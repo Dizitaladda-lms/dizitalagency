@@ -26,9 +26,76 @@
       "features": [
         { "title": "On-Page Optimization", "description": "Technical and content improvements for maximum search visibility." },
         { "title": "Link Building", "description": "Earn high-quality backlinks to boost authority and trust." },
-        { "title": "Local SEO", "description": "Capture nearby customers and dominate local search results." }
+        { "title": "Local SEO", "description": "Capture nearby customers and dominate local search results." },
+        { "title": "Technical SEO", "description": "Fix crawl errors, site speed, and core web vitals." },
+        { "title": "Content Strategy", "description": "Keyword-aligned content that ranks and converts." },
+        { "title": "Monthly Reporting", "description": "Transparent dashboards showing rankings, traffic, and ROI." }
+      ],
+      "problems": [
+        { "title": "Website not ranking on Google", "desc": "Your website is invisible on search engines." },
+        { "title": "Not getting leads", "desc": "No qualified leads coming to your business." },
+        { "title": "Low website traffic", "desc": "Very few visitors coming to your site." },
+        { "title": "High ad cost", "desc": "Spending too much on ads with low ROI." },
+        { "title": "Low conversions", "desc": "Visitors but no sales or inquiries." },
+        { "title": "Poor brand visibility", "desc": "Customers don't know about your brand." }
+      ],
+      "solutions": [
+        { "title": "Increase organic traffic", "desc": "Get more visitors from search engines." },
+        { "title": "Rank keywords", "desc": "Appear on page 1 for your target keywords." },
+        { "title": "Improve website authority", "desc": "Build trust with Google and users." },
+        { "title": "Generate leads", "desc": "Convert visitors into customers." },
+        { "title": "Improve conversions", "desc": "Turn traffic into sales and revenue." },
+        { "title": "Beat competitors", "desc": "Outrank your competition in search results." }
+      ],
+      "benefits": [
+        { "title": "Long term growth", "desc": "Sustainable results that compound over time." },
+        { "title": "Brand visibility", "desc": "Get your brand in front of the right audience." },
+        { "title": "Targeted audience", "desc": "Reach people actively looking for your service." },
+        { "title": "Better ROI", "desc": "Every rupee spent works harder for you." },
+        { "title": "Competitive advantage", "desc": "Stay ahead of your industry rivals." }
+      ],
+      "includes": [
+        "Keyword research",
+        "Competitor analysis",
+        "On-page SEO",
+        "Technical SEO",
+        "Link building",
+        "Monthly reporting"
+      ],
+      "caseStudies": [
+        { "metric": "10K+", "label": "Monthly Traffic", "growth": "+247%", "client": "Education Institute" },
+        { "metric": "#1", "label": "Google Ranking", "growth": "Page 1", "client": "E-commerce Store" },
+        { "metric": "500+", "label": "Monthly Leads", "growth": "+180%", "client": "Real Estate Company" },
+        { "metric": "5X", "label": "ROI Growth", "growth": "+400%", "client": "Healthcare Clinic" }
+      ],
+      "whyChooseUs": [
+        { "title": "Experienced team", "desc": "10+ years of industry expertise." },
+        { "title": "Proven results", "desc": "25,000+ successful projects delivered." },
+        { "title": "Affordable pricing", "desc": "Best value for your investment." },
+        { "title": "Transparent reporting", "desc": "Weekly detailed reports." },
+        { "title": "Latest tools", "desc": "Premium SEO & analytics tools." },
+        { "title": "Dedicated manager", "desc": "Personal account manager for you." }
+      ],
+      "tools": ["Google Analytics", "Search Console", "SEMrush", "Ahrefs", "Screaming Frog", "SurferSEO", "Moz"],
+      "industries": ["Education", "Real Estate", "Healthcare", "Ecommerce", "Local Businesses", "Startups"],
+      "packages": [
+        { "name": "Basic", "price": "₹15,000", "period": "/month", "features": ["Keyword research", "On-page SEO", "Monthly reporting", "5 keywords"], "popular": false },
+        { "name": "Standard", "price": "₹25,000", "period": "/month", "features": ["Everything in Basic", "Technical SEO", "Link building", "15 keywords", "Competitor analysis"], "popular": true },
+        { "name": "Premium", "price": "₹40,000", "period": "/month", "features": ["Everything in Standard", "Content creation", "Local SEO", "30 keywords", "Dedicated manager"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Rajesh Kumar", "role": "CEO, TechStart", "text": "DizitalAdda transformed our online presence. We went from page 5 to page 1 in just 3 months!", "rating": 5 },
+        { "name": "Priya Sharma", "role": "Marketing Head, EduCorp", "text": "The ROI we've seen from their SEO services is incredible. Our leads increased by 300%.", "rating": 5 },
+        { "name": "Amit Patel", "role": "Owner, HealthPlus", "text": "Professional team with proven results. They delivered exactly what they promised.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How long do SEO results take?", "a": "SEO is a long-term strategy. You can expect to see initial improvements in 3-4 months, with significant results in 6-12 months depending on competition and current website status." },
+        { "q": "How much budget is needed for SEO?", "a": "Our SEO packages start from ₹15,000/month. The exact budget depends on your goals, competition level, and the scope of work required." },
+        { "q": "Do you guarantee results?", "a": "While no ethical SEO agency can guarantee #1 rankings, we guarantee 100% transparency, white-hat practices, and measurable improvements in traffic, rankings, and leads." },
+        { "q": "Do you provide reports?", "a": "Yes! We provide detailed weekly and monthly reports covering keyword rankings, traffic growth, conversions, and all activities performed." }
       ]
     },
+
     "Website Designing": {
       "hero": {
         "title": "Modern, Responsive Websites That Convert.",
@@ -39,9 +106,76 @@
       "features": [
         { "title": "Custom Design", "description": "Unique layouts and branding for every client." },
         { "title": "Mobile-First", "description": "Flawless experience on phones, tablets, and desktops." },
-        { "title": "Conversion Focused", "description": "Built to turn visitors into leads and customers." }
+        { "title": "Conversion Focused", "description": "Built to turn visitors into leads and customers." },
+        { "title": "SEO Optimized", "description": "Clean code and structure for search engine visibility." },
+        { "title": "Fast Loading", "description": "Optimized performance for better UX and rankings." },
+        { "title": "CMS Integration", "description": "Easy-to-manage WordPress or custom CMS setup." }
+      ],
+      "problems": [
+        { "title": "Outdated website design", "desc": "Your website looks old and unprofessional." },
+        { "title": "Not mobile-friendly", "desc": "Losing mobile visitors due to poor responsiveness." },
+        { "title": "Slow loading speed", "desc": "High bounce rates from slow page loads." },
+        { "title": "Low conversions", "desc": "Visitors leave without taking action." },
+        { "title": "Poor branding", "desc": "Inconsistent visuals hurt your brand image." },
+        { "title": "Hard to manage", "desc": "Can't update content without developer help." }
+      ],
+      "solutions": [
+        { "title": "Modern UI/UX design", "desc": "Clean, professional designs that impress." },
+        { "title": "Fully responsive", "desc": "Perfect on every device and screen size." },
+        { "title": "Lightning fast", "desc": "Optimized for speed and performance." },
+        { "title": "Conversion optimized", "desc": "Strategic layouts that drive action." },
+        { "title": "Brand aligned", "desc": "Designs that reflect your brand identity." },
+        { "title": "Easy to manage", "desc": "User-friendly CMS for self-updates." }
+      ],
+      "benefits": [
+        { "title": "Professional image", "desc": "Build instant credibility with visitors." },
+        { "title": "Better user experience", "desc": "Keep visitors engaged longer." },
+        { "title": "Higher conversions", "desc": "Turn more visitors into customers." },
+        { "title": "SEO friendly", "desc": "Rank higher on search engines." },
+        { "title": "Scalable platform", "desc": "Grow with your business needs." }
+      ],
+      "includes": [
+        "Custom UI/UX design",
+        "Responsive development",
+        "SEO setup",
+        "CMS integration",
+        "Hosting setup",
+        "Training & support"
+      ],
+      "caseStudies": [
+        { "metric": "200+", "label": "Websites Delivered", "growth": "On time", "client": "Across industries" },
+        { "metric": "3X", "label": "Conversion Boost", "growth": "+200%", "client": "E-commerce Brand" },
+        { "metric": "0.8s", "label": "Load Time", "growth": "Fast", "client": "SaaS Company" },
+        { "metric": "98%", "label": "Client Satisfaction", "growth": "5-star", "client": "All clients" }
+      ],
+      "whyChooseUs": [
+        { "title": "Award-winning designers", "desc": "Creative team with global exposure." },
+        { "title": "On-time delivery", "desc": "We respect your deadlines, always." },
+        { "title": "Unlimited revisions", "desc": "Until you're 100% satisfied." },
+        { "title": "Post-launch support", "desc": "Free maintenance for 30 days." },
+        { "title": "Latest technologies", "desc": "React, Next.js, WordPress, Webflow." },
+        { "title": "Affordable packages", "desc": "Premium quality at fair prices." }
+      ],
+      "tools": ["Figma", "Adobe XD", "WordPress", "Webflow", "React", "Next.js", "Shopify"],
+      "industries": ["Education", "Real Estate", "Healthcare", "Ecommerce", "SaaS", "Startups"],
+      "packages": [
+        { "name": "Starter", "price": "₹20,000", "period": "/project", "features": ["5-page website", "Responsive design", "Contact form", "Basic SEO"], "popular": false },
+        { "name": "Business", "price": "₹45,000", "period": "/project", "features": ["Up to 15 pages", "Custom design", "CMS integration", "Advanced SEO", "Blog setup"], "popular": true },
+        { "name": "Enterprise", "price": "₹90,000", "period": "/project", "features": ["Unlimited pages", "Custom features", "E-commerce", "Multi-language", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Vikram Malhotra", "role": "Founder, StyleHub", "text": "The website they built exceeded our expectations. Sales jumped 40% in the first month!", "rating": 5 },
+        { "name": "Sneha Reddy", "role": "Director, EduLearn", "text": "Professional team, stunning design, and delivered ahead of schedule. Highly recommended.", "rating": 5 },
+        { "name": "Karan Singh", "role": "CEO, TechNova", "text": "Best web design agency we've worked with. Clean code, beautiful design, great support.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How long does it take to build a website?", "a": "A standard website takes 3-6 weeks. Complex projects with custom features may take 8-12 weeks." },
+        { "q": "Will my website be mobile-friendly?", "a": "Absolutely. All our websites are built mobile-first and look perfect on every device." },
+        { "q": "Can I update the website myself?", "a": "Yes! We integrate user-friendly CMS so you can update content without technical knowledge." },
+        { "q": "Do you provide hosting?", "a": "We can recommend and set up hosting for you, or work with your existing provider." }
       ]
     },
+
     "Graphic Design": {
       "hero": {
         "title": "Creative Visuals That Tell Your Story.",
@@ -52,9 +186,76 @@
       "features": [
         { "title": "Brand Identity", "description": "Logos, color palettes, and style guides." },
         { "title": "Marketing Collateral", "description": "Brochures, banners, and digital ads." },
-        { "title": "Social Media Kits", "description": "Ready-to-use graphics for every platform." }
+        { "title": "Social Media Kits", "description": "Ready-to-use graphics for every platform." },
+        { "title": "Packaging Design", "description": "Product packaging that sells on shelves." },
+        { "title": "Illustrations", "description": "Custom artwork for unique brand stories." },
+        { "title": "Print Design", "description": "Business cards, flyers, and posters." }
+      ],
+      "problems": [
+        { "title": "Inconsistent branding", "desc": "Your visuals don't match across platforms." },
+        { "title": "Poor quality designs", "desc": "Unprofessional graphics hurt credibility." },
+        { "title": "Low engagement", "desc": "Social posts don't get attention." },
+        { "title": "No brand guidelines", "desc": "Team creates mismatched visuals." },
+        { "title": "Weak brand identity", "desc": "Customers can't recognize your brand." },
+        { "title": "Slow turnaround", "desc": "Designs take too long to deliver." }
+      ],
+      "solutions": [
+        { "title": "Cohesive branding", "desc": "Consistent visuals across all touchpoints." },
+        { "title": "Eye-catching designs", "desc": "Stand out in a crowded market." },
+        { "title": "Engaging content", "desc": "Graphics that drive likes and shares." },
+        { "title": "Complete brand guidelines", "desc": "Rules for consistent brand usage." },
+        { "title": "Memorable identity", "desc": "Build a brand people remember." },
+        { "title": "Fast delivery", "desc": "Quick turnaround without quality loss." }
+      ],
+      "benefits": [
+        { "title": "Strong brand recall", "desc": "Be remembered by your audience." },
+        { "title": "Higher engagement", "desc": "Get more likes, shares, comments." },
+        { "title": "Professional image", "desc": "Look like an industry leader." },
+        { "title": "Increased sales", "desc": "Better designs drive conversions." },
+        { "title": "Time savings", "desc": "Ready-to-use design templates." }
+      ],
+      "includes": [
+        "Logo design",
+        "Brand guidelines",
+        "Marketing materials",
+        "Social media graphics",
+        "Packaging design",
+        "Unlimited revisions"
+      ],
+      "caseStudies": [
+        { "metric": "500+", "label": "Brands Designed", "growth": "Complete", "client": "Across industries" },
+        { "metric": "150%", "label": "Engagement Boost", "growth": "+150%", "client": "Fashion Brand" },
+        { "metric": "50+", "label": "Logos Created", "growth": "This year", "client": "Startups" },
+        { "metric": "98%", "label": "Client Satisfaction", "growth": "5-star", "client": "All clients" }
+      ],
+      "whyChooseUs": [
+        { "title": "Creative team", "desc": "Award-winning designers on board." },
+        { "title": "Unlimited revisions", "desc": "Until you love the design." },
+        { "title": "Fast turnaround", "desc": "Most designs in 24-48 hours." },
+        { "title": "Source files included", "desc": "Full ownership of all designs." },
+        { "title": "Affordable pricing", "desc": "Premium quality at fair rates." },
+        { "title": "Dedicated designer", "desc": "One point of contact for consistency." }
+      ],
+      "tools": ["Adobe Photoshop", "Illustrator", "InDesign", "Figma", "Canva Pro", "After Effects"],
+      "industries": ["Education", "Real Estate", "Healthcare", "Ecommerce", "Fashion", "Startups"],
+      "packages": [
+        { "name": "Basic", "price": "₹8,000", "period": "/month", "features": ["10 social media posts", "2 banner designs", "Source files", "2 revisions"], "popular": false },
+        { "name": "Standard", "price": "₹18,000", "period": "/month", "features": ["25 social posts", "5 banners", "Logo refresh", "Brand guidelines", "Unlimited revisions"], "popular": true },
+        { "name": "Premium", "price": "₹35,000", "period": "/month", "features": ["Unlimited designs", "Full branding", "Video thumbnails", "Dedicated designer", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Ananya Iyer", "role": "Founder, LuxeWear", "text": "Their design team nailed our brand aesthetic perfectly. Our social engagement tripled!", "rating": 5 },
+        { "name": "Rohit Jain", "role": "Marketing Lead, FoodieHub", "text": "Creative, fast, and professional. They understand our brand better than we do.", "rating": 5 },
+        { "name": "Meera Kapoor", "role": "CEO, BeautyBliss", "text": "Stunning designs every single time. Worth every rupee spent.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How many revisions do I get?", "a": "Unlimited revisions on all packages until you're 100% satisfied with the design." },
+        { "q": "Do I own the designs?", "a": "Yes, you get full ownership and all source files upon project completion." },
+        { "q": "What's the turnaround time?", "a": "Most designs are delivered within 24-48 hours. Complex projects take 3-5 days." },
+        { "q": "Can you match my existing brand?", "a": "Absolutely. We'll study your brand guidelines and create designs that fit perfectly." }
       ]
     },
+
     "Professional Video Editing": {
       "hero": {
         "title": "Engaging Videos That Captivate.",
@@ -65,22 +266,156 @@
       "features": [
         { "title": "Storytelling", "description": "Narrative-driven edits that connect with viewers." },
         { "title": "Motion Graphics", "description": "Add energy and clarity with custom animations." },
-        { "title": "Multi-Platform", "description": "Optimized exports for every channel and device." }
+        { "title": "Multi-Platform", "description": "Optimized exports for every channel and device." },
+        { "title": "Color Grading", "description": "Cinematic color correction for professional look." },
+        { "title": "Sound Design", "description": "Music, SFX, and voice-over mixing." },
+        { "title": "Subtitles & Captions", "description": "Accessible content for wider reach." }
+      ],
+      "problems": [
+        { "title": "Raw unedited footage", "desc": "Hours of footage with no cohesive story." },
+        { "title": "Low engagement", "desc": "Videos don't hold viewer attention." },
+        { "title": "Poor quality output", "desc": "Amateur editing hurts brand image." },
+        { "title": "Wrong formats", "desc": "Videos don't fit platform requirements." },
+        { "title": "No storytelling", "desc": "Content feels flat and boring." },
+        { "title": "Slow turnaround", "desc": "Editing takes too long to publish." }
+      ],
+      "solutions": [
+        { "title": "Professional editing", "desc": "Polished, broadcast-quality output." },
+        { "title": "Engaging content", "desc": "Keep viewers watching till the end." },
+        { "title": "High-quality output", "desc": "4K, cinematic-grade videos." },
+        { "title": "Platform optimized", "desc": "Right format for every channel." },
+        { "title": "Compelling stories", "desc": "Narratives that resonate emotionally." },
+        { "title": "Fast delivery", "desc": "Quick turnaround for time-sensitive content." }
+      ],
+      "benefits": [
+        { "title": "Higher engagement", "desc": "Videos get 1200% more shares than text." },
+        { "title": "Better conversions", "desc": "Video increases purchase likelihood by 64%." },
+        { "title": "Brand authority", "desc": "Look like an industry leader." },
+        { "title": "SEO boost", "desc": "Videos rank higher in search results." },
+        { "title": "Wider reach", "desc": "Shareable content across platforms." }
+      ],
+      "includes": [
+        "Video editing",
+        "Motion graphics",
+        "Color grading",
+        "Sound design",
+        "Subtitles & captions",
+        "Multi-format exports"
+      ],
+      "caseStudies": [
+        { "metric": "1M+", "label": "Video Views", "growth": "Generated", "client": "YouTube Creator" },
+        { "metric": "300%", "label": "Engagement", "growth": "+300%", "client": "E-commerce Brand" },
+        { "metric": "50+", "label": "Ads Created", "growth": "This quarter", "client": "D2C Brands" },
+        { "metric": "10X", "label": "ROI on Ads", "growth": "+900%", "client": "Real Estate" }
+      ],
+      "whyChooseUs": [
+        { "title": "Expert editors", "desc": "10+ years of video editing experience." },
+        { "title": "Cinematic quality", "desc": "Broadcast-grade output every time." },
+        { "title": "Fast turnaround", "desc": "Most videos delivered in 48-72 hours." },
+        { "title": "Latest software", "desc": "Premiere Pro, After Effects, DaVinci." },
+        { "title": "Unlimited revisions", "desc": "Until you're completely happy." },
+        { "title": "Affordable rates", "desc": "Premium quality at competitive prices." }
+      ],
+      "tools": ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Final Cut Pro", "Audition", "Cinema 4D"],
+      "industries": ["Education", "Real Estate", "Healthcare", "Ecommerce", "Entertainment", "Startups"],
+      "packages": [
+        { "name": "Basic", "price": "₹5,000", "period": "/video", "features": ["Up to 3 min video", "Basic editing", "Background music", "1 revision"], "popular": false },
+        { "name": "Standard", "price": "₹12,000", "period": "/video", "features": ["Up to 10 min video", "Motion graphics", "Color grading", "Sound design", "3 revisions"], "popular": true },
+        { "name": "Premium", "price": "₹25,000", "period": "/video", "features": ["Unlimited length", "Advanced VFX", "Custom animations", "Voice-over", "Unlimited revisions"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Arjun Reddy", "role": "YouTuber, 500K subs", "text": "They turned my raw footage into cinematic gold. My channel growth exploded!", "rating": 5 },
+        { "name": "Divya Nair", "role": "CMO, StyleCo", "text": "The ad videos they created drove 10X ROI. Exceptional storytelling.", "rating": 5 },
+        { "name": "Siddharth Rao", "role": "Founder, FitLife", "text": "Professional, creative, and always on time. Our go-to video team.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How long does video editing take?", "a": "Standard videos take 48-72 hours. Complex projects with VFX may take 5-7 days." },
+        { "q": "What formats do you deliver?", "a": "We deliver in any format — MP4, MOV, AVI — optimized for YouTube, Instagram, TikTok, etc." },
+        { "q": "Do you provide stock footage and music?", "a": "Yes, we include licensed stock footage and music in all packages." },
+        { "q": "Can you add subtitles?", "a": "Absolutely. We add accurate subtitles and captions in multiple languages." }
       ]
     },
+
     "Local SEO": {
       "hero": {
         "title": "Own Your Local Market.",
         "subtitle": "Attract nearby customers and grow your reputation.",
-        "description": "We optimize your business for local search, maps, and directories—so you’re found by the people who matter most."
+        "description": "We optimize your business for local search, maps, and directories—so you're found by the people who matter most."
       },
       "cta": "Get a Local SEO Plan",
       "features": [
         { "title": "Google My Business", "description": "Setup, optimization, and review management." },
         { "title": "Local Listings", "description": "Consistent NAP across all directories." },
-        { "title": "Geo-Targeted Content", "description": "Content that speaks to your local audience." }
+        { "title": "Geo-Targeted Content", "description": "Content that speaks to your local audience." },
+        { "title": "Map Pack Ranking", "description": "Get into the top 3 local map results." },
+        { "title": "Review Management", "description": "Generate and respond to customer reviews." },
+        { "title": "Local Citations", "description": "Build authority with local business directories." }
+      ],
+      "problems": [
+        { "title": "Not on Google Maps", "desc": "Customers can't find you on maps." },
+        { "title": "No local visibility", "desc": "Invisible to nearby searchers." },
+        { "title": "Poor reviews", "desc": "Bad reviews hurting your reputation." },
+        { "title": "Inconsistent NAP", "desc": "Name, address, phone mismatched online." },
+        { "title": "Missing citations", "desc": "Not listed on key directories." },
+        { "title": "Losing to competitors", "desc": "Local rivals ranking above you." }
+      ],
+      "solutions": [
+        { "title": "GMB optimization", "desc": "Fully optimized Google Business Profile." },
+        { "title": "Local citations", "desc": "Listed on 50+ local directories." },
+        { "title": "Review management", "desc": "Generate 5-star reviews consistently." },
+        { "title": "NAP consistency", "desc": "Uniform info across all platforms." },
+        { "title": "Local content", "desc": "Geo-targeted content that ranks." },
+        { "title": "Map pack ranking", "desc": "Top 3 positions in local searches." }
+      ],
+      "benefits": [
+        { "title": "More foot traffic", "desc": "Attract nearby customers." },
+        { "title": "Higher calls", "desc": "Get more phone inquiries." },
+        { "title": "Better reputation", "desc": "Build trust with positive reviews." },
+        { "title": "Competitive edge", "desc": "Outrank local competitors." },
+        { "title": "Increased revenue", "desc": "Convert local searches to sales." }
+      ],
+      "includes": [
+        "GMB setup & optimization",
+        "Local citations",
+        "Review management",
+        "Local keyword optimization",
+        "Geo-targeted content",
+        "Map ranking"
+      ],
+      "caseStudies": [
+        { "metric": "#1", "label": "Map Pack Rank", "growth": "Top 3", "client": "Dental Clinic" },
+        { "metric": "300%", "label": "More Calls", "growth": "+300%", "client": "Restaurant" },
+        { "metric": "500+", "label": "5-Star Reviews", "growth": "Generated", "client": "Salon Chain" },
+        { "metric": "10X", "label": "Foot Traffic", "growth": "+900%", "client": "Retail Store" }
+      ],
+      "whyChooseUs": [
+        { "title": "Local experts", "desc": "Specialized in local search algorithms." },
+        { "title": "Proven results", "desc": "100+ businesses ranked in map pack." },
+        { "title": "Transparent process", "desc": "Clear reporting on every action." },
+        { "title": "Fast results", "desc": "See improvements in 30-60 days." },
+        { "title": "Affordable packages", "desc": "Local SEO starting at ₹8,000/month." },
+        { "title": "Dedicated manager", "desc": "Personal point of contact." }
+      ],
+      "tools": ["Google My Business", "BrightLocal", "Moz Local", "Whitespark", "Yext", "Google Maps"],
+      "industries": ["Restaurants", "Healthcare", "Real Estate", "Retail", "Legal", "Home Services"],
+      "packages": [
+        { "name": "Basic", "price": "₹8,000", "period": "/month", "features": ["GMB optimization", "10 citations", "Review monitoring", "Monthly report"], "popular": false },
+        { "name": "Standard", "price": "₹15,000", "period": "/month", "features": ["Everything in Basic", "30 citations", "Review generation", "Local content", "Map pack focus"], "popular": true },
+        { "name": "Premium", "price": "₹25,000", "period": "/month", "features": ["Everything in Standard", "50+ citations", "Advanced local SEO", "Competitor analysis", "Dedicated manager"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Dr. Priya Menon", "role": "Dentist, SmileCare", "text": "We're now #1 on Google Maps. Patient calls have doubled in 2 months!", "rating": 5 },
+        { "name": "Rahul Gupta", "role": "Owner, Spice Garden", "text": "Our restaurant is now fully booked every weekend. Local SEO works!", "rating": 5 },
+        { "name": "Neha Joshi", "role": "Manager, Glow Salon", "text": "500+ 5-star reviews and counting. Our reputation has never been better.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How long for local SEO results?", "a": "Most clients see map pack improvements in 30-60 days. Full results in 3-4 months." },
+        { "q": "Do you guarantee #1 ranking?", "a": "We can't guarantee specific rankings, but we guarantee measurable improvements in visibility and calls." },
+        { "q": "What's included in GMB optimization?", "a": "Complete profile setup, category selection, photo uploads, posts, Q&A management, and regular updates." },
+        { "q": "How do you generate reviews?", "a": "We set up automated review request systems via SMS and email to happy customers." }
       ]
     },
+
     "Content Writing": {
       "hero": {
         "title": "Words That Work for Your Brand.",
@@ -91,9 +426,76 @@
       "features": [
         { "title": "SEO Copywriting", "description": "Content that ranks and resonates." },
         { "title": "Brand Voice", "description": "Consistent tone across all channels." },
-        { "title": "Long-Form & Short-Form", "description": "From articles to ad copy, we do it all." }
+        { "title": "Long-Form & Short-Form", "description": "From articles to ad copy, we do it all." },
+        { "title": "Website Copy", "description": "Landing pages that convert visitors." },
+        { "title": "Blog Content", "description": "Engaging articles that drive traffic." },
+        { "title": "Email Copy", "description": "Campaigns that get opened and clicked." }
+      ],
+      "problems": [
+        { "title": "No content strategy", "desc": "Publishing random content without goals." },
+        { "title": "Poor quality writing", "desc": "Content doesn't engage readers." },
+        { "title": "No SEO optimization", "desc": "Content doesn't rank on Google." },
+        { "title": "Inconsistent voice", "desc": "Brand tone varies across channels." },
+        { "title": "Low engagement", "desc": "Content doesn't get reads or shares." },
+        { "title": "No conversions", "desc": "Content doesn't drive action." }
+      ],
+      "solutions": [
+        { "title": "Strategic content", "desc": "Content aligned with business goals." },
+        { "title": "Quality writing", "desc": "Engaging, well-researched content." },
+        { "title": "SEO optimized", "desc": "Content that ranks on page 1." },
+        { "title": "Consistent voice", "desc": "Unified brand tone everywhere." },
+        { "title": "High engagement", "desc": "Content people want to read." },
+        { "title": "Conversion focused", "desc": "Content that drives action." }
+      ],
+      "benefits": [
+        { "title": "Organic traffic", "desc": "Rank higher on search engines." },
+        { "title": "Brand authority", "desc": "Position as industry expert." },
+        { "title": "Lead generation", "desc": "Attract qualified prospects." },
+        { "title": "Customer trust", "desc": "Build credibility through content." },
+        { "title": "Long-term value", "desc": "Content keeps working for months." }
+      ],
+      "includes": [
+        "Blog posts",
+        "Website copy",
+        "Product descriptions",
+        "Email copy",
+        "Social content",
+        "Content strategy"
+      ],
+      "caseStudies": [
+        { "metric": "1000+", "label": "Articles Written", "growth": "Published", "client": "Multiple clients" },
+        { "metric": "500%", "label": "Traffic Growth", "growth": "+500%", "client": "SaaS Company" },
+        { "metric": "200+", "label": "Page 1 Rankings", "growth": "Achieved", "client": "Across niches" },
+        { "metric": "50K+", "label": "Leads Generated", "growth": "From content", "client": "B2B clients" }
+      ],
+      "whyChooseUs": [
+        { "title": "Expert writers", "desc": "Industry-specialized content writers." },
+        { "title": "SEO expertise", "desc": "Content optimized for search engines." },
+        { "title": "Plagiarism-free", "desc": "100% original content guaranteed." },
+        { "title": "On-time delivery", "desc": "We never miss a deadline." },
+        { "title": "Unlimited revisions", "desc": "Until you're completely satisfied." },
+        { "title": "Affordable rates", "desc": "Quality content at fair prices." }
+      ],
+      "tools": ["Grammarly", "Hemingway", "SurferSEO", "Copyscape", "Google Docs", "WordPress"],
+      "industries": ["Education", "Healthcare", "Finance", "Technology", "Ecommerce", "Real Estate"],
+      "packages": [
+        { "name": "Basic", "price": "₹10,000", "period": "/month", "features": ["4 blog posts", "SEO optimized", "1000 words each", "2 revisions"], "popular": false },
+        { "name": "Standard", "price": "₹20,000", "period": "/month", "features": ["10 blog posts", "Website copy", "Social content", "SEO strategy", "Unlimited revisions"], "popular": true },
+        { "name": "Premium", "price": "₹40,000", "period": "/month", "features": ["20+ blog posts", "Full content strategy", "Email campaigns", "Dedicated writer", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Kavita Desai", "role": "CMO, FinServe", "text": "Their content writers understand finance like experts. Our blog traffic grew 500%!", "rating": 5 },
+        { "name": "Sanjay Mehta", "role": "Founder, TechFlow", "text": "SEO-optimized content that actually ranks. Best investment we've made.", "rating": 5 },
+        { "name": "Pooja Shah", "role": "Director, EduFirst", "text": "Consistent quality, on-time delivery, and great communication. Highly recommend.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "Do you write SEO-optimized content?", "a": "Yes, all content is researched, keyword-optimized, and structured for search engine rankings." },
+        { "q": "Can you match our brand voice?", "a": "Absolutely. We study your existing content and brand guidelines to match your tone perfectly." },
+        { "q": "Is the content plagiarism-free?", "a": "100% original. We provide plagiarism reports with every delivery." },
+        { "q": "How fast can you deliver?", "a": "Standard turnaround is 3-5 days per article. Rush delivery available for urgent projects." }
       ]
     },
+
     "Affiliate Marketing": {
       "hero": {
         "title": "Grow With Strategic Partnerships.",
@@ -104,9 +506,76 @@
       "features": [
         { "title": "Network Setup", "description": "Connect with top affiliates in your niche." },
         { "title": "Tracking & Reporting", "description": "Transparent, real-time performance data." },
-        { "title": "Compliance", "description": "Protect your brand and stay within guidelines." }
+        { "title": "Compliance", "description": "Protect your brand and stay within guidelines." },
+        { "title": "Commission Structure", "description": "Optimized payouts for maximum motivation." },
+        { "title": "Affiliate Recruitment", "description": "Find and onboard quality partners." },
+        { "title": "Performance Optimization", "description": "Continuous improvement for better ROI." }
+      ],
+      "problems": [
+        { "title": "No affiliate program", "desc": "Missing out on partner-driven sales." },
+        { "title": "Low partner engagement", "desc": "Affiliates aren't promoting you." },
+        { "title": "Poor tracking", "desc": "Can't measure affiliate performance." },
+        { "title": "Compliance issues", "desc": "Risk of brand damage from partners." },
+        { "title": "No scale", "desc": "Program isn't growing." },
+        { "title": "Low ROI", "desc": "Affiliate spend not delivering results." }
+      ],
+      "solutions": [
+        { "title": "Program setup", "desc": "Complete affiliate program launch." },
+        { "title": "Partner engagement", "desc": "Motivated affiliates promoting you." },
+        { "title": "Accurate tracking", "desc": "Real-time performance analytics." },
+        { "title": "Brand protection", "desc": "Compliant, quality partnerships." },
+        { "title": "Scalable growth", "desc": "Program that grows with you." },
+        { "title": "High ROI", "desc": "Performance-based returns." }
+      ],
+      "benefits": [
+        { "title": "Performance-based", "desc": "Pay only for results." },
+        { "title": "Scalable channel", "desc": "Grow without proportional cost." },
+        { "title": "Brand exposure", "desc": "Reach new audiences via partners." },
+        { "title": "Low risk", "desc": "No upfront marketing spend." },
+        { "title": "Long-term growth", "desc": "Compounding partner network." }
+      ],
+      "includes": [
+        "Program setup",
+        "Affiliate recruitment",
+        "Commission structure",
+        "Tracking setup",
+        "Reporting",
+        "Compliance management"
+      ],
+      "caseStudies": [
+        { "metric": "500+", "label": "Active Affiliates", "growth": "Recruited", "client": "E-commerce Brand" },
+        { "metric": "₹2Cr+", "label": "Revenue Generated", "growth": "Via affiliates", "client": "D2C Brand" },
+        { "metric": "40%", "label": "Sales Share", "growth": "From affiliates", "client": "SaaS Company" },
+        { "metric": "15X", "label": "ROI", "growth": "+1400%", "client": "Fashion Brand" }
+      ],
+      "whyChooseUs": [
+        { "title": "Proven network", "desc": "Access to 10,000+ verified affiliates." },
+        { "title": "Performance focus", "desc": "Only pay for actual results." },
+        { "title": "Full management", "desc": "We handle everything end-to-end." },
+        { "title": "Transparent reporting", "desc": "Real-time dashboards and reports." },
+        { "title": "Compliance experts", "desc": "Protect your brand reputation." },
+        { "title": "Industry experience", "desc": "10+ years in affiliate marketing." }
+      ],
+      "tools": ["Impact", "ShareASale", "CJ Affiliate", "Rakuten", "PartnerStack", "Refersion"],
+      "industries": ["Ecommerce", "SaaS", "Finance", "Education", "Travel", "Health"],
+      "packages": [
+        { "name": "Starter", "price": "₹25,000", "period": "/month", "features": ["Program setup", "50 affiliates", "Basic tracking", "Monthly report"], "popular": false },
+        { "name": "Growth", "price": "₹50,000", "period": "/month", "features": ["200 affiliates", "Advanced tracking", "Commission optimization", "Weekly reports"], "popular": true },
+        { "name": "Enterprise", "price": "₹1,00,000", "period": "/month", "features": ["Unlimited affiliates", "Custom platform", "Dedicated manager", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Amit Shah", "role": "CEO, ShopEasy", "text": "Our affiliate program now drives 40% of our sales. Incredible ROI!", "rating": 5 },
+        { "name": "Ritu Kapoor", "role": "Marketing Head, SaaSGrowth", "text": "They built our affiliate program from scratch. Now it's our top revenue channel.", "rating": 5 },
+        { "name": "Vikram Patel", "role": "Founder, TravelDeals", "text": "Professional management, transparent reporting, and amazing results.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How much does affiliate marketing cost?", "a": "You pay affiliates only for results (commission). Our management fee starts at ₹25,000/month." },
+        { "q": "How long to see results?", "a": "Most programs show meaningful results in 2-3 months. Full scale in 6-12 months." },
+        { "q": "Do you recruit affiliates?", "a": "Yes, we actively recruit quality affiliates in your niche through our network." },
+        { "q": "What platforms do you work with?", "a": "We work with Impact, ShareASale, CJ Affiliate, Rakuten, and custom solutions." }
       ]
     },
+
     "Influencer Marketing": {
       "hero": {
         "title": "Amplify Your Brand With Influencers.",
@@ -117,9 +586,76 @@
       "features": [
         { "title": "Talent Sourcing", "description": "Find the right influencers for your goals." },
         { "title": "Campaign Management", "description": "End-to-end execution and reporting." },
-        { "title": "Authentic Content", "description": "Collaborations that feel real, not forced." }
+        { "title": "Authentic Content", "description": "Collaborations that feel real, not forced." },
+        { "title": "Vetting Process", "description": "Verify followers, engagement, and brand fit." },
+        { "title": "Contract Management", "description": "Clear deliverables and legal protection." },
+        { "title": "Performance Tracking", "description": "Measure ROI on every collaboration." }
+      ],
+      "problems": [
+        { "title": "Wrong influencers", "desc": "Partners don't match your brand." },
+        { "title": "No ROI", "desc": "Campaigns don't deliver results." },
+        { "title": "Fake followers", "desc": "Influencers with inflated numbers." },
+        { "title": "Poor content", "desc": "Low-quality branded content." },
+        { "title": "No strategy", "desc": "Random collaborations without goals." },
+        { "title": "Management headache", "desc": "Too many influencers to handle." }
+      ],
+      "solutions": [
+        { "title": "Vetted influencers", "desc": "Only authentic, relevant partners." },
+        { "title": "Measurable ROI", "desc": "Track every campaign's impact." },
+        { "title": "Real followers", "desc": "Verified, engaged audiences." },
+        { "title": "Quality content", "desc": "Professional, on-brand creatives." },
+        { "title": "Strategic campaigns", "desc": "Goal-driven influencer partnerships." },
+        { "title": "Full management", "desc": "We handle everything for you." }
+      ],
+      "benefits": [
+        { "title": "Brand awareness", "desc": "Reach millions of potential customers." },
+        { "title": "Social proof", "desc": "Build trust via trusted voices." },
+        { "title": "Authentic reach", "desc": "Connect with engaged audiences." },
+        { "title": "Content library", "desc": "Get reusable branded content." },
+        { "title": "SEO boost", "desc": "Backlinks and social signals." }
+      ],
+      "includes": [
+        "Influencer sourcing",
+        "Vetting process",
+        "Campaign management",
+        "Content creation",
+        "Reporting",
+        "Compliance"
+      ],
+      "caseStudies": [
+        { "metric": "10M+", "label": "Reach Generated", "growth": "Across campaigns", "client": "Fashion Brand" },
+        { "metric": "500+", "label": "Influencers Managed", "growth": "This year", "client": "Multiple brands" },
+        { "metric": "25X", "label": "Engagement Rate", "growth": "vs. brand content", "client": "Beauty Brand" },
+        { "metric": "₹5Cr+", "label": "Sales Driven", "growth": "Via influencers", "client": "D2C Brands" }
+      ],
+      "whyChooseUs": [
+        { "title": "Large network", "desc": "50,000+ verified influencers." },
+        { "title": "Data-driven", "desc": "Selection based on real metrics." },
+        { "title": "Full service", "desc": "Strategy to execution to reporting." },
+        { "title": "Brand safety", "desc": "Rigorous vetting process." },
+        { "title": "Transparent pricing", "desc": "No hidden fees or commissions." },
+        { "title": "Proven results", "desc": "Track record of successful campaigns." }
+      ],
+      "tools": ["Modash", "Heepsy", "CreatorIQ", "AspireIQ", "Instagram", "YouTube Analytics"],
+      "industries": ["Fashion", "Beauty", "Food", "Travel", "Fitness", "Technology"],
+      "packages": [
+        { "name": "Starter", "price": "₹30,000", "period": "/campaign", "features": ["5 micro-influencers", "Campaign strategy", "Content review", "Basic report"], "popular": false },
+        { "name": "Growth", "price": "₹75,000", "period": "/campaign", "features": ["15 influencers", "Macro + micro mix", "Full management", "Detailed analytics"], "popular": true },
+        { "name": "Enterprise", "price": "₹2,00,000", "period": "/campaign", "features": ["50+ influencers", "Celebrity partnerships", "Multi-platform", "Dedicated team"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Isha Malhotra", "role": "Brand Manager, GlamCo", "text": "They found us perfect influencers. Our campaign went viral and sales doubled!", "rating": 5 },
+        { "name": "Arjun Nair", "role": "Founder, FitGear", "text": "Professional management, authentic content, and incredible ROI. Best in the business.", "rating": 5 },
+        { "name": "Simran Kaur", "role": "CMO, FoodieBox", "text": "Their influencer network is unmatched. Every campaign delivers beyond expectations.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How do you choose influencers?", "a": "We vet based on audience demographics, engagement rate, content quality, and brand alignment." },
+        { "q": "What's the typical campaign duration?", "a": "Standard campaigns run 4-8 weeks. Long-term partnerships can be 3-12 months." },
+        { "q": "Do you handle payments to influencers?", "a": "Yes, we manage all contracts, payments, and deliverable tracking." },
+        { "q": "How do you measure success?", "a": "We track reach, engagement, website traffic, conversions, and ROI based on campaign goals." }
       ]
     },
+
     "Social Media Marketing": {
       "hero": {
         "title": "Build Your Brand. Engage Your Audience.",
@@ -130,9 +666,76 @@
       "features": [
         { "title": "Content Calendars", "description": "Consistent, strategic posting across platforms." },
         { "title": "Community Management", "description": "Respond, engage, and build loyalty." },
-        { "title": "Paid Social", "description": "Targeted ads for maximum reach and ROI." }
+        { "title": "Paid Social", "description": "Targeted ads for maximum reach and ROI." },
+        { "title": "Content Creation", "description": "Graphics, videos, and copy that engage." },
+        { "title": "Analytics & Reporting", "description": "Track performance and optimize strategy." },
+        { "title": "Influencer Collabs", "description": "Partner with voices your audience trusts." }
+      ],
+      "problems": [
+        { "title": "Low engagement", "desc": "Posts don't get likes or comments." },
+        { "title": "No strategy", "desc": "Random posting without goals." },
+        { "title": "Inconsistent posting", "desc": "Irregular content schedule." },
+        { "title": "Poor content quality", "desc": "Unprofessional graphics and copy." },
+        { "title": "No growth", "desc": "Follower count not increasing." },
+        { "title": "No leads", "desc": "Social doesn't drive business results." }
+      ],
+      "solutions": [
+        { "title": "Strategic content", "desc": "Posts aligned with business goals." },
+        { "title": "Community building", "desc": "Active engagement with followers." },
+        { "title": "Consistent schedule", "desc": "Regular posting across platforms." },
+        { "title": "Quality creatives", "desc": "Professional graphics and videos." },
+        { "title": "Organic growth", "desc": "Steady follower increase." },
+        { "title": "Lead generation", "desc": "Social that drives real business." }
+      ],
+      "benefits": [
+        { "title": "Brand awareness", "desc": "Reach your target audience." },
+        { "title": "Customer loyalty", "desc": "Build lasting relationships." },
+        { "title": "Lead generation", "desc": "Convert followers to customers." },
+        { "title": "Competitive edge", "desc": "Stay ahead of competitors." },
+        { "title": "Real-time feedback", "desc": "Direct customer insights." }
+      ],
+      "includes": [
+        "Content calendar",
+        "Community management",
+        "Paid ads",
+        "Analytics",
+        "Content creation",
+        "Strategy"
+      ],
+      "caseStudies": [
+        { "metric": "100K+", "label": "Followers Gained", "growth": "Organic", "client": "Fashion Brand" },
+        { "metric": "500%", "label": "Engagement", "growth": "+500%", "client": "Food Brand" },
+        { "metric": "1000+", "label": "Leads/Month", "growth": "From social", "client": "Real Estate" },
+        { "metric": "20X", "label": "ROAS", "growth": "+1900%", "client": "E-commerce" }
+      ],
+      "whyChooseUs": [
+        { "title": "Platform experts", "desc": "Specialists for each social platform." },
+        { "title": "Creative team", "desc": "In-house designers and videographers." },
+        { "title": "Data-driven", "desc": "Decisions based on real analytics." },
+        { "title": "Transparent reporting", "desc": "Weekly performance updates." },
+        { "title": "Trend-aware", "desc": "Always ahead of social trends." },
+        { "title": "Affordable packages", "desc": "Quality service at fair prices." }
+      ],
+      "tools": ["Meta Business Suite", "Hootsuite", "Buffer", "Canva Pro", "Later", "Sprout Social"],
+      "industries": ["Fashion", "Food", "Real Estate", "Ecommerce", "Education", "Healthcare"],
+      "packages": [
+        { "name": "Basic", "price": "₹12,000", "period": "/month", "features": ["2 platforms", "12 posts/month", "Basic graphics", "Monthly report"], "popular": false },
+        { "name": "Standard", "price": "₹25,000", "period": "/month", "features": ["3 platforms", "20 posts/month", "Videos included", "Community management", "Paid ads"], "popular": true },
+        { "name": "Premium", "price": "₹50,000", "period": "/month", "features": ["All platforms", "30+ posts/month", "Advanced videos", "Influencer collabs", "Dedicated manager"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Tanya Singh", "role": "Founder, ChicStyle", "text": "Our Instagram grew from 5K to 100K in 6 months. Sales through social tripled!", "rating": 5 },
+        { "name": "Rohan Mehta", "role": "Owner, TastyBites", "text": "They understand food marketing perfectly. Every post gets amazing engagement.", "rating": 5 },
+        { "name": "Anjali Verma", "role": "Director, PropertyHub", "text": "1000+ leads per month from social media. Best investment we've made.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "Which platforms do you manage?", "a": "We manage Instagram, Facebook, LinkedIn, Twitter, YouTube, and Pinterest based on your needs." },
+        { "q": "How often do you post?", "a": "Depending on the package, we post 12-30+ times per month across your platforms." },
+        { "q": "Do you create graphics and videos?", "a": "Yes, our in-house team creates all graphics, videos, and copy for your posts." },
+        { "q": "Can you run paid ads?", "a": "Absolutely. We manage Facebook, Instagram, and LinkedIn ads as part of our packages." }
       ]
     },
+
     "Pay Per Click": {
       "hero": {
         "title": "Instant Traffic. Measurable Results.",
@@ -143,9 +746,76 @@
       "features": [
         { "title": "Google Ads", "description": "Certified experts in search, display, and shopping." },
         { "title": "A/B Testing", "description": "Continuous improvement for better ROI." },
-        { "title": "Conversion Tracking", "description": "See exactly what’s working and why." }
+        { "title": "Conversion Tracking", "description": "See exactly what's working and why." },
+        { "title": "Landing Pages", "description": "High-converting pages for your ads." },
+        { "title": "Budget Optimization", "description": "Maximize every rupee of ad spend." },
+        { "title": "Performance Reporting", "description": "Transparent weekly and monthly reports." }
+      ],
+      "problems": [
+        { "title": "Wasted ad spend", "desc": "Budget going to wrong keywords." },
+        { "title": "Low ROI", "desc": "Ads not delivering returns." },
+        { "title": "Poor targeting", "desc": "Reaching wrong audience." },
+        { "title": "No tracking", "desc": "Can't measure campaign success." },
+        { "title": "High CPC", "desc": "Cost per click too expensive." },
+        { "title": "Low conversions", "desc": "Clicks but no sales." }
+      ],
+      "solutions": [
+        { "title": "Optimized campaigns", "desc": "Every rupee working hard." },
+        { "title": "High ROI", "desc": "Measurable returns on ad spend." },
+        { "title": "Precise targeting", "desc": "Reach the right audience." },
+        { "title": "Full tracking", "desc": "Know exactly what works." },
+        { "title": "Lower CPC", "desc": "Cost-efficient campaigns." },
+        { "title": "Higher conversions", "desc": "Turn clicks into customers." }
+      ],
+      "benefits": [
+        { "title": "Instant results", "desc": "Traffic from day one." },
+        { "title": "Measurable ROI", "desc": "Know your exact returns." },
+        { "title": "Scalable growth", "desc": "Increase budget as you grow." },
+        { "title": "Targeted reach", "desc": "Reach high-intent buyers." },
+        { "title": "Brand visibility", "desc": "Appear at the top of search." }
+      ],
+      "includes": [
+        "Campaign setup",
+        "Keyword targeting",
+        "Ad copy creation",
+        "Conversion tracking",
+        "Optimization",
+        "Reporting"
+      ],
+      "caseStudies": [
+        { "metric": "15X", "label": "ROAS", "growth": "+1400%", "client": "E-commerce" },
+        { "metric": "₹50L+", "label": "Revenue", "growth": "Via Google Ads", "client": "SaaS Company" },
+        { "metric": "60%", "label": "Lower CPC", "growth": "Achieved", "client": "Real Estate" },
+        { "metric": "300%", "label": "More Conversions", "growth": "+300%", "client": "Healthcare" }
+      ],
+      "whyChooseUs": [
+        { "title": "Google certified", "desc": "Certified Google Ads specialists." },
+        { "title": "Data-driven", "desc": "Every decision backed by data." },
+        { "title": "Transparent reporting", "desc": "Full visibility into spend." },
+        { "title": "Proven results", "desc": "Track record of high ROAS." },
+        { "title": "Latest strategies", "desc": "Always updated with Google changes." },
+        { "title": "Dedicated manager", "desc": "Personal account management." }
+      ],
+      "tools": ["Google Ads", "Meta Ads", "Google Analytics", "SEMrush", "SpyFu", "Unbounce"],
+      "industries": ["Ecommerce", "SaaS", "Real Estate", "Healthcare", "Education", "Finance"],
+      "packages": [
+        { "name": "Starter", "price": "₹15,000", "period": "/month", "features": ["₹50K ad budget", "Google Ads only", "Basic optimization", "Monthly report"], "popular": false },
+        { "name": "Growth", "price": "₹30,000", "period": "/month", "features": ["₹2L ad budget", "Google + Meta", "A/B testing", "Weekly reports", "Landing pages"], "popular": true },
+        { "name": "Scale", "price": "₹60,000", "period": "/month", "features": ["Unlimited budget", "All platforms", "Advanced optimization", "Dedicated manager", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Karan Malhotra", "role": "CEO, ShopNow", "text": "15X ROAS on our Google Ads. These guys know what they're doing!", "rating": 5 },
+        { "name": "Pooja Reddy", "role": "Marketing Head, SaaSGrow", "text": "₹50L+ revenue generated through their PPC campaigns. Incredible results.", "rating": 5 },
+        { "name": "Rajiv Kumar", "role": "Director, HomeFind", "text": "They cut our CPC by 60% while doubling conversions. True experts.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "What's the minimum ad budget?", "a": "We recommend at least ₹50,000/month for meaningful results. Our management fee is separate." },
+        { "q": "How soon will I see results?", "a": "You'll see traffic immediately. Optimized conversions typically in 2-4 weeks." },
+        { "q": "Do you manage Meta Ads too?", "a": "Yes, we manage Google, Meta (Facebook/Instagram), LinkedIn, and YouTube ads." },
+        { "q": "What's your management fee?", "a": "Starting at ₹15,000/month. Fee scales with ad spend and complexity." }
       ]
     },
+
     "WhatsApp Marketing": {
       "hero": {
         "title": "Connect Directly. Convert Instantly.",
@@ -156,9 +826,76 @@
       "features": [
         { "title": "Bulk Messaging", "description": "Send offers, updates, and reminders at scale." },
         { "title": "Interactive Campaigns", "description": "Polls, surveys, and feedback collection." },
-        { "title": "Opt-In Management", "description": "Grow your list the right way." }
+        { "title": "Opt-In Management", "description": "Grow your list the right way." },
+        { "title": "Chatbot Setup", "description": "24/7 automated customer support." },
+        { "title": "Template Design", "description": "Approved templates for compliance." },
+        { "title": "Analytics", "description": "Track delivery, reads, and responses." }
+      ],
+      "problems": [
+        { "title": "No direct channel", "desc": "Can't reach customers directly." },
+        { "title": "Low engagement", "desc": "Emails and SMS not working." },
+        { "title": "No automation", "desc": "Manual messaging not scalable." },
+        { "title": "Spam concerns", "desc": "Worried about being marked spam." },
+        { "title": "No tracking", "desc": "Can't measure campaign success." },
+        { "title": "Compliance issues", "desc": "Risk of getting blocked." }
+      ],
+      "solutions": [
+        { "title": "Direct channel", "desc": "Reach customers on WhatsApp." },
+        { "title": "High engagement", "desc": "98% open rates on WhatsApp." },
+        { "title": "Full automation", "desc": "Scalable messaging systems." },
+        { "title": "Compliant sending", "desc": "Follow WhatsApp guidelines." },
+        { "title": "Full tracking", "desc": "Know every message's impact." },
+        { "title": "Safe sending", "desc": "No risk of getting blocked." }
+      ],
+      "benefits": [
+        { "title": "98% open rates", "desc": "Highest of any channel." },
+        { "title": "Instant delivery", "desc": "Messages delivered in seconds." },
+        { "title": "Higher conversions", "desc": "Direct path to purchase." },
+        { "title": "Cost effective", "desc": "Lower cost than SMS." },
+        { "title": "Personal touch", "desc": "Build customer relationships." }
+      ],
+      "includes": [
+        "Campaign setup",
+        "Template design",
+        "Automation",
+        "Opt-in management",
+        "Analytics",
+        "Compliance"
+      ],
+      "caseStudies": [
+        { "metric": "98%", "label": "Open Rate", "growth": "Average", "client": "All clients" },
+        { "metric": "40%", "label": "Conversion Rate", "growth": "From campaigns", "client": "E-commerce" },
+        { "metric": "1M+", "label": "Messages Sent", "growth": "This quarter", "client": "Retail brands" },
+        { "metric": "5X", "label": "ROI vs Email", "growth": "+400%", "client": "D2C brands" }
+      ],
+      "whyChooseUs": [
+        { "title": "Official partner", "desc": "WhatsApp Business API partner." },
+        { "title": "High deliverability", "desc": "99% message delivery rate." },
+        { "title": "Compliance experts", "desc": "100% WhatsApp guideline compliant." },
+        { "title": "Custom templates", "desc": "Beautiful, approved templates." },
+        { "title": "24/7 support", "desc": "Always here when you need us." },
+        { "title": "Affordable pricing", "desc": "Pay per message, no hidden fees." }
+      ],
+      "tools": ["WhatsApp Business API", "Interakt", "Wati", "AiSensy", "Twilio", "Gupshup"],
+      "industries": ["Ecommerce", "Education", "Healthcare", "Real Estate", "Retail", "Food"],
+      "packages": [
+        { "name": "Starter", "price": "₹5,000", "period": "/month", "features": ["5000 messages", "3 templates", "Basic automation", "Monthly report"], "popular": false },
+        { "name": "Growth", "price": "₹12,000", "period": "/month", "features": ["25,000 messages", "10 templates", "Chatbot setup", "Advanced automation"], "popular": true },
+        { "name": "Scale", "price": "₹25,000", "period": "/month", "features": ["Unlimited messages", "Custom templates", "Dedicated manager", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Neha Gupta", "role": "Owner, StyleKart", "text": "98% open rates on WhatsApp. Our sales notifications convert like crazy!", "rating": 5 },
+        { "name": "Vikas Sharma", "role": "Director, EduPro", "text": "Student engagement through WhatsApp has been game-changing for us.", "rating": 5 },
+        { "name": "Meera Iyer", "role": "Manager, HealthFirst", "text": "Appointment reminders via WhatsApp reduced no-shows by 70%.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "Is WhatsApp marketing legal?", "a": "Yes, when done via official WhatsApp Business API with proper opt-ins. We ensure full compliance." },
+        { "q": "What's the cost per message?", "a": "WhatsApp charges conversation-based pricing. We pass through costs with small management fee." },
+        { "q": "Can I send bulk messages?", "a": "Yes, but only to opted-in contacts using approved templates. We handle the setup." },
+        { "q": "Do you provide chatbots?", "a": "Yes, we build custom WhatsApp chatbots for automated customer support." }
       ]
     },
+
     "E-mail Marketing": {
       "hero": {
         "title": "Nurture Leads. Retain Customers.",
@@ -169,9 +906,76 @@
       "features": [
         { "title": "List Building", "description": "Grow and segment your audience for better results." },
         { "title": "Automations", "description": "Drip campaigns, follow-ups, and more." },
-        { "title": "Performance Analytics", "description": "Track opens, clicks, and conversions." }
+        { "title": "Performance Analytics", "description": "Track opens, clicks, and conversions." },
+        { "title": "Template Design", "description": "Beautiful, responsive email templates." },
+        { "title": "Copywriting", "description": "Subject lines and content that convert." },
+        { "title": "A/B Testing", "description": "Optimize every element for best results." }
+      ],
+      "problems": [
+        { "title": "Low open rates", "desc": "Emails not getting opened." },
+        { "title": "No automation", "desc": "Manual sending not scalable." },
+        { "title": "Poor segmentation", "desc": "Same email to everyone." },
+        { "title": "No strategy", "desc": "Random emails without goals." },
+        { "title": "Low conversions", "desc": "Emails don't drive action." },
+        { "title": "High unsubscribe", "desc": "People leaving your list." }
+      ],
+      "solutions": [
+        { "title": "Higher open rates", "desc": "Compelling subject lines." },
+        { "title": "Full automation", "desc": "Set-and-forget sequences." },
+        { "title": "Smart segmentation", "desc": "Right message to right person." },
+        { "title": "Clear strategy", "desc": "Goal-driven email campaigns." },
+        { "title": "Better conversions", "desc": "Emails that drive action." },
+        { "title": "Engaged list", "desc": "Subscribers who want your emails." }
+      ],
+      "benefits": [
+        { "title": "Highest ROI", "desc": "$42 return for every $1 spent." },
+        { "title": "Direct channel", "desc": "Reach customers in their inbox." },
+        { "title": "Scalable", "desc": "Grow without proportional cost." },
+        { "title": "Measurable", "desc": "Track every metric." },
+        { "title": "Personalized", "desc": "Tailored messaging per segment." }
+      ],
+      "includes": [
+        "List building",
+        "Automation setup",
+        "Templates",
+        "Segmentation",
+        "Analytics",
+        "Strategy"
+      ],
+      "caseStudies": [
+        { "metric": "45%", "label": "Open Rate", "growth": "Industry avg 20%", "client": "E-commerce" },
+        { "metric": "₹42", "label": "ROI per ₹1", "growth": "Average", "client": "All clients" },
+        { "metric": "300%", "label": "More Revenue", "growth": "From email", "client": "SaaS Company" },
+        { "metric": "50K+", "label": "Subscribers", "growth": "Built", "client": "D2C Brand" }
+      ],
+      "whyChooseUs": [
+        { "title": "Email experts", "desc": "Specialized email marketing team." },
+        { "title": "High deliverability", "desc": "99% inbox delivery rate." },
+        { "title": "Beautiful designs", "desc": "Templates that look great." },
+        { "title": "Compelling copy", "desc": "Subject lines that get opens." },
+        { "title": "Data-driven", "desc": "Every decision backed by data." },
+        { "title": "Affordable pricing", "desc": "Packages starting at ₹8,000." }
+      ],
+      "tools": ["Mailchimp", "Klaviyo", "ActiveCampaign", "ConvertKit", "HubSpot", "SendGrid"],
+      "industries": ["Ecommerce", "SaaS", "Education", "Finance", "Healthcare", "Real Estate"],
+      "packages": [
+        { "name": "Basic", "price": "₹8,000", "period": "/month", "features": ["4 campaigns", "Basic templates", "List up to 5K", "Monthly report"], "popular": false },
+        { "name": "Growth", "price": "₹18,000", "period": "/month", "features": ["12 campaigns", "Custom templates", "Automation setup", "Segmentation", "A/B testing"], "popular": true },
+        { "name": "Scale", "price": "₹35,000", "period": "/month", "features": ["Unlimited campaigns", "Advanced automations", "Dedicated manager", "Priority support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Sonia Kapoor", "role": "CMO, ShopMore", "text": "45% open rates and 300% revenue increase from email. These guys are wizards!", "rating": 5 },
+        { "name": "Arun Sharma", "role": "Founder, SaaSGrow", "text": "Their email automations generate leads while we sleep. Incredible ROI.", "rating": 5 },
+        { "name": "Priyanka Bose", "role": "Director, EduLearn", "text": "Beautiful designs, compelling copy, and amazing results. Highly recommend.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "What email platform do you use?", "a": "We work with Mailchimp, Klaviyo, ActiveCampaign, and others based on your needs." },
+        { "q": "How do you grow my email list?", "a": "Through lead magnets, website popups, landing pages, and social media campaigns." },
+        { "q": "Can you set up automations?", "a": "Yes, we build welcome series, abandoned cart, re-engagement, and custom sequences." },
+        { "q": "What's a good open rate?", "a": "Industry average is 20%. We typically achieve 35-45% for our clients." }
       ]
     },
+
     "Data Management": {
       "hero": {
         "title": "Organize, Secure, and Leverage Your Data.",
@@ -182,9 +986,76 @@
       "features": [
         { "title": "Data Integration", "description": "Connect all your tools and platforms." },
         { "title": "Security & Compliance", "description": "Protect sensitive information and meet regulations." },
-        { "title": "Reporting Dashboards", "description": "Visualize your data for better decisions." }
+        { "title": "Reporting Dashboards", "description": "Visualize your data for better decisions." },
+        { "title": "Data Cleaning", "description": "Remove duplicates and ensure accuracy." },
+        { "title": "Analytics Setup", "description": "Track what matters for your business." },
+        { "title": "Consulting", "description": "Expert guidance on data strategy." }
+      ],
+      "problems": [
+        { "title": "Scattered data", "desc": "Info spread across multiple tools." },
+        { "title": "No insights", "desc": "Data not driving decisions." },
+        { "title": "Security risks", "desc": "Vulnerable to data breaches." },
+        { "title": "Poor integration", "desc": "Tools don't talk to each other." },
+        { "title": "No dashboards", "desc": "Can't visualize performance." },
+        { "title": "Manual work", "desc": "Too much time on data tasks." }
+      ],
+      "solutions": [
+        { "title": "Unified data", "desc": "All info in one place." },
+        { "title": "Actionable insights", "desc": "Data that drives decisions." },
+        { "title": "Secure storage", "desc": "Protected, compliant data." },
+        { "title": "Full integration", "desc": "All tools connected seamlessly." },
+        { "title": "Visual dashboards", "desc": "Real-time performance views." },
+        { "title": "Automation", "desc": "Less manual work, more insights." }
+      ],
+      "benefits": [
+        { "title": "Better decisions", "desc": "Data-backed business choices." },
+        { "title": "Time savings", "desc": "Automated data workflows." },
+        { "title": "Cost reduction", "desc": "Eliminate redundant tools." },
+        { "title": "Risk mitigation", "desc": "Secure, compliant data." },
+        { "title": "Competitive edge", "desc": "Outperform with insights." }
+      ],
+      "includes": [
+        "Data integration",
+        "Security setup",
+        "Dashboards",
+        "Reporting",
+        "Analytics",
+        "Consulting"
+      ],
+      "caseStudies": [
+        { "metric": "50+", "label": "Integrations", "growth": "Connected", "client": "Enterprise client" },
+        { "metric": "70%", "label": "Time Saved", "growth": "On reporting", "client": "SaaS Company" },
+        { "metric": "99.9%", "label": "Data Accuracy", "growth": "Achieved", "client": "E-commerce" },
+        { "metric": "₹20L+", "label": "Cost Saved", "growth": "Annually", "client": "Retail chain" }
+      ],
+      "whyChooseUs": [
+        { "title": "Data experts", "desc": "Certified data specialists." },
+        { "title": "Platform agnostic", "desc": "Work with any tool stack." },
+        { "title": "Security first", "desc": "Enterprise-grade security." },
+        { "title": "Custom solutions", "desc": "Tailored to your needs." },
+        { "title": "Ongoing support", "desc": "Continuous optimization." },
+        { "title": "Transparent pricing", "desc": "No hidden costs." }
+      ],
+      "tools": ["Google Analytics", "Looker Studio", "Tableau", "Power BI", "Zapier", "Airtable"],
+      "industries": ["Ecommerce", "SaaS", "Finance", "Healthcare", "Retail", "Manufacturing"],
+      "packages": [
+        { "name": "Basic", "price": "₹20,000", "period": "/month", "features": ["5 integrations", "Basic dashboards", "Monthly reports", "Email support"], "popular": false },
+        { "name": "Business", "price": "₹45,000", "period": "/month", "features": ["20 integrations", "Custom dashboards", "Weekly reports", "Priority support"], "popular": true },
+        { "name": "Enterprise", "price": "₹1,00,000", "period": "/month", "features": ["Unlimited integrations", "Advanced analytics", "Dedicated manager", "24/7 support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Rajesh Verma", "role": "CTO, TechCorp", "text": "They connected all our tools seamlessly. Data-driven decisions are now easy.", "rating": 5 },
+        { "name": "Anita Desai", "role": "COO, RetailMax", "text": "Saved us ₹20L annually by eliminating redundant tools. Incredible ROI.", "rating": 5 },
+        { "name": "Suresh Patel", "role": "CEO, DataFlow", "text": "Their dashboards give us real-time insights. Game-changer for our business.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "What tools can you integrate?", "a": "We integrate with 1000+ tools including CRMs, ERPs, marketing platforms, and custom APIs." },
+        { "q": "Is my data secure?", "a": "Absolutely. We use enterprise-grade encryption and comply with GDPR, ISO 27001, and other standards." },
+        { "q": "How long does setup take?", "a": "Basic integrations take 1-2 weeks. Complex enterprise setups take 4-8 weeks." },
+        { "q": "Do you provide training?", "a": "Yes, we train your team on using dashboards and interpreting data insights." }
       ]
     },
+
     "PR Marketing": {
       "hero": {
         "title": "Shape Perception. Build Trust.",
@@ -195,7 +1066,73 @@
       "features": [
         { "title": "Media Outreach", "description": "Get featured in top publications." },
         { "title": "Crisis Management", "description": "Protect your reputation when it matters most." },
-        { "title": "Thought Leadership", "description": "Position your team as industry experts." }
+        { "title": "Thought Leadership", "description": "Position your team as industry experts." },
+        { "title": "Press Releases", "description": "Newsworthy stories that get picked up." },
+        { "title": "Event PR", "description": "Maximize visibility for your events." },
+        { "title": "Media Training", "description": "Prepare your spokespeople for interviews." }
+      ],
+      "problems": [
+        { "title": "No media coverage", "desc": "Brand not getting press attention." },
+        { "title": "Poor reputation", "desc": "Negative perception in market." },
+        { "title": "No thought leadership", "desc": "Not seen as industry expert." },
+        { "title": "Crisis vulnerable", "desc": "Unprepared for negative press." },
+        { "title": "Unknown brand", "desc": "Low brand awareness." },
+        { "title": "No media relations", "desc": "No journalist connections." }
+      ],
+      "solutions": [
+        { "title": "Media coverage", "desc": "Features in top publications." },
+        { "title": "Strong reputation", "desc": "Positive brand perception." },
+        { "title": "Thought leadership", "desc": "Recognized as industry expert." },
+        { "title": "Crisis ready", "desc": "Prepared for any situation." },
+        { "title": "Brand awareness", "desc": "Wider market recognition." },
+        { "title": "Media network", "desc": "Strong journalist relationships." }
+      ],
+      "benefits": [
+        { "title": "Credibility", "desc": "Third-party validation builds trust." },
+        { "title": "Brand awareness", "desc": "Reach wider audiences." },
+        { "title": "SEO boost", "desc": "High-authority backlinks." },
+        { "title": "Investor interest", "desc": "Attract funding opportunities." },
+        { "title": "Talent attraction", "desc": "Top talent wants to work with you." }
+      ],
+      "includes": [
+        "Press releases",
+        "Media outreach",
+        "Reputation management",
+        "Thought leadership",
+        "Crisis PR",
+        "Events"
+      ],
+      "caseStudies": [
+        { "metric": "200+", "label": "Media Features", "growth": "Secured", "client": "Across industries" },
+        { "metric": "50+", "label": "Top Publications", "growth": "Including ET, Forbes", "client": "Multiple clients" },
+        { "metric": "10M+", "label": "Media Reach", "growth": "Generated", "client": "Tech startup" },
+        { "metric": "₹10Cr+", "label": "Funding Raised", "growth": "Post PR campaign", "client": "Startup" }
+      ],
+      "whyChooseUs": [
+        { "title": "Media network", "desc": "500+ journalist relationships." },
+        { "title": "Industry expertise", "desc": "15+ years in PR." },
+        { "title": "Crisis experts", "desc": "Proven crisis management." },
+        { "title": "Creative storytelling", "desc": "Stories that get picked up." },
+        { "title": "Measurable results", "desc": "Track every PR win." },
+        { "title": "Ethical practices", "desc": "Transparent, honest PR." }
+      ],
+      "tools": ["Meltwater", "Cision", "Muck Rack", "PR Newswire", "Google Alerts", "Twitter"],
+      "industries": ["Technology", "Finance", "Healthcare", "Education", "Real Estate", "Startups"],
+      "packages": [
+        { "name": "Basic", "price": "₹25,000", "period": "/month", "features": ["2 press releases", "10 media pitches", "Monthly report", "Basic monitoring"], "popular": false },
+        { "name": "Growth", "price": "₹50,000", "period": "/month", "features": ["4 press releases", "30 media pitches", "Thought leadership", "Crisis support"], "popular": true },
+        { "name": "Enterprise", "price": "₹1,00,000", "period": "/month", "features": ["Unlimited releases", "Full media relations", "Dedicated team", "24/7 crisis support"], "popular": false }
+      ],
+      "testimonials": [
+        { "name": "Nikhil Arora", "role": "Founder, TechStart", "text": "Got us featured in Forbes and ET. Our credibility skyrocketed overnight!", "rating": 5 },
+        { "name": "Shweta Jain", "role": "CEO, FinServe", "text": "Their crisis management saved our reputation. Professional and quick.", "rating": 5 },
+        { "name": "Deepak Kumar", "role": "CMO, HealthPlus", "text": "200+ media features in a year. They truly understand modern PR.", "rating": 5 }
+      ],
+      "faqs": [
+        { "q": "How long to get media coverage?", "a": "Typically 2-4 weeks for initial coverage. Major features can take 1-3 months." },
+        { "q": "Do you guarantee coverage?", "a": "We can't guarantee specific placements, but we guarantee quality pitches and measurable outreach." },
+        { "q": "Can you handle crisis PR?", "a": "Yes, we have dedicated crisis management services with 24/7 availability." },
+        { "q": "What publications do you work with?", "a": "We have relationships with 500+ journalists across top Indian and global publications." }
       ]
     }
   }
