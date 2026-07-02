@@ -18,6 +18,22 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  async redirects() {
+    return [
+      // Fix: /contact (lowercase) → /Contact (actual folder name on server)
+      {
+        source: "/contact",
+        destination: "/Contact",
+        permanent: false,
+      },
+      // Fix: /contact-us → /Contact
+      {
+        source: "/contact-us",
+        destination: "/Contact",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
