@@ -49,11 +49,14 @@ A production-ready blog CMS built with Next.js App Router, Prisma, PostgreSQL, c
 
 ```
 DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
-ADMIN_USERNAME="admin"
-ADMIN_PASSWORD="change-me"
+DIRECT_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+NEXT_PUBLIC_SITE_URL="https://www.digitaladdaagency.com"
+ADMIN_EMAIL="admin@example.com"
+ADMIN_PASSWORD="use-a-long-unique-password"
+JWT_SECRET="use-a-long-random-secret"
 ADMIN_SESSION_SECRET="replace-with-long-random-secret"
 IMGBB_API_KEY="your-imgbb-api-key"
+WEB3FORMS_ACCESS_KEY="your-web3forms-access-key"
 ```
 
 ## API Endpoints

@@ -23,7 +23,7 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
             "name": "DigitalAdda Digital Marketing Agency",
-            "url": "https://www.digitaladdaagency.com/",
+            "url": "http://localhost:3000/",
             "telephone": "09355121681",
             "address": {
               "@type": "PostalAddress",
@@ -54,7 +54,7 @@ export default function Home() {
             "sameAs": [
               "https://www.instagram.com/digitaladdaagency/",
               "https://www.linkedin.com/in/digitaladda-agency-283322372/",
-              "https://www.digitaladdaagency.com/",
+              "http://localhost:3000/",
               "https://www.facebook.com/profile.php?id=61571980529782"
             ]
           })

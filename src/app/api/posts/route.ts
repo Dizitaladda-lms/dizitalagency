@@ -3,6 +3,9 @@ import { z } from 'zod'
 import prisma from '@/lib/prisma'
 import { generateArticleSchema } from '@/lib/schema-generator'
 import { calculateReadTime, calculateWordCount } from '@/lib/utils'
+import { verifyAuthRequest } from '@/lib/auth-jwt'
+import { ensureAdminApi } from '@/lib/auth'
+import { sanitizeContent } from '@/lib/sanitize'
 
 const postInsertSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -34,15 +37,35 @@ const postInsertSchema = z.object({
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
+    const requestedStatus = searchParams.get('status')
     const search = searchParams.get('search')
+    const category = searchParams.get('category')
     const page = Math.max(1, parseInt(searchParams.get('page') ?? '1', 10))
     const limit = Math.min(100, Math.max(1, parseInt(searchParams.get('limit') ?? '10', 10)))
     const skip = (page - 1) * limit
 
+    const session = await verifyAuthRequest(request)
+    const isAdmin = Boolean(session)
+
     const where: any = {}
-    if (status) where.status = status
-    if (search) where.title = { contains: search, mode: 'insensitive' }
+    
+    if (isAdmin) {
+      if (requestedStatus) where.status = requestedStatus
+    } else {
+      // 🔒 Public visitors only get published posts (Prevents Draft Leaks)
+      where.status = 'published'
+    }
+
+    if (search) {
+      where.OR = [
+        { title: { contains: search, mode: 'insensitive' } },
+        { excerpt: { contains: search, mode: 'insensitive' } }
+      ]
+    }
+
+    if (category) {
+      where.category = { equals: category, mode: 'insensitive' }
+    }
 
     const [data, total] = await Promise.all([
       prisma.blog.findMany({
@@ -65,6 +88,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    // 🔒 1. Strict JWT Authentication Gate
+    const session = await ensureAdminApi(request)
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Valid Admin session required to create posts' },
+        { status: 401 }
+      )
+    }
+
     const body = await request.json()
     const parsed = postInsertSchema.safeParse(body)
 
@@ -76,7 +108,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || ''
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
     // Check slug uniqueness
     const existing = await prisma.blog.findUnique({
@@ -88,18 +120,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Slug already exists' }, { status: 400 })
     }
 
-    const wordCount = calculateWordCount(data.content)
-    const readTime = calculateReadTime(data.content)
+    // Sanitize HTML Content against XSS
+    const sanitizedHtml = sanitizeContent(data.content)
+    const wordCount = calculateWordCount(sanitizedHtml)
+    const readTime = calculateReadTime(sanitizedHtml)
 
     const publishedAt = data.status === 'published'
       ? (data.published_at ? new Date(data.published_at) : new Date())
       : (data.published_at ? new Date(data.published_at) : null)
 
     const postData: any = {
-      title: data.title,
-      slug: data.slug,
-      excerpt: data.excerpt || null,
-      content: data.content,
+      title: data.title.trim(),
+      slug: data.slug.trim(),
+      excerpt: data.excerpt ? data.excerpt.trim() : null,
+      content: sanitizedHtml,
       status: data.status,
       coverImage: data.cover_image_url || null,
       coverImageAlt: data.cover_image_alt || null,
@@ -117,7 +151,7 @@ export async function POST(request: NextRequest) {
       twitterImage: data.twitter_image_url || null,
       robotsDirective: data.robots_directive,
       schemaJson: '',
-      authorName: data.author_name,
+      authorName: data.author_name || 'Admin',
       authorUrl: data.author_url || null,
       wordCount: wordCount,
       readTime: readTime,

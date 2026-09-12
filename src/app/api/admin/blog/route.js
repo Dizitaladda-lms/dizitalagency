@@ -27,13 +27,13 @@ export async function POST(request) {
 
     const blog = await prisma.blog.create({
       data: {
-        title: data.title,
+        title: data.title.trim(),
         slug,
         metaTitle: data.metaTitle || null,
         metaDescription: data.metaDescription || null,
+        metaKeywords: normalizeKeywords(data.keywords),
+        schemaJson: normalizeSchemas(data.schemas),
         tags: normalizeTags(data.tags),
-        keywords: normalizeKeywords(data.keywords),
-        schemas: normalizeSchemas(data.schemas),
         coverImage: data.coverImage || null,
         ogImage: data.ogImage || null,
         content: sanitizeBlogHtml(data.content)
@@ -42,7 +42,7 @@ export async function POST(request) {
 
     const ip = await getClientIp(request);
     await recordAudit("blog.create", {
-      actor: session.sub,
+      actor: session.email || session.sub || "admin",
       entity: "Blog",
       entityId: blog.id,
       ip,

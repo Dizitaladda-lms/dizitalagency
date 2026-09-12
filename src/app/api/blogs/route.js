@@ -1,24 +1,7 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 
-export async function GET() {
-  try {
-    const blogs = await prisma.blog.findMany({
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        metaDescription: true,
-        tags: true,
-        coverImage: true,
-        createdAt: true
-      }
-    });
-
-    return NextResponse.json({ data: blogs });
-  } catch (error) {
-    console.error("GET /api/blogs failed", error);
-    return NextResponse.json({ error: "Unable to fetch blogs" }, { status: 500 });
-  }
+export async function GET(request) {
+  // 🔒 Redirect public visitors to the visual /blogs page instead of exposing raw JSON
+  const url = new URL("/blogs", request.url);
+  return NextResponse.redirect(url, 307);
 }

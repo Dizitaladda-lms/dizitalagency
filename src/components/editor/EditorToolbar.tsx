@@ -1,6 +1,7 @@
 'use client'
 
 import { type Editor } from '@tiptap/react'
+import { withAdminCsrf } from '@/lib/client-csrf'
 import {
   Bold,
   Italic,
@@ -84,7 +85,7 @@ export default function EditorToolbar({ editor }: EditorToolbarProps) {
       formData.append('image', file)
 
       try {
-        const res = await fetch('/api/upload', { method: 'POST', body: formData })
+        const res = await fetch('/api/upload', withAdminCsrf({ method: 'POST', body: formData }))
         const data = await res.json()
         if (data.url) {
           editor.chain().focus().setImage({ src: data.url }).run()

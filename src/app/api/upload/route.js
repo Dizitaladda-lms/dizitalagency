@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAuthToken, verifyToken } from "@/lib/auth-jwt";
+import { ensureAdminApi } from "@/lib/auth";
 import { recordAudit } from "@/lib/audit";
 import { getClientIp } from "@/lib/request-info";
 import { uploadToImgBB } from "@/lib/imgbb";
@@ -10,8 +10,7 @@ const MAX_FILE_SIZE_BYTES = 32 * 1024 * 1024;
 
 export async function POST(request) {
   try {
-    const token = await getAuthToken();
-    const session = token ? await verifyToken(token) : null;
+    const session = await ensureAdminApi(request);
     
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

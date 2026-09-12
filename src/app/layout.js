@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/Children/Header";
-import Footer from "@/Children/Footer";
+import ConditionalLayout from "@/components/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "DizitalAdda - Digital Marketing Agency",
-  description: "India's leading digital growth agency delivering results since 2009.",
+  title: "DigitalAdda - Leading Digital Marketing & Growth Agency",
+  description:
+    "DigitalAdda Agency delivers high-impact digital marketing, SEO, PPC ads, web development, and social media growth strategies.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.digitaladdaagency.com"
+  ),
+  openGraph: {
+    title: "DigitalAdda - Leading Digital Marketing & Growth Agency",
+    description:
+      "DigitalAdda Agency delivers high-impact digital marketing, SEO, PPC ads, web development, and social media growth strategies.",
+    type: "website",
+    locale: "en_US",
+    siteName: "DigitalAdda Agency",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -25,12 +36,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Header />
-
-        <main style={{ paddingTop: "100px" }}>
-          {children}
-        </main>
-        <Footer />
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   );

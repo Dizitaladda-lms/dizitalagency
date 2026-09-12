@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { Upload, X, Link as LinkIcon, Image as ImageIcon } from 'lucide-react'
 import LoadingSpinner from './LoadingSpinner'
+import { withAdminCsrf } from '@/lib/client-csrf'
 
 interface ImageUploaderProps {
   value: string
@@ -30,10 +31,10 @@ export default function ImageUploader({ value, onChange, label }: ImageUploaderP
       const formData = new FormData()
       formData.append('image', file)
 
-      const response = await fetch('/api/upload', {
+      const response = await fetch('/api/upload', withAdminCsrf({
         method: 'POST',
         body: formData,
-      })
+      }))
 
       const data = await response.json()
 

@@ -2,9 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { generateArticleSchema } from '@/lib/schema-generator'
 import { calculateReadTime, calculateWordCount } from '@/lib/utils'
+import { verifyAuthRequest } from '@/lib/auth-jwt'
+import { ensureAdminApi } from '@/lib/auth'
+import { sanitizeContent } from '@/lib/sanitize'
+import { recordAudit } from '@/lib/audit'
+import { getClientIp } from '@/lib/request-info'
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -15,6 +20,14 @@ export async function GET(
 
     if (!data) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 })
+    }
+
+    // 🔒 If post is draft, only allow if admin session exists
+    if (data.status !== 'published') {
+      const session = await verifyAuthRequest(request)
+      if (!session) {
+        return NextResponse.json({ error: 'Post not found' }, { status: 404 })
+      }
     }
 
     return NextResponse.json({ data })
@@ -29,21 +42,31 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 🔒 1. Strict JWT Authentication Gate
+    const session = await ensureAdminApi(request)
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin login required to edit posts' },
+        { status: 401 }
+      )
+    }
+
     const { id } = await params
     const body = await request.json()
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || ''
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
     const current = await prisma.blog.findUnique({
       where: { id },
-      select: { publishedAt: true, status: true }
+      select: { publishedAt: true, status: true, title: true }
     })
 
     if (!current) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 })
     }
 
-    const wordCount = calculateWordCount(body.content ?? '')
-    const readTime = calculateReadTime(body.content ?? '')
+    const sanitizedHtml = body.content ? sanitizeContent(body.content) : ''
+    const wordCount = calculateWordCount(sanitizedHtml)
+    const readTime = calculateReadTime(sanitizedHtml)
 
     let publishedAt = current.publishedAt
     if (body.status === 'published' && !publishedAt) {
@@ -53,10 +76,10 @@ export async function PUT(
     }
 
     const updateData: any = {
-      title: body.title,
-      slug: body.slug,
-      excerpt: body.excerpt || null,
-      content: body.content,
+      title: (body.title || current.title).trim(),
+      slug: body.slug ? body.slug.trim() : undefined,
+      excerpt: body.excerpt ? body.excerpt.trim() : null,
+      content: sanitizedHtml,
       status: body.status,
       coverImage: body.cover_image_url || null,
       coverImageAlt: body.cover_image_alt || null,
@@ -92,6 +115,15 @@ export async function PUT(
       data: updateData
     })
 
+    const ip = await getClientIp(request)
+    await recordAudit("post.update", {
+      actor: (session.email as string) || "admin",
+      entity: "Blog",
+      entityId: id,
+      ip,
+      metadata: { title: updated.title, slug: updated.slug }
+    })
+
     return NextResponse.json({ data: updated })
   } catch (error) {
     console.error("PUT /api/posts/[id] error:", error)
@@ -100,16 +132,44 @@ export async function PUT(
 }
 
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 🔒 1. Strict JWT Authentication Gate
+    const session = await ensureAdminApi(request)
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Unauthorized: Admin login required to delete posts' },
+        { status: 401 }
+      )
+    }
+
     const { id } = await params
+    
+    const postToDelete = await prisma.blog.findUnique({
+      where: { id },
+      select: { id: true, title: true, slug: true }
+    })
+
+    if (!postToDelete) {
+      return NextResponse.json({ error: 'Post not found' }, { status: 404 })
+    }
+
     await prisma.blog.delete({
       where: { id }
     })
 
-    return NextResponse.json({ success: true })
+    const ip = await getClientIp(request)
+    await recordAudit("post.delete", {
+      actor: (session.email as string) || "admin",
+      entity: "Blog",
+      entityId: id,
+      ip,
+      metadata: { title: postToDelete.title, slug: postToDelete.slug }
+    })
+
+    return NextResponse.json({ success: true, message: 'Post deleted successfully' })
   } catch (error) {
     console.error("DELETE /api/posts/[id] error:", error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

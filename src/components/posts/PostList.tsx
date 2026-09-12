@@ -7,6 +7,7 @@ import { BlogPost, ApiResponse } from '@/types/blog'
 import PostCard from './PostCard'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import { withAdminCsrf } from '@/lib/client-csrf'
 
 type StatusFilter = 'all' | 'draft' | 'published' | 'archived'
 
@@ -77,7 +78,7 @@ export default function PostList() {
     if (!deleteId) return
     setIsDeleting(true)
     try {
-      await fetch(`/api/posts/${deleteId}`, { method: 'DELETE' })
+      await fetch(`/api/posts/${deleteId}`, withAdminCsrf({ method: 'DELETE' }))
       setDeleteId(null)
       fetchPosts()
     } finally {
@@ -87,11 +88,11 @@ export default function PostList() {
 
   const handleToggleStatus = async (post: BlogPost) => {
     const newStatus = post.status === 'published' ? 'draft' : 'published'
-    await fetch(`/api/posts/${post.id}`, {
+    await fetch(`/api/posts/${post.id}`, withAdminCsrf({
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...post, status: newStatus }),
-    })
+    }))
     fetchPosts()
   }
 

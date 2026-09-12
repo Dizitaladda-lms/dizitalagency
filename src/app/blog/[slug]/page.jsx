@@ -17,7 +17,7 @@ const toExcerpt = (html) => {
 };
 
 const getBlogBySlug = async (slug) =>
-  prisma.blog.findUnique({ where: { slug } });
+  prisma.blog.findFirst({ where: { slug, status: "published" } });
 
 const getRecommended = async (currentId, tags = []) => {
   // Try tag-matching first, then fall back to latest
@@ -27,6 +27,7 @@ const getRecommended = async (currentId, tags = []) => {
     posts = await prisma.blog.findMany({
       where: {
         id: { not: currentId },
+        status: "published",
         tags: { hasSome: tags },
       },
       orderBy: { createdAt: "desc" },
@@ -47,7 +48,7 @@ const getRecommended = async (currentId, tags = []) => {
   if (posts.length < 4) {
     const existingIds = [currentId, ...posts.map((p) => p.id)];
     const extras = await prisma.blog.findMany({
-      where: { id: { notIn: existingIds } },
+      where: { id: { notIn: existingIds }, status: "published" },
       orderBy: { createdAt: "desc" },
       take: 4 - posts.length,
       select: {

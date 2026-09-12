@@ -193,14 +193,14 @@ export default function ServicePage({ params }) {
             <FadeIn delay={0.4}>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/Contact"
+                  href="/contact"
                   className="inline-flex items-center gap-3 px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold uppercase tracking-[0.18em] transition-all duration-300 group hover:scale-105 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]"
                 >
                   Get Free Consultation
                   <Arrow className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
                 <a
-                  href="/Contact"
+                  href="/contact"
                   className="inline-flex items-center gap-3 px-8 py-4 border border-purple-500/40 hover:border-purple-400 hover:bg-purple-500/10 text-white text-sm font-bold uppercase tracking-[0.18em] transition-all duration-300 group hover:scale-105"
                 >
                   Get Free Audit
@@ -662,7 +662,7 @@ export default function ServicePage({ params }) {
                       ))}
                     </ul>
                     <a
-                      href="/Contact"
+                      href="/contact"
                       className={`inline-flex items-center gap-3 px-6 py-3 text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 group/btn w-full justify-center ${pkg.popular
                         ? "bg-purple-600 hover:bg-purple-500 text-white hover:scale-105"
                         : "border border-white/[0.1] hover:border-purple-400 text-white hover:bg-purple-500/10"
@@ -895,7 +895,7 @@ export default function ServicePage({ params }) {
 
           <div className="flex flex-wrap gap-3 flex-shrink-0">
             <a
-              href="/Contact"
+              href="/contact"
               className="inline-flex items-center gap-3 px-6 py-4 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 group hover:scale-105"
             >
               Book Consultation

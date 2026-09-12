@@ -15,6 +15,7 @@ import SlugInput from '@/components/ui/SlugInput'
 import TagInput from '@/components/ui/TagInput'
 import ImageUploader from '@/components/ui/ImageUploader'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import { withAdminCsrf } from '@/lib/client-csrf'
 
 const TiptapEditor = dynamic(() => import('@/components/editor/TiptapEditor'), {
   ssr: false,
@@ -169,11 +170,11 @@ export default function PostForm({ initialData, postId, mode }: PostFormProps) {
       const url = mode === 'create' ? '/api/posts' : `/api/posts/${postId}`
       const method = mode === 'create' ? 'POST' : 'PUT'
 
-      const res = await fetch(url, {
+      const res = await fetch(url, withAdminCsrf({
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      })
+      }))
 
       const json = await res.json()
 

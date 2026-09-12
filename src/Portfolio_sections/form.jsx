@@ -42,26 +42,26 @@ export default function PortfolioProjectForm() {
     setIsSubmitting(true);
     setResult("Sending...");
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("access_key", "8b5d3f99-8f11-4cfc-bcab-35143aba7bc4");
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("phone", formData.phone);
-    formDataToSend.append("service", formData.service.value);
-    formDataToSend.append("message", formData.message);
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: formDataToSend
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service?.value || "General Inquiry",
+          message: formData.message,
+        }),
       });
+
       const data = await response.json();
-      if (data.success) {
+      if (response.ok && data.success) {
         setResult("Form Submitted Successfully! You can now download the portfolio PDF.");
         setFormData({ name: '', email: '', phone: '', service: serviceOptions[0], message: '' });
         setDownloadReady(true);
       } else {
-        setResult(data.message || "Something went wrong. Please try again.");
+        setResult(data.error || "Something went wrong. Please try again.");
       }
     } catch (error) {
       setResult("Failed to send message. Please try again.");
@@ -102,7 +102,7 @@ export default function PortfolioProjectForm() {
                 <Listbox.Button className="w-full px-4 py-2.5 bg-purple-900/50 border border-purple-500/30 rounded-xl text-white text-left focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition text-sm">
                   {formData.service.label}
                 </Listbox.Button>
-                <Listbox.Options className="absolute left-0 w-full mt-2 bg-gray-900 border border-purple-500/30 rounded-xl shadow-xl max-h-60 overflow-y-auto focus:outline-none custom-scrollbar">
+                <Listbox.Options className="absolute left-0 w-full mt-2 bg-[#0d0b24] border border-purple-500/40 rounded-xl shadow-2xl max-h-60 overflow-y-auto focus:outline-none custom-scrollbar z-50">
                   {serviceOptions.map((option) => (
                     <Listbox.Option
                       key={option.value}

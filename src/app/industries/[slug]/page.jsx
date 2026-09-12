@@ -112,7 +112,7 @@ export default function IndustryPage({ params }) {
 
           <FadeIn delay={0.4}>
             <a
-              href="/Contact"
+              href="/contact"
               className="inline-flex items-center gap-3 px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold uppercase tracking-[0.18em] transition-colors duration-300 group"
             >
               {ctaText}
@@ -334,7 +334,7 @@ export default function IndustryPage({ params }) {
 
                     {/* CTA */}
                     <a
-                      href="/Contact"
+                      href="/contact"
                       className={`mt-auto inline-flex items-center justify-center gap-2 py-3.5 px-6 text-sm font-bold uppercase tracking-[0.18em] transition-colors duration-300 group/btn
                         ${isPremium
                           ? "bg-purple-600 hover:bg-purple-500 text-white"
@@ -379,7 +379,7 @@ export default function IndustryPage({ params }) {
           </div>
 
           <a
-            href="/Contact"
+            href="/contact"
             className="flex-shrink-0 inline-flex items-center gap-3 px-8 py-4 bg-purple-600 hover:bg-purple-500 text-white text-sm font-bold uppercase tracking-[0.18em] transition-colors duration-300 group"
           >
             {ctaText}

@@ -199,7 +199,7 @@ export default function WhyTrustUs() {
 
           {/* Right — CTA */}
           <a
-            href="/Contact"
+            href="/contact"
             className="flex-shrink-0 inline-flex items-center gap-3 px-7 py-3.5 bg-purple-600 text-white text-sm font-bold uppercase tracking-[0.15em] hover:bg-purple-500 transition-colors duration-300 group"
           >
             Start a Conversation

@@ -34,13 +34,13 @@ export async function PUT(request, { params }) {
     const updated = await prisma.blog.update({
       where: { id },
       data: {
-        title: data.title,
+        title: data.title.trim(),
         slug,
         metaTitle: data.metaTitle || null,
         metaDescription: data.metaDescription || null,
+        metaKeywords: normalizeKeywords(data.keywords),
+        schemaJson: normalizeSchemas(data.schemas),
         tags: normalizeTags(data.tags),
-        keywords: normalizeKeywords(data.keywords),
-        schemas: normalizeSchemas(data.schemas),
         coverImage: data.coverImage || null,
         ogImage: data.ogImage || null,
         content: sanitizeBlogHtml(data.content)
@@ -49,7 +49,7 @@ export async function PUT(request, { params }) {
 
     const ip = await getClientIp(request);
     await recordAudit("blog.update", {
-      actor: session.sub,
+      actor: session.email || session.sub || "admin",
       entity: "Blog",
       entityId: updated.id,
       ip,
@@ -78,7 +78,7 @@ export async function DELETE(request, { params }) {
 
     const ip = await getClientIp(request);
     await recordAudit("blog.delete", {
-      actor: session.sub,
+      actor: session.email || session.sub || "admin",
       entity: "Blog",
       entityId: deleted.id,
       ip,

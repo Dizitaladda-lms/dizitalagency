@@ -13,6 +13,11 @@ const LOGIN_WINDOW_MS = 60_000;
 const LOGIN_ATTEMPT_LIMIT = 5;
 
 export async function POST(request) {
+  return NextResponse.json(
+    { error: "This session endpoint is retired. Use /api/auth/login." },
+    { status: 410 }
+  );
+
   const ip = await getClientIp(request);
   const isAllowed = rateLimit({
     key: `admin-login:${ip}`,
@@ -44,6 +49,11 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
+  return NextResponse.json(
+    { error: "This session endpoint is retired. Use /api/auth/logout." },
+    { status: 410 }
+  );
+
   const session = await ensureAdminApi(request, { requireCsrf: true });
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

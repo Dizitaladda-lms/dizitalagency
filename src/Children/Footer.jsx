@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-8">
             <div className="relative items-start">
               <img 
-                src="/final logo.png" 
+                src="/final-logo.png" 
                 alt="Digital Adda Logo"
                 className="h-auto md:h-[10vw] w-full object-cover md:object-contain scale-100 md:scale-200" 
               />
@@ -58,10 +58,15 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h3 className="text-lg font-bold text-white mb-6">Company</h3>
             <ul className="space-y-3 text-gray-400 text-sm">
-              {['About Us', 'Careers', 'Case Studies', 'Blog', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-cyan-400 transition block">
-                    {item}
+              {[
+                { name: 'About Us', href: '/Aboutus' },
+                { name: 'Portfolio', href: '/Portfolio' },
+                { name: 'Blog', href: '/blogs' },
+                { name: 'Contact', href: '/contact' },
+              ].map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="hover:text-cyan-400 transition block">
+                    {item.name}
                   </a>
                 </li>
               ))}

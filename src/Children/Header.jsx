@@ -67,18 +67,26 @@ export default function Header() {
   }, []);
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
-      phone: formData.get('phone'),
-      service: formData.get('service'),
-      message: formData.get('message'),
+      phone: formData.get('phone') || '',
+      service: formData.get('service') || 'General Inquiry',
+      message: formData.get('message') || 'Popup Inquiry',
     };
     
-    console.log('Form submitted:', data);
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+    } catch (err) {
+      console.error('Popup lead submit error:', err);
+    }
     
     // Show success message
     setShowSuccess(true);
@@ -87,7 +95,7 @@ export default function Header() {
     setTimeout(() => {
       setPopupOpen(false);
       setShowSuccess(false);
-      e.target.reset();
+      e.target?.reset?.();
     }, 3000);
   };
 
@@ -153,7 +161,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <Link
-            href="/Contact"
+            href="/contact"
             className="hidden lg:block px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold text-white shadow-lg hover:scale-105 transition-all duration-300"
           >
             Get in touch
@@ -338,21 +346,25 @@ export default function Header() {
                         <label className="block text-white text-sm font-medium mb-2">
                           Service Interested In *
                         </label>
-                        <select
-                          name="service"
-                          required
-                          className="w-full px-4 py-2.5 md:py-3 bg-white/5 border border-purple-500/30 rounded-xl text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition appearance-none text-sm"
-                        >
-                          <option value="">Select a service</option>
-                          <option value="digital-marketing">Digital Marketing</option>
-                          <option value="ai-integration">AI Integration</option>
-                          <option value="vr-development">VR Development</option>
-                          <option value="brand-strategy">Brand Strategy</option>
-                          <option value="seo">SEO & Content</option>
-                          <option value="social-media">Social Media Marketing</option>
-                          <option value="web-development">Web Development</option>
-                          <option value="other">Other</option>
-                        </select>
+                        <div className="relative">
+                          <select
+                            name="service"
+                            required
+                            className="w-full px-4 py-2.5 md:py-3 pr-10 bg-[#120e2e]/90 border border-purple-500/40 rounded-xl text-white focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/30 transition appearance-none text-sm cursor-pointer"
+                          >
+                            <option value="" className="bg-[#0e0c24] text-gray-400">Select a service</option>
+                            <option value="Search Engine Optimization (SEO)" className="bg-[#0e0c24] text-white py-1">Search Engine Optimization (SEO)</option>
+                            <option value="Website Designing & Development" className="bg-[#0e0c24] text-white py-1">Website Designing & Development</option>
+                            <option value="Social Media Marketing" className="bg-[#0e0c24] text-white py-1">Social Media Marketing</option>
+                            <option value="Pay Per Click (PPC Ads)" className="bg-[#0e0c24] text-white py-1">Pay Per Click (PPC Ads)</option>
+                            <option value="Graphic Design & Branding" className="bg-[#0e0c24] text-white py-1">Graphic Design & Branding</option>
+                            <option value="Professional Video Editing" className="bg-[#0e0c24] text-white py-1">Professional Video Editing</option>
+                            <option value="Local SEO & Google Maps" className="bg-[#0e0c24] text-white py-1">Local SEO & Google Maps</option>
+                            <option value="Influencer & PR Marketing" className="bg-[#0e0c24] text-white py-1">Influencer & PR Marketing</option>
+                            <option value="Other Growth Services" className="bg-[#0e0c24] text-white py-1">Other Growth Services</option>
+                          </select>
+                          <ChevronDown className="w-4 h-4 text-purple-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        </div>
                       </div>
                     </div>
 

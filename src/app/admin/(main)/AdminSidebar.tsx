@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { withAdminCsrf } from '@/lib/client-csrf'
 import {
   LayoutDashboard,
   FileText,
@@ -29,7 +30,7 @@ export default function AdminSidebar({ adminEmail }: AdminSidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' })
+    await fetch('/api/auth/logout', withAdminCsrf({ method: 'POST' }))
     router.push('/admin/login')
   }
 

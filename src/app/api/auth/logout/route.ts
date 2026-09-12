@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server'
-import { clearAdminSessionCookie } from '@/lib/auth'
+import { clearAdminSessionCookie, ensureAdminApi } from '@/lib/auth'
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
+    const session = await ensureAdminApi(request)
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
     const response = NextResponse.json({ success: true }, { status: 200 })
     response.cookies.set('admin_token', '', {
       httpOnly: true,

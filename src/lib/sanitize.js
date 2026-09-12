@@ -46,11 +46,13 @@ export const sanitizeBlogHtml = (value = "") =>
     allowedSchemes: ["http", "https", "mailto"],
     transformTags: {
       a: sanitizeHtml.simpleTransform("a", {
-        rel: "noopener noreferrer nofollow",
+        rel: "noopener noreferrer",
         target: "_blank"
       })
     }
   });
+
+export const sanitizeContent = sanitizeBlogHtml;
 
 export const stripHtml = (value = "") =>
   sanitizeHtml(value, {
