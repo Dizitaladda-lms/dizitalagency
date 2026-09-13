@@ -86,10 +86,11 @@ export default function Footer() {
               </ul> */}
             </div>
 
-            {/* Google Map now lives here */}
+            {/* Standard Maps embed keeps the iframe tied to the address shown above. */}
             <div className="relative rounded-2xl overflow-hidden border border-cyan-500/20 shadow-2xl shadow-cyan-500/10 group">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56079.044798360745!2d77.20051465834564!3d28.541514099999986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce38a7f54bc17%3A0xdde852ca05ce4e4c!2sDigital%20Adda%20Agency!5e0!3m2!1sen!2sin!4v1764515568346!5m2!1sen!2sin"
+                title="Digital Adda Agency location in Greater Kailash II, New Delhi"
+                src="https://www.google.com/maps?q=2nd+Floor%2C+Office+No.+201%2C+Spacetime+Management+Pvt+Ltd+Design+House%2C+behind+Savitri+Cinema+Complex%2C+Greater+Kailash+II%2C+New+Delhi+110048&z=16&output=embed"
                 width="100%"
                 height="300"
                 style={{ border: 0 }}
@@ -100,7 +101,7 @@ export default function Footer() {
               />
               
               <a
-                href="https://maps.google.com/maps?q=Digital+Adda+Agency+Gurugram"
+                href="https://www.google.com/maps/search/?api=1&query=2nd+Floor%2C+Office+No.+201%2C+Spacetime+Management+Pvt+Ltd+Design+House%2C+behind+Savitri+Cinema+Complex%2C+Greater+Kailash+II%2C+New+Delhi+110048"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute bottom-4 left-4 bg-purple-600 hover:bg-purple-700 backdrop-blur-lg border border-cyan-400/30 px-5 py-2.5 rounded-full text-cyan-300 text-sm font-semibold hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-lg"
