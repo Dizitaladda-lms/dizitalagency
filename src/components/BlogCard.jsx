@@ -18,7 +18,7 @@ const BlogCard = ({ blog }) => {
   const isExternalCover = Boolean(rawCover && /^(https?:)?\/\//i.test(rawCover));
   const hasCover = Boolean(rawCover);
   const cover = hasCover ? rawCover : "/placeholder.svg";
-  const description = blog.metaDescription || toExcerpt(blog.content);
+  const description = blog.metaDescription || blog.excerpt || "";
   const primaryTag = blog.tags?.[0];
 
   return (

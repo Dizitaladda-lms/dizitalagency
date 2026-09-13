@@ -2,7 +2,9 @@ import BlogCard from "@/components/BlogCard";
 import prisma from "@/lib/prisma";
 import styles from "./page.module.css";
 
-export const dynamic = "force-dynamic";
+// Keep the public listing responsive while allowing new posts to appear shortly
+// after publication instead of querying the database on every navigation.
+export const revalidate = 60;
 
 export const metadata = {
   title: "Blog — DigitalAdda Agency",
@@ -20,7 +22,7 @@ export default async function BlogsPage() {
       metaDescription: true,
       tags: true,
       coverImage: true,
-      content: true,
+      excerpt: true,
       createdAt: true
     }
   });
