@@ -5,52 +5,177 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Sparkles, ShieldCheck, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const brands = [
-  { id: 1,  name: "Blumera",                     src: "/brands/1.png",  category: "E-Commerce & Retail", metrics: "3.2x ROAS Growth" },
-  { id: 2,  name: "CUET-Adda",                   src: "/brands/2.png",  category: "EdTech & Learning", metrics: "150k+ Students Reached" },
-  { id: 3,  name: "DesigningVidya",              src: "/brands/3.png",  category: "Creative Academy", metrics: "4.8/5 Brand Rating" },
-  { id: 4,  name: "DigitalAdda",                 src: "/brands/4.png",  category: "Digital Growth", metrics: "500k+ Monthly Visits" },
-  { id: 5,  name: "Digiwarms",                   src: "/brands/5.png",  category: "Tech & Solutions", metrics: "88% Lead Conversion" },
-  { id: 6,  name: "DigitalAdda II",              src: "/brands/6.png",  category: "Agency Network", metrics: "Multi-Channel Scale" },
-  { id: 7,  name: "Economics With Gulshan Sir",  src: "/brands/7.png",  category: "Education & Coaching", metrics: "10x Organic Reach" },
-  { id: 8,  name: "FACT Education",              src: "/brands/8.png",  category: "Higher Education", metrics: "Top Institutional Reach" },
-  { id: 9,  name: "Hacking Vidya",               src: "/brands/9.png",  category: "Cybersecurity & IT", metrics: "20k+ Community" },
-  { id: 10, name: "IIDAD",                       src: "/brands/10.png", category: "Design Institute", metrics: "#1 Creative Enrolments" },
-  { id: 11, name: "LawPrep",                     src: "/brands/11.png", category: "Legal Entrance Prep", metrics: "94% Admission Rank" },
-  { id: 12, name: "Legal Adda",                  src: "/brands/12.png", category: "Legal Tech & Advisory", metrics: "2.4x Inbound Leads" },
-  { id: 13, name: "NIDADS",                      src: "/brands/13.png", category: "Animation & Design", metrics: "Pan-India Expansion" },
-  { id: 14, name: "NIFASE",                      src: "/brands/14.png", category: "Skill Training Academy", metrics: "Top Job Placement Rate" },
-  { id: 15, name: "NIGAPE",                      src: "/brands/15.png", category: "Professional Studies", metrics: "Compounding ROI" },
-  { id: 16, name: "NIHACS",                      src: "/brands/16.png", category: "Healthcare Academy", metrics: "High-Trust Campaigns" },
-  { id: 17, name: "NIMLACC",                     src: "/brands/17.png", category: "Management Institute", metrics: "Executive Leadership" },
-  { id: 18, name: "Shalini Vashisht",            src: "/brands/18.png", category: "Personal Brand & Coach", metrics: "6-Figure Authority" },
+  {
+    id: 1,
+    name: "CUET-Adda",
+    src: "/brands/1.png",
+    category: "EdTech & University Entrance",
+    tagline: "Think Regular College, Think CuetAdda",
+    metrics: "150k+ Students Trained",
+  },
+  {
+    id: 2,
+    name: "DesigningVidya",
+    src: "/brands/2.png",
+    category: "Design & Multimedia Academy",
+    tagline: "India's #1 Designing Institute",
+    metrics: "4.9/5 Student Rating",
+  },
+  {
+    id: 3,
+    name: "Digiwarms",
+    src: "/brands/3.png",
+    category: "Digital Growth & IT Solutions",
+    tagline: "Performance-Driven Marketing & Tech",
+    metrics: "3.5x Client ROI",
+  },
+  {
+    id: 4,
+    name: "DigitalAdda Agency",
+    src: "/brands/4.png",
+    category: "Performance Marketing Agency",
+    tagline: "Your Business Growth Is Our Guarantee",
+    metrics: "500k+ Monthly Visits",
+  },
+  {
+    id: 5,
+    name: "DizitalAdda Institute",
+    src: "/brands/5.png",
+    category: "Digital Marketing Institute",
+    tagline: "India's Most Recommended Marketing Institute",
+    metrics: "10k+ Alumni Network",
+  },
+  {
+    id: 6,
+    name: "Economics With Gulshan Sir",
+    src: "/brands/6.png",
+    category: "Economics & Academic Coaching",
+    tagline: "Top-Tier Economics & Commerce Guidance",
+    metrics: "10x Organic Reach",
+  },
+  {
+    id: 7,
+    name: "FACT Education",
+    src: "/brands/7.png",
+    category: "Academics & Professional Studies",
+    tagline: "Empowering Careers Since 2008",
+    metrics: "15+ Years Track Record",
+  },
+  {
+    id: 8,
+    name: "Hacking Vidya",
+    src: "/brands/8.png",
+    category: "Cybersecurity & IT Training",
+    tagline: "India's #1 Hacking Institute",
+    metrics: "25k+ Security Aspirants",
+  },
+  {
+    id: 9,
+    name: "IIDAD",
+    src: "/brands/9.png",
+    category: "Design & Development Institute",
+    tagline: "Indian Institute of Designing and Development",
+    metrics: "Top Placement Rate",
+  },
+  {
+    id: 10,
+    name: "LawPrep Coaching",
+    src: "/brands/10.png",
+    category: "Law & CLAT Entrance Prep",
+    tagline: "India's Premier Law Preparation Institute",
+    metrics: "Top National Ranks",
+  },
+  {
+    id: 11,
+    name: "Legal Adda",
+    src: "/brands/11.png",
+    category: "Legal Tech & Corporate Advisory",
+    tagline: "Comprehensive Legal Services & Solutions",
+    metrics: "100% Compliance Success",
+  },
+  {
+    id: 12,
+    name: "NIDADS",
+    src: "/brands/12.png",
+    category: "Data Analytics & Data Science",
+    tagline: "National Institute of Data Analytics & Data Science",
+    metrics: "Industry-Ready Programs",
+  },
+  {
+    id: 13,
+    name: "NIFASE",
+    src: "/brands/13.png",
+    category: "Finance & Stock Market Academy",
+    tagline: "National Institute of Finance & Stock Education",
+    metrics: "High-Accuracy Market Training",
+  },
+  {
+    id: 14,
+    name: "NIGAPE",
+    src: "/brands/14.png",
+    category: "Gen AI & Prompt Engineering",
+    tagline: "National Institute of Gen AI & Prompt Engineering",
+    metrics: "Next-Gen AI Skills",
+  },
+  {
+    id: 15,
+    name: "NIHACS",
+    src: "/brands/15.png",
+    category: "Cyber Security & Defense",
+    tagline: "National Institute of Hacking & Cyber Security",
+    metrics: "Elite Security Certifications",
+  },
+  {
+    id: 16,
+    name: "NIMLACC",
+    src: "/brands/16.png",
+    category: "Machine Learning & Cloud Computing",
+    tagline: "National Institute of ML & Cloud Computing",
+    metrics: "Advanced Tech Programs",
+  },
+  {
+    id: 17,
+    name: "Blumera",
+    src: "/brands/17.png",
+    category: "Aesthetics & Beauty Lounge",
+    tagline: "Luxury Aesthetic Care & Beauty Experience",
+    metrics: "3.2x Revenue Scale",
+  },
+  {
+    id: 18,
+    name: "Shalini Vasisht",
+    src: "/brands/18.png",
+    category: "Makeup Studio & Beauty Academy",
+    tagline: "Celebrity Makeup & Styling Studio",
+    metrics: "High-Authority Personal Brand",
+  },
 ];
 
 const rowOne = brands.slice(0, 9);
 const rowTwo = brands.slice(9);
 
-/* ── Individual Logo Card ── */
+/* ── Individual Logo Card with crisp solid white backing and scaled graphics ── */
 function LogoCard({ brand, isSelected, onClick }) {
   return (
     <div
       onClick={onClick}
-      className={`group relative flex-shrink-0 w-[150px] sm:w-[175px] md:w-[200px] h-[78px] sm:h-[88px] rounded-2xl cursor-pointer transition-all duration-300 flex items-center justify-center p-3 sm:p-4 select-none ${
+      className={`group relative flex-shrink-0 w-[170px] sm:w-[200px] md:w-[230px] h-[84px] sm:h-[96px] rounded-2xl cursor-pointer transition-all duration-300 flex items-center justify-center p-3.5 select-none overflow-hidden ${
         isSelected
-          ? "bg-purple-600/20 border-2 border-purple-400 shadow-[0_0_25px_rgba(168,85,247,0.35)] scale-105"
-          : "bg-white/[0.07] hover:bg-white/[0.14] border border-white/15 hover:border-purple-400/60 shadow-lg shadow-black/40 hover:scale-105"
+          ? "bg-white ring-4 ring-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.5)] scale-105"
+          : "bg-white/95 hover:bg-white border border-purple-200/50 shadow-md shadow-black/30 hover:shadow-xl hover:shadow-purple-500/20 hover:scale-105"
       }`}
     >
-      {/* Light radial backdrop pill so black/dark logo typography pops crisply */}
-      <div className="absolute inset-2 bg-gradient-to-br from-white/10 to-white/5 rounded-xl pointer-events-none group-hover:from-white/15 group-hover:to-white/10 transition-colors" />
+      <div className="w-full h-full flex items-center justify-center overflow-hidden">
+        <img
+          src={brand.src}
+          alt={brand.name}
+          className="w-full h-full object-contain transform scale-135 sm:scale-145 group-hover:scale-155 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
 
-      <img
-        src={brand.src}
-        alt={brand.name}
-        className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)] group-hover:brightness-110 group-hover:scale-105 transition-all duration-300"
-        loading="lazy"
-      />
-
-      {/* Subtle brand name tooltip on hover */}
-      <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-[#0d0022] text-[10px] font-semibold text-purple-200 px-2.5 py-1 rounded-md border border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-30 shadow-lg">
+      {/* Subtle brand name badge on hover */}
+      <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 bg-[#0c001f]/90 backdrop-blur-sm text-[10px] font-bold text-purple-200 px-2.5 py-0.5 rounded-full border border-purple-400/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-20 shadow-md">
         {brand.name}
       </div>
     </div>
@@ -231,13 +356,12 @@ export default function BrandShowcase() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8"
               >
-                {/* Logo Display Card with Bright Glass Backing for Crystal Clarity */}
-                <div className="relative w-44 sm:w-52 h-24 sm:h-28 rounded-2xl bg-white/95 p-4 flex items-center justify-center shadow-xl shadow-purple-900/30 border border-white flex-shrink-0 group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-100/40 to-transparent rounded-2xl pointer-events-none" />
+                {/* Logo Display Card with Pure White Backing & Zoomed Crisp Graphic */}
+                <div className="relative w-48 sm:w-60 h-28 sm:h-32 rounded-2xl bg-white p-4 flex items-center justify-center shadow-2xl border-2 border-purple-300/40 flex-shrink-0 overflow-hidden group">
                   <img
                     src={activeBrand.src}
                     alt={activeBrand.name}
-                    className="w-full h-full object-contain filter contrast-105"
+                    className="w-full h-full object-contain transform scale-140 sm:scale-150 filter contrast-105 transition-transform duration-300"
                   />
                 </div>
 
@@ -252,12 +376,16 @@ export default function BrandShowcase() {
                     {activeBrand.name}
                   </h3>
 
-                  <p className="text-sm text-gray-300 mb-3 font-medium">
-                    Industry Sector: <span className="text-purple-300 font-semibold">{activeBrand.category}</span>
+                  <p className="text-sm text-gray-300 mb-1 font-medium">
+                    Sector: <span className="text-purple-300 font-semibold">{activeBrand.category}</span>
+                  </p>
+
+                  <p className="text-xs text-gray-400 mb-3 italic">
+                    &ldquo;{activeBrand.tagline}&rdquo;
                   </p>
 
                   <div className="inline-block bg-gradient-to-r from-purple-600/20 to-indigo-600/20 border border-purple-500/30 px-3.5 py-1.5 rounded-xl text-xs font-semibold text-purple-200">
-                    Key Milestone: <span className="text-white font-bold">{activeBrand.metrics}</span>
+                    Milestone: <span className="text-white font-bold">{activeBrand.metrics}</span>
                   </div>
                 </div>
               </motion.div>
@@ -297,13 +425,13 @@ export default function BrandShowcase() {
           onSelect={(idx) => setCurrentIndex(idx)}
         />
 
-        {/* Row 2 — Right Scroll (Opposite direction for dynamic visual appeal) */}
+        {/* Row 2 — Right Scroll */}
         <MarqueeRow
           items={rowTwo}
           reverse={true}
           duration={28}
           selectedId={activeBrand.id}
-          onSelect={(idx) => setCurrentIndex(idx + 9)}
+          onSelect={(idx) => setCurrentIndex(idx)}
         />
       </motion.div>
 
