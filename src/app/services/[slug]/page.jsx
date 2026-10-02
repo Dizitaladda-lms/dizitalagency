@@ -82,10 +82,26 @@ export default function ServicePage({ params }) {
   const toggleFaq = (index) => setOpenFaq(openFaq === index ? null : index);
   const handleInputChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Thank you! We will contact you soon.");
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service || serviceName || 'Service Page Lead',
+          message: `Website: ${formData.website || 'N/A'} - Inquiry for ${serviceName || 'Service'}`,
+        }),
+      });
+      alert('Thank you! Your inquiry has been sent successfully. Our team will contact you shortly.');
+      setFormData({ name: '', phone: '', email: '', website: '', service: '' });
+    } catch (err) {
+      console.error(err);
+      alert('Failed to send inquiry. Please try again.');
+    }
   };
 
   // ── 404 ───────────────────────────────────────────────────────────────────
