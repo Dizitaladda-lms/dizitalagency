@@ -79,7 +79,7 @@ export default function HeroSection() {
   const handleRightEnded = () => setActiveSide("left");
 
   return (
-    <section className="w-full bg-[#0f0020]">
+    <section id="strategy-videos" className="w-full bg-[#0f0020]">
 
       <div className="grid grid-cols-2 w-full relative">
         <div className="relative w-full aspect-video bg-black border border-white/15">

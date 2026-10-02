@@ -1,3 +1,4 @@
+import HomesectionGlobalHero from "@/Homesections/HomesectionGlobalHero";
 import Homesection1 from "@/Homesections/Homesection1";
 import Homesection2 from "@/Homesections/Homesection2";
 import Homesection3 from "@/Homesections/Homesection3";
@@ -62,6 +63,7 @@ export default function Home() {
       />
 
       {/* Page Sections */}
+      <HomesectionGlobalHero />
       <Homesection1 />
       {/*<Homesection2_1 />*/}
       
