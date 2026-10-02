@@ -2,19 +2,87 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, ArrowRight, Sparkles, ShieldCheck, Zap, Play, Compass } from "lucide-react";
 import Link from "next/link";
 
-// Key countries data with coordinates (lat, lng) and info
+// Realistic Continent Polygon Data (lat, lng arrays) for authentic 3D world landmasses
+const CONTINENT_POLYGONS = [
+  // North America
+  [
+    [70, -165], [72, -130], [70, -80], [60, -64], [47, -53], [44, -64], 
+    [32, -80], [25, -80], [18, -95], [15, -92], [8, -78], [15, -104], 
+    [30, -115], [48, -125], [60, -140], [65, -168], [70, -165]
+  ],
+  // Greenland
+  [
+    [78, -70], [82, -30], [70, -20], [60, -43], [65, -52], [78, -70]
+  ],
+  // South America
+  [
+    [12, -73], [10, -62], [5, -50], [-5, -35], [-18, -38], [-23, -42], 
+    [-35, -55], [-54, -68], [-52, -75], [-45, -74], [-18, -71], [0, -80], [12, -73]
+  ],
+  // Europe
+  [
+    [71, 28], [68, 45], [60, 30], [55, 38], [45, 36], [40, 26], [37, 22],
+    [36, -5], [43, -9], [48, -4], [52, 2], [58, 6], [62, 5], [65, 14], [70, 20], [71, 28]
+  ],
+  // United Kingdom & Ireland
+  [
+    [58, -6], [58, 2], [50, 1], [50, -5], [58, -6]
+  ],
+  // Africa
+  [
+    [37, 10], [32, 32], [28, 34], [12, 43], [11, 51], [4, 42], [-11, 40], 
+    [-26, 33], [-34, 20], [-34, 18], [-18, 12], [5, 9], [10, -14], [15, -17], [35, -6], [37, 10]
+  ],
+  // Madagascar
+  [
+    [-12, 49], [-15, 50], [-25, 47], [-25, 44], [-12, 49]
+  ],
+  // Asia - Main Landmass
+  [
+    [75, 75], [76, 110], [72, 130], [66, 170], [60, 162], [55, 135], [43, 131], 
+    [38, 118], [22, 114], [15, 108], [10, 99], [22, 91], [8, 77], [22, 69], 
+    [12, 44], [15, 53], [25, 57], [30, 48], [30, 35], [40, 35], [45, 50], [55, 60], [75, 75]
+  ],
+  // India Peninsula
+  [
+    [32, 75], [24, 69], [15, 73], [8, 77], [13, 80], [20, 85], [27, 88], [30, 78], [32, 75]
+  ],
+  // Arabia Peninsula
+  [
+    [30, 35], [30, 48], [25, 57], [15, 53], [12, 44], [20, 38], [30, 35]
+  ],
+  // Japan
+  [
+    [45, 142], [41, 140], [35, 136], [31, 130], [35, 133], [40, 138], [45, 142]
+  ],
+  // Southeast Asia Islands (Indonesia & Philippines)
+  [
+    [18, 121], [10, 126], [5, 115], [-5, 105], [-8, 115], [-8, 127], [2, 128], [18, 121]
+  ],
+  // Australia
+  [
+    [-12, 130], [-12, 142], [-25, 153], [-38, 148], [-35, 135], [-33, 115], 
+    [-22, 114], [-15, 124], [-12, 130]
+  ],
+  // New Zealand
+  [
+    [-34, 172], [-46, 166], [-46, 174], [-38, 178], [-34, 172]
+  ]
+];
+
+// Key Target Business Hub Countries
 const COUNTRY_MARKERS = [
-  { name: "United States", flag: "🇺🇸", lat: 37.0902, lng: -95.7129, stat: "340% ROAS Growth" },
-  { name: "United Kingdom", flag: "🇬🇧", lat: 55.3781, lng: -3.436, stat: "2.8x Lead Velocity" },
-  { name: "United Arab Emirates", flag: "🇦🇪", lat: 23.4241, lng: 53.8478, stat: "15k+ Qualified Leads" },
-  { name: "India", flag: "🇮🇳", lat: 20.5937, lng: 78.9629, stat: "10M+ Organic Impressions" },
-  { name: "Australia", flag: "🇦🇺", lat: -25.2744, lng: 133.7751, stat: "420% Sales Conversion" },
-  { name: "Canada", flag: "🇨🇦", lat: 56.1304, lng: -106.3468, stat: "High-Authority Branding" },
-  { name: "Germany", flag: "🇩🇪", lat: 51.1657, lng: 10.4515, stat: "Multi-Language SEO Scale" },
-  { name: "Singapore", flag: "🇸🇬", lat: 1.3521, lng: 103.8198, stat: "FinTech Campaign Success" },
+  { name: "United States", code: "US", lat: 37.0902, lng: -95.7129, stat: "340% ROAS Growth" },
+  { name: "United Kingdom", code: "UK", lat: 55.3781, lng: -3.436, stat: "2.8x Lead Velocity" },
+  { name: "United Arab Emirates", code: "UAE", lat: 24.2, lng: 54.3, stat: "15k+ Qualified Leads" },
+  { name: "India", code: "IN", lat: 21.0, lng: 78.0, stat: "10M+ Organic Impressions" },
+  { name: "Australia", code: "AU", lat: -25.2, lng: 133.7, stat: "420% Sales Conversion" },
+  { name: "Canada", code: "CA", lat: 56.1, lng: -106.3, stat: "High-Authority Branding" },
+  { name: "Germany", code: "DE", lat: 51.1, lng: 10.4, stat: "Multi-Language SEO Scale" },
+  { name: "Singapore", code: "SG", lat: 1.35, lng: 103.8, stat: "FinTech Campaign Success" },
+  { name: "Japan", code: "JP", lat: 36.2, lng: 138.2, stat: "APAC Market Expansion" },
 ];
 
 export default function HomesectionGlobalHero() {
@@ -22,10 +90,10 @@ export default function HomesectionGlobalHero() {
   const [activeCountry, setActiveCountry] = useState(0);
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
-  const rotationRef = useRef({ x: 0.3, y: 0.8 });
-  const velocityRef = useRef({ x: 0, y: 0.003 });
+  const rotationRef = useRef({ x: 0.25, y: 0.6 });
+  const velocityRef = useRef({ x: 0, y: 0.0035 });
 
-  // Rotate active country badge periodically
+  // Rotate spotlight country marker
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCountry((prev) => (prev + 1) % COUNTRY_MARKERS.length);
@@ -33,7 +101,7 @@ export default function HomesectionGlobalHero() {
     return () => clearInterval(interval);
   }, []);
 
-  // 3D Canvas Globe Engine
+  // 3D Engine for Vector Continent Globe
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -51,46 +119,48 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Generate Globe Dot Grid (sphere lat/lng points)
-    const points = [];
-    const radius = 175; // Sphere radius in px
-    const latLines = 32;
-    const lngLines = 64;
+    const radius = 180; // Sphere radius in px
 
-    for (let i = 0; i <= latLines; i++) {
-      const lat = (i / latLines) * Math.PI - Math.PI / 2;
-      for (let j = 0; j < lngLines; j++) {
-        const lng = (j / lngLines) * 2 * Math.PI;
-        // Introduce continent mask density to simulate realistic landmass dots
-        const isLand =
-          (lat > -0.7 && lat < 1.1 && (
-            (lng > 0.3 && lng < 2.5) || // Eurasia & Africa
-            (lng > -2.8 && lng < -0.8) || // Americas
-            (lng > 2.0 && lng < 2.9 && lat < 0.2) // Australia
-          ));
-
-        if (isLand || Math.random() < 0.18) {
-          points.push({
-            x: radius * Math.cos(lat) * Math.sin(lng),
-            y: radius * Math.sin(lat),
-            z: radius * Math.cos(lat) * Math.cos(lng),
-            isLand,
-          });
-        }
-      }
-    }
-
-    // Convert country lat/long to 3D sphere coordinate
-    const country3DCoords = COUNTRY_MARKERS.map((c) => {
-      const phi = (90 - c.lat) * (Math.PI / 180);
-      const theta = (c.lng + 180) * (Math.PI / 180);
+    // Helper: Convert lat/long to 3D point on sphere radius R
+    const latLngTo3D = (lat, lng, r = radius) => {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lng + 180) * (Math.PI / 180);
       return {
-        ...c,
-        x: -(radius * Math.sin(phi) * Math.cos(theta)),
-        y: radius * Math.cos(phi),
-        z: radius * Math.sin(phi) * Math.sin(theta),
+        x: -(r * Math.sin(phi) * Math.cos(theta)),
+        y: r * Math.cos(phi),
+        z: r * Math.sin(phi) * Math.sin(theta),
       };
-    });
+    };
+
+    // Pre-calculate 3D country pin locations
+    const country3DCoords = COUNTRY_MARKERS.map((c) => ({
+      ...c,
+      pos3D: latLngTo3D(c.lat, c.lng, radius),
+    }));
+
+    // Pre-calculate 3D continent polygon structures
+    const continent3DPolygons = CONTINENT_POLYGONS.map((poly) =>
+      poly.map(([lat, lng]) => latLngTo3D(lat, lng, radius))
+    );
+
+    // Generate longitude & latitude graticule rings
+    const graticuleLines = [];
+    // Latitudes
+    for (let lat = -60; lat <= 60; lat += 30) {
+      const ring = [];
+      for (let lng = -180; lng <= 180; lng += 10) {
+        ring.push(latLngTo3D(lat, lng, radius));
+      }
+      graticuleLines.push(ring);
+    }
+    // Longitudes
+    for (let lng = -180; lng < 180; lng += 45) {
+      const line = [];
+      for (let lat = -80; lat <= 80; lat += 10) {
+        line.push(latLngTo3D(lat, lng, radius));
+      }
+      graticuleLines.push(line);
+    }
 
     // Render loop
     const render = () => {
@@ -105,7 +175,7 @@ export default function HomesectionGlobalHero() {
       // Auto rotation physics
       if (!isDraggingRef.current) {
         rotationRef.current.y += velocityRef.current.y;
-        rotationRef.current.x += (0.3 - rotationRef.current.x) * 0.02; // snap back tilt
+        rotationRef.current.x += (0.25 - rotationRef.current.x) * 0.02;
       }
 
       const rotX = rotationRef.current.x;
@@ -116,122 +186,188 @@ export default function HomesectionGlobalHero() {
       const cosY = Math.cos(rotY);
       const sinY = Math.sin(rotY);
 
-      // Render Atmosphere Glow Ring
-      const bgGradient = ctx.createRadialGradient(
-        centerX, centerY, radius * 0.7,
-        centerX, centerY, radius * 1.35
-      );
-      bgGradient.addColorStop(0, "rgba(168, 85, 247, 0.12)");
-      bgGradient.addColorStop(0.6, "rgba(99, 102, 241, 0.08)");
-      bgGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-      ctx.fillStyle = bgGradient;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius * 1.35, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Project and draw dot matrix points
-      for (let i = 0; i < points.length; i++) {
-        const pt = points[i];
-
-        // 3D Matrix Rotation (Y axis then X axis)
+      // 3D Point Projection Helper
+      const project = (pt) => {
         const x1 = pt.x * cosY + pt.z * sinY;
         const z1 = -pt.x * sinY + pt.z * cosY;
         const y1 = pt.y * cosX - z1 * sinX;
         const z2 = pt.y * sinX + z1 * cosX;
 
-        // Perspective scale & culling (only render front-facing hemisphere clearly)
-        const perspective = 600 / (600 + z2);
-        const screenX = centerX + x1 * perspective;
-        const screenY = centerY + y1 * perspective;
-
-        const isFront = z2 > -40;
-        const alpha = isFront
-          ? Math.max(0.12, (z2 + radius) / (2 * radius))
-          : Math.max(0.02, (z2 + radius) / (4 * radius));
-
-        ctx.fillStyle = pt.isLand
-          ? `rgba(168, 85, 247, ${alpha * 0.85})` // Neon Purple
-          : `rgba(99, 102, 241, ${alpha * 0.4})`; // Indigo
-
-        const dotSize = (pt.isLand ? 1.8 : 1.2) * perspective;
-        ctx.beginPath();
-        ctx.arc(screenX, screenY, Math.max(0.5, dotSize), 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Draw Connection Arcs between countries on front face
-      const projectedCountries = country3DCoords.map((c, idx) => {
-        const x1 = c.x * cosY + c.z * sinY;
-        const z1 = -c.x * sinY + c.z * cosY;
-        const y1 = c.y * cosX - z1 * sinX;
-        const z2 = c.y * sinX + z1 * cosX;
-        const perspective = 600 / (600 + z2);
+        const perspective = 650 / (650 + z2);
         return {
-          ...c,
           screenX: centerX + x1 * perspective,
           screenY: centerY + y1 * perspective,
           z2,
-          isFront: z2 > 0,
+          perspective,
+          isFront: z2 > -10,
+        };
+      };
+
+      // 1. Atmosphere Radial Glow Behind Globe
+      const glowGrad = ctx.createRadialGradient(
+        centerX, centerY, radius * 0.6,
+        centerX, centerY, radius * 1.35
+      );
+      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.18)");
+      glowGrad.addColorStop(0.6, "rgba(99, 102, 241, 0.1)");
+      glowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius * 1.35, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 2. Base Ocean Sphere (Dark Deep Space Blue Fill)
+      const oceanGrad = ctx.createRadialGradient(
+        centerX - radius * 0.3, centerY - radius * 0.3, radius * 0.2,
+        centerX, centerY, radius
+      );
+      oceanGrad.addColorStop(0, "#1e1045");
+      oceanGrad.addColorStop(0.7, "#0d0628");
+      oceanGrad.addColorStop(1, "#070316");
+
+      ctx.fillStyle = oceanGrad;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 3. Render Graticule Lines (Grid)
+      ctx.strokeStyle = "rgba(168, 85, 247, 0.12)";
+      ctx.lineWidth = 1;
+      graticuleLines.forEach((ring) => {
+        ctx.beginPath();
+        let started = false;
+        ring.forEach((pt) => {
+          const proj = project(pt);
+          if (proj.isFront) {
+            if (!started) {
+              ctx.moveTo(proj.screenX, proj.screenY);
+              started = true;
+            } else {
+              ctx.lineTo(proj.screenX, proj.screenY);
+            }
+          } else {
+            started = false;
+          }
+        });
+        ctx.stroke();
+      });
+
+      // 4. Render Vector Continent Polygons with Fills & Glowing Strokes
+      continent3DPolygons.forEach((poly) => {
+        const projectedPoly = poly.map(project);
+        
+        // Calculate average Z depth to cull back-facing continents
+        const avgZ = projectedPoly.reduce((sum, p) => sum + p.z2, 0) / projectedPoly.length;
+
+        if (avgZ > -20) {
+          ctx.beginPath();
+          projectedPoly.forEach((p, idx) => {
+            if (idx === 0) ctx.moveTo(p.screenX, p.screenY);
+            else ctx.lineTo(p.screenX, p.screenY);
+          });
+          ctx.closePath();
+
+          // Continent Land Fill Gradient
+          const landAlpha = Math.min(0.45, Math.max(0.1, (avgZ + radius) / (2 * radius)));
+          ctx.fillStyle = `rgba(147, 51, 234, ${landAlpha})`;
+          ctx.fill();
+
+          // Continent Coastline Outline
+          ctx.strokeStyle = `rgba(192, 132, 252, ${landAlpha * 1.6})`;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+      });
+
+      // 5. Project Country Markers
+      const projectedCountries = country3DCoords.map((c, idx) => {
+        const proj = project(c.pos3D);
+        return {
+          ...c,
+          screenX: proj.screenX,
+          screenY: proj.screenY,
+          z2: proj.z2,
+          isFront: proj.z2 > 0,
           idx,
         };
       });
 
-      // Draw bezier flight / data arcs connecting active country to others
+      // 6. Draw Curved Data Arcs connecting Active Country to Others
       const curActive = projectedCountries[activeCountry];
       if (curActive && curActive.isFront) {
         projectedCountries.forEach((target, i) => {
           if (i === activeCountry || !target.isFront) return;
 
           const midX = (curActive.screenX + target.screenX) / 2;
-          const midY = (curActive.screenY + target.screenY) / 2 - 45;
+          const midY = (curActive.screenY + target.screenY) / 2 - 40;
 
           const arcGradient = ctx.createLinearGradient(
             curActive.screenX, curActive.screenY,
             target.screenX, target.screenY
           );
-          arcGradient.addColorStop(0, "rgba(217, 70, 239, 0.8)");
-          arcGradient.addColorStop(0.5, "rgba(56, 189, 248, 0.9)");
-          arcGradient.addColorStop(1, "rgba(168, 85, 247, 0.2)");
+          arcGradient.addColorStop(0, "rgba(236, 72, 153, 0.9)");
+          arcGradient.addColorStop(0.5, "rgba(56, 189, 248, 0.8)");
+          arcGradient.addColorStop(1, "rgba(168, 85, 247, 0.3)");
 
           ctx.beginPath();
           ctx.moveTo(curActive.screenX, curActive.screenY);
           ctx.quadraticCurveTo(midX, midY, target.screenX, target.screenY);
           ctx.strokeStyle = arcGradient;
           ctx.lineWidth = 1.5;
-          ctx.setLineDash([4, 4]);
+          ctx.setLineDash([4, 3]);
           ctx.stroke();
           ctx.setLineDash([]);
         });
       }
 
-      // Draw Country Ping Markers & Pulsing Rings
+      // 7. Draw Country Pin Nodes & Pulsing Beacons
       projectedCountries.forEach((c) => {
         if (!c.isFront) return;
 
         const isCurrentActive = c.idx === activeCountry;
-        const size = isCurrentActive ? 6 : 4;
+        const size = isCurrentActive ? 6.5 : 4;
 
-        // Outer glow aura
+        // Outer Glow Ring
         ctx.fillStyle = isCurrentActive
-          ? "rgba(236, 72, 153, 0.4)"
+          ? "rgba(244, 63, 94, 0.4)"
           : "rgba(56, 189, 248, 0.3)";
         ctx.beginPath();
-        ctx.arc(c.screenX, c.screenY, size * 2.8, 0, Math.PI * 2);
+        ctx.arc(c.screenX, c.screenY, size * 2.6, 0, Math.PI * 2);
         ctx.fill();
 
-        // Inner solid core
+        // Inner Core
         ctx.fillStyle = isCurrentActive ? "#f43f5e" : "#38bdf8";
         ctx.beginPath();
         ctx.arc(c.screenX, c.screenY, size, 0, Math.PI * 2);
         ctx.fill();
 
-        // White highlight
+        // Bright Center Dot
         ctx.fillStyle = "#ffffff";
         ctx.beginPath();
         ctx.arc(c.screenX, c.screenY, size * 0.4, 0, Math.PI * 2);
         ctx.fill();
+
+        // Label on Front
+        ctx.font = "bold 10px Inter, sans-serif";
+        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.85)";
+        ctx.fillText(c.code, c.screenX + 8, c.screenY + 3);
       });
+
+      // 8. Outer Glowing Atmosphere Edge Rim
+      const rimGrad = ctx.createRadialGradient(
+        centerX, centerY, radius * 0.96,
+        centerX, centerY, radius * 1.04
+      );
+      rimGrad.addColorStop(0, "rgba(168, 85, 247, 0)");
+      rimGrad.addColorStop(0.5, "rgba(192, 132, 252, 0.6)");
+      rimGrad.addColorStop(1, "rgba(56, 189, 248, 0.8)");
+
+      ctx.strokeStyle = rimGrad;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -244,7 +380,7 @@ export default function HomesectionGlobalHero() {
     };
   }, [activeCountry]);
 
-  // Drag handlers for 3D Globe rotation
+  // Drag handlers
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
     lastMousePosRef.current = { x: e.clientX, y: e.clientY };
@@ -265,16 +401,16 @@ export default function HomesectionGlobalHero() {
     isDraggingRef.current = false;
   };
 
-  // Character-by-Character Stagger Animation Variants
-  const agencyNameText = "DigitalAdda Agency";
-  
+  const word1 = "DigitalAdda";
+  const word2 = "Agency";
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.04,
-        delayChildren: 0.2,
+        staggerChildren: 0.03,
+        delayChildren: 0.1,
       },
     },
   };
@@ -282,17 +418,15 @@ export default function HomesectionGlobalHero() {
   const letterVariants = {
     hidden: {
       opacity: 0,
-      y: 24,
-      scale: 0.8,
-      filter: "blur(10px)",
+      y: 20,
+      filter: "blur(6px)",
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       filter: "blur(0px)",
       transition: {
-        duration: 0.5,
+        duration: 0.4,
         ease: [0.21, 0.47, 0.32, 0.98],
       },
     },
@@ -301,19 +435,14 @@ export default function HomesectionGlobalHero() {
   const activeCountryData = COUNTRY_MARKERS[activeCountry];
 
   return (
-    <section className="relative w-full min-h-[90vh] bg-[#070714] text-white overflow-hidden flex items-center pt-24 pb-16 border-b border-purple-900/30">
+    <section className="relative w-full min-h-[88vh] bg-[#070714] text-white overflow-hidden flex items-center pt-20 pb-14 border-b border-purple-900/30">
       
-      {/* ── Background Grid & Radial Lights ── */}
+      {/* Background Ambient Glows */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Top center deep purple glow */}
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-purple-600/20 via-indigo-600/10 to-transparent rounded-full blur-[140px]" />
-        
-        {/* Right side cyan light bloom */}
-        <div className="absolute bottom-10 right-[-10%] w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[160px]" />
-
-        {/* Futuristic Cybernetic Mesh Overlay */}
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[750px] h-[450px] bg-gradient-to-b from-purple-600/20 via-indigo-600/10 to-transparent rounded-full blur-[140px]" />
+        <div className="absolute bottom-5 right-[-5%] w-[550px] h-[550px] bg-cyan-500/10 rounded-full blur-[160px]" />
         <div
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(168, 85, 247, 0.4) 1px, transparent 1px),
@@ -325,108 +454,100 @@ export default function HomesectionGlobalHero() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* ══════════════════════════════════════════════════════════════
-              LEFT COLUMN — Character-by-Character Animated Headline & Info
+              LEFT COLUMN — Professional Typography & Character Animation
           ══════════════════════════════════════════════════════════════ */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
             {/* Top Pill Badge */}
             <motion.div
-              initial={{ opacity: 0, y: -16 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 backdrop-blur-md mb-6"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-purple-950/60 border border-purple-500/30 backdrop-blur-md mb-6"
             >
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-              </span>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-purple-300">
+              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-purple-200">
                 Global Performance Marketing Agency
               </span>
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
             </motion.div>
 
-            {/* ── Character-by-Character Agency Name Animation ── */}
+            {/* ── Agency Title: Clean & Non-Breaking ── */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="mb-4 flex flex-wrap items-center gap-x-1 sm:gap-x-2 text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05]"
+              className="mb-5 flex flex-wrap items-center gap-x-3 sm:gap-x-4 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none"
             >
-              {agencyNameText.split("").map((char, index) => {
-                const isAgency = index >= 12; // "Agency" part
-                return (
-                  <motion.span
-                    key={index}
-                    variants={letterVariants}
-                    className={`inline-block ${
-                      isAgency
-                        ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]"
-                        : "text-white"
-                    }`}
-                  >
-                    {char === " " ? "\u00A0" : char}
+              {/* Word 1: DigitalAdda */}
+              <span className="inline-block whitespace-nowrap text-white">
+                {word1.split("").map((char, index) => (
+                  <motion.span key={index} variants={letterVariants} className="inline-block">
+                    {char}
                   </motion.span>
-                );
-              })}
+                ))}
+              </span>
+
+              {/* Word 2: Agency */}
+              <span className="inline-block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                {word2.split("").map((char, index) => (
+                  <motion.span key={index} variants={letterVariants} className="inline-block">
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
             </motion.div>
 
-            {/* Sub-Title / Global Value Proposition */}
+            {/* Sub-Title */}
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-              className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-200 mb-6 leading-snug"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-lg sm:text-2xl font-bold text-slate-200 mb-5 leading-snug"
             >
-              Scaling Brands Across <span className="text-cyan-400 underline decoration-purple-500 decoration-wavy decoration-2">25+ Countries</span> Worldwide 🌐
+              Scaling Brands Across <span className="text-cyan-400 font-extrabold">25+ Countries</span> Worldwide
             </motion.h2>
 
             {/* Description Body */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.75 }}
-              className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mb-8"
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed mb-8"
             >
-              Whether you're expanding into international markets or dominating your home turf — we build AI-driven PPC campaigns, high-converting global SEO, and performance strategies that turn worldwide clicks into revenue.
+              Whether expanding internationally or dominating regional markets — we craft data-driven PPC campaigns, high-converting global SEO, and performance marketing built for compounding scale.
             </motion.p>
 
             {/* CTAs Row */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.9 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto"
             >
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 text-white font-extrabold text-sm uppercase tracking-wider shadow-lg shadow-purple-500/25 hover:shadow-xl hover:shadow-purple-500/40 hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto text-center overflow-hidden"
+                className="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-purple-900/40 hover:scale-[1.02] transition-all duration-200 w-full sm:w-auto text-center"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Get Free Global Audit
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                Get Free Global Audit
               </Link>
 
               <a
                 href="#strategy-videos"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 border border-purple-500/30 hover:border-purple-400 font-bold text-sm uppercase tracking-wider transition-all duration-300 w-full sm:w-auto text-center backdrop-blur-md"
+                className="inline-flex items-center justify-center px-7 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 border border-purple-500/30 hover:border-purple-400 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 w-full sm:w-auto text-center backdrop-blur-md"
               >
-                <Play className="w-4 h-4 fill-purple-400 text-purple-400" />
                 Watch Strategy Videos
               </a>
             </motion.div>
 
-            {/* Global Performance Highlights Bar */}
+            {/* Performance Stats Bar */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.05 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-purple-900/30 w-full max-w-2xl"
+              transition={{ duration: 0.6, delay: 0.95 }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-purple-900/30 w-full max-w-xl"
             >
               {[
                 { label: "Global Clients", value: "200+" },
@@ -435,10 +556,10 @@ export default function HomesectionGlobalHero() {
                 { label: "Satisfaction", value: "98.5%" },
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col">
-                  <span className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-white to-cyan-300">
+                  <span className="text-xl sm:text-2xl font-black text-white">
                     {item.value}
                   </span>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mt-1">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 mt-0.5">
                     {item.label}
                   </span>
                 </div>
@@ -448,16 +569,15 @@ export default function HomesectionGlobalHero() {
           </div>
 
           {/* ══════════════════════════════════════════════════════════════
-              RIGHT COLUMN — 3D Interactive Spinning Globe Canvas
+              RIGHT COLUMN — 3D Vector Landmass Globe Canvas
           ══════════════════════════════════════════════════════════════ */}
           <div className="lg:col-span-5 relative flex items-center justify-center">
             
-            {/* Globe Outer Glow Box */}
-            <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+            <div className="relative w-full max-w-[460px] aspect-square flex items-center justify-center">
               
-              {/* Outer Decorative Orbit Ring */}
-              <div className="absolute inset-2 border border-purple-500/20 rounded-full animate-[spin_40s_linear_infinite] pointer-events-none" />
-              <div className="absolute inset-8 border border-cyan-500/20 rounded-full animate-[spin_25s_linear_infinite_reverse] pointer-events-none" />
+              {/* Outer Decorative Orbit Rings */}
+              <div className="absolute inset-2 border border-purple-500/20 rounded-full animate-[spin_45s_linear_infinite] pointer-events-none" />
+              <div className="absolute inset-8 border border-cyan-500/15 rounded-full animate-[spin_30s_linear_infinite_reverse] pointer-events-none" />
 
               {/* 3D Canvas element */}
               <div
@@ -470,36 +590,31 @@ export default function HomesectionGlobalHero() {
                 <canvas ref={canvasRef} className="w-full h-full block" />
               </div>
 
-              {/* Floating Active Country Glassmorphism Spotlight Card */}
+              {/* Active Country Spotlight Card */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeCountryData.name}
-                  initial={{ opacity: 0, y: 16, scale: 0.9 }}
+                  initial={{ opacity: 0, y: 12, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -16, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-900/90 backdrop-blur-xl border border-purple-500/40 px-5 py-3 rounded-2xl shadow-2xl shadow-purple-900/50 flex items-center gap-3 z-30 pointer-events-none whitespace-nowrap min-w-[260px]"
+                  exit={{ opacity: 0, y: -12, scale: 0.95 }}
+                  transition={{ duration: 0.35 }}
+                  className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 px-5 py-2.5 rounded-xl shadow-2xl flex items-center gap-3 z-30 pointer-events-none whitespace-nowrap min-w-[240px]"
                 >
-                  <span className="text-3xl">{activeCountryData.flag}</span>
+                  <span className="text-xs font-black text-purple-400 px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">
+                    {activeCountryData.code}
+                  </span>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-extrabold text-white">
+                      <span className="text-xs font-bold text-white">
                         {activeCountryData.name}
                       </span>
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
                     </div>
-                    <p className="text-[11px] font-semibold text-purple-300">
-                      ⚡ {activeCountryData.stat}
+                    <p className="text-[11px] font-medium text-cyan-300">
+                      {activeCountryData.stat}
                     </p>
                   </div>
                 </motion.div>
               </AnimatePresence>
-
-              {/* Drag Hint Overlay */}
-              <div className="absolute top-4 right-4 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-purple-500/30 text-[10px] font-bold text-slate-300 flex items-center gap-1.5 shadow-md pointer-events-none">
-                <Compass className="w-3 h-3 text-cyan-400 animate-spin" />
-                <span>Drag to Rotate Globe</span>
-              </div>
 
             </div>
 
