@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 
+import CountrySelector from "./CountrySelector";
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -159,13 +161,16 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
-          <Link
-            href="/contact"
-            className="hidden lg:block px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold text-white shadow-lg hover:scale-105 transition-all duration-300"
-          >
-            Get in touch
-          </Link>
+          {/* Desktop Right Side CTA & Country Selector */}
+          <div className="hidden lg:flex items-center gap-4">
+            <CountrySelector />
+            <Link
+              href="/contact"
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold text-white shadow-lg hover:scale-105 transition-all duration-300 text-sm"
+            >
+              Get in touch
+            </Link>
+          </div>
 
           {/* Mobile Hamburger */}
           <button
@@ -196,10 +201,16 @@ export default function Header() {
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block text-2xl font-bold text-white mb-8"
+            className="block text-2xl font-bold text-white mb-6"
           >
             Digital Adda
           </Link>
+
+          {/* Mobile Country Selector */}
+          <div className="mb-6 pb-6 border-b border-purple-900/40">
+            <p className="text-xs font-bold text-purple-300 uppercase tracking-wider mb-2">Select Country & Language</p>
+            <CountrySelector isMobile />
+          </div>
 
           {/* Mobile Nav Items */}
           {navItems.map((item) => {

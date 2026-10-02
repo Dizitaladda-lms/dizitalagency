@@ -598,7 +598,7 @@ export default function HomesectionGlobalHero() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -12, scale: 0.95 }}
                   transition={{ duration: 0.35 }}
-                  className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 px-5 py-2.5 rounded-xl shadow-2xl flex items-center gap-3 z-30 pointer-events-none whitespace-nowrap min-w-[240px]"
+                  className="notranslate absolute bottom-2 left-1/2 -translate-x-1/2 bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 px-5 py-2.5 rounded-xl shadow-2xl flex items-center gap-3 z-30 pointer-events-none whitespace-nowrap min-w-[240px]"
                 >
                   <span className="text-xs font-black text-purple-400 px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">
                     {activeCountryData.code}
