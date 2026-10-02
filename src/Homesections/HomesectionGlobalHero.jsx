@@ -74,15 +74,15 @@ const CONTINENT_POLYGONS = [
 
 // Key Target Business Hub Countries
 const COUNTRY_MARKERS = [
-  { name: "United States", code: "US", lat: 37.0902, lng: -95.7129, stat: "340% ROAS Growth" },
-  { name: "United Kingdom", code: "UK", lat: 55.3781, lng: -3.436, stat: "2.8x Lead Velocity" },
-  { name: "United Arab Emirates", code: "UAE", lat: 24.2, lng: 54.3, stat: "15k+ Qualified Leads" },
-  { name: "India", code: "IN", lat: 21.0, lng: 78.0, stat: "10M+ Organic Impressions" },
-  { name: "Australia", code: "AU", lat: -25.2, lng: 133.7, stat: "420% Sales Conversion" },
-  { name: "Canada", code: "CA", lat: 56.1, lng: -106.3, stat: "High-Authority Branding" },
-  { name: "Germany", code: "DE", lat: 51.1, lng: 10.4, stat: "Multi-Language SEO Scale" },
-  { name: "Singapore", code: "SG", lat: 1.35, lng: 103.8, stat: "FinTech Campaign Success" },
-  { name: "Japan", code: "JP", lat: 36.2, lng: 138.2, stat: "APAC Market Expansion" },
+  { name: "United States", flag: "🇺🇸", code: "US", lat: 37.0902, lng: -95.7129, stat: "340% ROAS Growth" },
+  { name: "United Kingdom", flag: "🇬🇧", code: "UK", lat: 55.3781, lng: -3.436, stat: "2.8x Lead Velocity" },
+  { name: "United Arab Emirates", flag: "🇦🇪", code: "UAE", lat: 24.2, lng: 54.3, stat: "15k+ Qualified Leads" },
+  { name: "India", flag: "🇮🇳", code: "IN", lat: 21.0, lng: 78.0, stat: "10M+ Organic Impressions" },
+  { name: "Australia", flag: "🇦🇺", code: "AU", lat: -25.2, lng: 133.7, stat: "420% Sales Conversion" },
+  { name: "Canada", flag: "🇨🇦", code: "CA", lat: 56.1, lng: -106.3, stat: "High-Authority Branding" },
+  { name: "Germany", flag: "🇩🇪", code: "DE", lat: 51.1, lng: 10.4, stat: "Multi-Language SEO Scale" },
+  { name: "Singapore", flag: "🇸🇬", code: "SG", lat: 1.35, lng: 103.8, stat: "FinTech Campaign Success" },
+  { name: "Japan", flag: "🇯🇵", code: "JP", lat: 36.2, lng: 138.2, stat: "APAC Market Expansion" },
 ];
 
 export default function HomesectionGlobalHero() {
@@ -604,7 +604,8 @@ export default function HomesectionGlobalHero() {
                     {activeCountryData.code}
                   </span>
                   <div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm">{activeCountryData.flag}</span>
                       <span className="text-xs font-bold text-white">
                         {activeCountryData.name}
                       </span>
