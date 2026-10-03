@@ -90,7 +90,9 @@ export default function HomesectionGlobalHero() {
   const [activeCountry, setActiveCountry] = useState(0);
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
-  const rotationRef = useRef({ x: 0.25, y: 0.6 });
+
+  // Diagonal 3D view initial rotation angle
+  const rotationRef = useRef({ x: 0.42, y: 0.75 });
   // Slow ambient rotation speed
   const velocityRef = useRef({ x: 0, y: 0.0012 });
 
@@ -120,10 +122,10 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Full screen background radius calculation
+    // Edge-to-edge diagonal background radius calculation
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      return Math.min(rect.width, rect.height) * 0.48;
+      return Math.max(rect.width, rect.height) * 0.52;
     };
 
     // Helper: Convert lat/long to 3D point on sphere radius R
@@ -142,8 +144,10 @@ export default function HomesectionGlobalHero() {
       const rect = canvas.parentElement.getBoundingClientRect();
       const width = rect.width;
       const height = rect.height;
-      const centerX = width / 2;
-      const centerY = height / 2;
+
+      // Diagonal center offset for immersive background flow
+      const centerX = width * 0.54;
+      const centerY = height * 0.48;
       const radius = getRadius();
 
       ctx.clearRect(0, 0, width, height);
@@ -151,7 +155,7 @@ export default function HomesectionGlobalHero() {
       // Auto rotation physics (slow & smooth)
       if (!isDraggingRef.current) {
         rotationRef.current.y += velocityRef.current.y;
-        rotationRef.current.x += (0.25 - rotationRef.current.x) * 0.01;
+        rotationRef.current.x += (0.42 - rotationRef.current.x) * 0.01;
       }
 
       const rotX = rotationRef.current.x;
@@ -184,8 +188,8 @@ export default function HomesectionGlobalHero() {
         centerX, centerY, radius * 0.5,
         centerX, centerY, radius * 1.35
       );
-      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.2)");
-      glowGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.1)");
+      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.22)");
+      glowGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.12)");
       glowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
       ctx.fillStyle = glowGrad;
@@ -422,11 +426,11 @@ export default function HomesectionGlobalHero() {
   const activeCountryData = COUNTRY_MARKERS[activeCountry];
 
   return (
-    <section className="relative w-full min-h-[75vh] lg:min-h-[82vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-14 pb-10 sm:pt-16 sm:pb-12 border-b border-purple-900/30">
+    <section className="relative w-full min-h-[78vh] lg:min-h-[85vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-14 pb-10 sm:pt-16 sm:pb-12 border-b border-purple-900/30">
       
       {/* ── BACKGROUND 1: Ambient Lighting Glows ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-gradient-to-b from-purple-600/18 via-indigo-600/12 to-cyan-500/8 rounded-full blur-[130px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-gradient-to-b from-purple-600/20 via-indigo-600/14 to-cyan-500/10 rounded-full blur-[140px]" />
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -439,15 +443,15 @@ export default function HomesectionGlobalHero() {
         />
       </div>
 
-      {/* ── BACKGROUND 2: Full Screen Background 3D Vector Globe Canvas ── */}
-      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-40 sm:opacity-50 flex items-center justify-center overflow-hidden">
+      {/* ── BACKGROUND 2: Diagonal Edge-to-Edge 3D Vector Globe Canvas ── */}
+      <div className="absolute -inset-[15%] w-[130%] h-[130%] pointer-events-auto z-0 opacity-45 sm:opacity-55 flex items-center justify-center overflow-hidden rotate-[-14deg]">
         <div className="relative w-full h-full flex items-center justify-center">
           
-          {/* Decorative Full Orbit Rings */}
-          <div className="absolute w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
-          <div className="absolute w-[65vw] h-[65vw] max-w-[750px] max-h-[750px] border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
+          {/* Decorative Diagonal Orbit Rings */}
+          <div className="absolute w-[100vw] h-[100vw] max-w-[1200px] max-h-[1200px] border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
+          <div className="absolute w-[80vw] h-[80vw] max-w-[950px] max-h-[950px] border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
 
-          {/* 3D Canvas element spanning full section */}
+          {/* 3D Canvas element spanning edge-to-edge diagonally */}
           <div
             className="w-full h-full relative cursor-grab active:cursor-grabbing select-none"
             onMouseDown={handleMouseDown}
