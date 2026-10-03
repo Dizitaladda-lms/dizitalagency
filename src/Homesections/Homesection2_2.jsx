@@ -166,6 +166,14 @@ export default function BrandShowcase() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
+  // Pre-load all brand logo images into browser cache for instant synchronous rendering
+  useEffect(() => {
+    BRANDS_DATA.forEach((brand) => {
+      const img = new Image();
+      img.src = brand.src;
+    });
+  }, []);
+
   // Filter brands based on selected category
   const filteredBrands =
     selectedCategory === "all"
@@ -337,12 +345,16 @@ export default function BrandShowcase() {
               
               {/* Back Card 2 */}
               {thirdBrand && (
-                <div className="absolute inset-0 rounded-3xl bg-white/70 border border-purple-300/40 shadow-md transform translate-y-5 scale-[0.88] z-0 opacity-50 pointer-events-none transition-all duration-500" />
+                <div className="absolute inset-0 rounded-3xl bg-white/70 border border-purple-300/40 shadow-md transform translate-y-5 scale-[0.88] z-0 opacity-50 pointer-events-none transition-all duration-500 overflow-hidden flex items-center justify-center p-8">
+                  <img src={thirdBrand.src} alt="" className="w-full h-full object-contain filter contrast-105 transform scale-140 opacity-60" decoding="async" />
+                </div>
               )}
 
               {/* Back Card 1 */}
               {nextBrand && (
-                <div className="absolute inset-0 rounded-3xl bg-white/90 border border-purple-300/60 shadow-lg transform translate-y-2.5 scale-[0.94] z-10 opacity-80 pointer-events-none transition-all duration-500" />
+                <div className="absolute inset-0 rounded-3xl bg-white/90 border border-purple-300/60 shadow-lg transform translate-y-2.5 scale-[0.94] z-10 opacity-80 pointer-events-none transition-all duration-500 overflow-hidden flex items-center justify-center p-8">
+                  <img src={nextBrand.src} alt="" className="w-full h-full object-contain filter contrast-105 transform scale-140 opacity-80" decoding="async" />
+                </div>
               )}
 
               {/* Front Active Card — Clean Pure White Surface */}
@@ -372,6 +384,8 @@ export default function BrandShowcase() {
                       <img
                         src={activeBrand.src}
                         alt={activeBrand.name}
+                        loading="eager"
+                        decoding="sync"
                         className="w-full h-full object-contain filter contrast-105 transform scale-140 group-hover:scale-155 transition-transform duration-300"
                       />
                     </div>

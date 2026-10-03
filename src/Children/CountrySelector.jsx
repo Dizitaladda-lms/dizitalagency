@@ -153,13 +153,13 @@ export default function CountrySelector({ isMobile = false }) {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-950/90 via-slate-900/90 to-purple-950/90 border border-purple-500/40 text-white hover:border-purple-400 hover:shadow-lg hover:shadow-purple-900/30 transition-all duration-200 text-xs sm:text-sm font-semibold ${
+        className={`inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-purple-950/90 via-slate-900/90 to-purple-950/90 border border-purple-500/40 text-white hover:border-purple-400 hover:shadow-lg hover:shadow-purple-900/30 transition-all duration-200 text-xs sm:text-sm font-semibold ${
           isMobile ? "w-full justify-between" : ""
         }`}
         aria-label="Select Country and Language"
       >
         <span className="flex items-center gap-2">
-          <span className="text-lg leading-none filter drop-shadow">{selectedCountry.flag}</span>
+          <span className="text-xl sm:text-2xl leading-none shrink-0 filter drop-shadow">{selectedCountry.flag}</span>
           <span className="font-bold text-white tracking-wide">{selectedCountry.name}</span>
           <span className="text-[11px] text-purple-300 font-normal hidden sm:inline-block">
             ({selectedCountry.lang})
@@ -208,7 +208,7 @@ export default function CountrySelector({ isMobile = false }) {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      <span className="text-base">{country.flag}</span>
+                      <span className="text-lg sm:text-xl shrink-0">{country.flag}</span>
                       <span className="font-semibold">{country.name}</span>
                       <span className="text-[10px] text-purple-300">({country.lang})</span>
                     </span>
