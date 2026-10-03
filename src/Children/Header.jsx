@@ -103,7 +103,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#070714] shadow-lg border-b border-purple-900/40">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#070714]/40 backdrop-blur-md border-b border-purple-900/20">
         <div className="container mx-auto px-6 py-5 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
