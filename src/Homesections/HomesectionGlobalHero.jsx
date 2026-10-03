@@ -492,15 +492,15 @@ export default function HomesectionGlobalHero() {
           </span>
         </motion.div>
 
-        {/* ── Agency Title: Medium Sleek Proportional Size ── */}
+        {/* ── Agency Title: Guaranteed Full Word Visibility (No Character Clipping) ── */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="mb-3 flex flex-wrap justify-center items-center gap-x-2.5 sm:gap-x-3.5 text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold tracking-tight leading-none drop-shadow-xl"
+          className="mb-3 flex flex-wrap justify-center items-center gap-x-3.5 sm:gap-x-4 text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold tracking-tight leading-none drop-shadow-xl"
         >
           {/* Word 1: DigitalAdda */}
-          <span className="inline-block whitespace-nowrap text-white">
+          <span className="inline-block text-white">
             {word1.split("").map((char, index) => (
               <motion.span key={index} variants={letterVariants} className="inline-block">
                 {char}
@@ -508,8 +508,8 @@ export default function HomesectionGlobalHero() {
             ))}
           </span>
 
-          {/* Word 2: Agency */}
-          <span className="inline-block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+          {/* Word 2: Agency (With pr-3 padding to guarantee 'y' is never clipped) */}
+          <span className="inline-block pr-3 sm:pr-4 pb-1 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
             {word2.split("").map((char, index) => (
               <motion.span key={index} variants={letterVariants} className="inline-block">
                 {char}
