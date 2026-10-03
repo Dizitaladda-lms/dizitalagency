@@ -91,7 +91,7 @@ export default function HomesectionGlobalHero() {
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
   const rotationRef = useRef({ x: 0.25, y: 0.6 });
-  // Slow down movement speed as requested
+  // Slow ambient rotation speed
   const velocityRef = useRef({ x: 0, y: 0.0012 });
 
   // Rotate spotlight country marker
@@ -120,10 +120,10 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Dynamic radius scaled to canvas size
+    // Controlled medium radius for professional proportions
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      return Math.min(rect.width, rect.height) * 0.42;
+      return Math.min(rect.width, rect.height) * 0.40;
     };
 
     // Helper: Convert lat/long to 3D point on sphere radius R
@@ -169,7 +169,7 @@ export default function HomesectionGlobalHero() {
         const y1 = pt.y * cosX - z1 * sinX;
         const z2 = pt.y * sinX + z1 * cosX;
 
-        const perspective = 750 / (750 + z2);
+        const perspective = 700 / (700 + z2);
         return {
           screenX: centerX + x1 * perspective,
           screenY: centerY + y1 * perspective,
@@ -184,8 +184,8 @@ export default function HomesectionGlobalHero() {
         centerX, centerY, radius * 0.5,
         centerX, centerY, radius * 1.35
       );
-      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.22)");
-      glowGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.12)");
+      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.2)");
+      glowGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.1)");
       glowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
       ctx.fillStyle = glowGrad;
@@ -198,8 +198,8 @@ export default function HomesectionGlobalHero() {
         centerX - radius * 0.3, centerY - radius * 0.3, radius * 0.2,
         centerX, centerY, radius
       );
-      oceanGrad.addColorStop(0, "#1d1047");
-      oceanGrad.addColorStop(0.7, "#0c0628");
+      oceanGrad.addColorStop(0, "#1a0f3d");
+      oceanGrad.addColorStop(0.7, "#0b0524");
       oceanGrad.addColorStop(1, "#070316");
 
       ctx.fillStyle = oceanGrad;
@@ -225,7 +225,7 @@ export default function HomesectionGlobalHero() {
       }
 
       // 3. Render Graticule Lines
-      ctx.strokeStyle = "rgba(168, 85, 247, 0.14)";
+      ctx.strokeStyle = "rgba(168, 85, 247, 0.12)";
       ctx.lineWidth = 1;
       graticuleLines.forEach((ring) => {
         ctx.beginPath();
@@ -260,12 +260,12 @@ export default function HomesectionGlobalHero() {
           });
           ctx.closePath();
 
-          const landAlpha = Math.min(0.5, Math.max(0.12, (avgZ + radius) / (2 * radius)));
+          const landAlpha = Math.min(0.45, Math.max(0.1, (avgZ + radius) / (2 * radius)));
           ctx.fillStyle = `rgba(147, 51, 234, ${landAlpha})`;
           ctx.fill();
 
-          ctx.strokeStyle = `rgba(192, 132, 252, ${landAlpha * 1.8})`;
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = `rgba(192, 132, 252, ${landAlpha * 1.6})`;
+          ctx.lineWidth = 1.1;
           ctx.stroke();
         }
       });
@@ -291,21 +291,21 @@ export default function HomesectionGlobalHero() {
           if (i === activeCountry || !target.isFront) return;
 
           const midX = (curActive.screenX + target.screenX) / 2;
-          const midY = (curActive.screenY + target.screenY) / 2 - 40;
+          const midY = (curActive.screenY + target.screenY) / 2 - 30;
 
           const arcGradient = ctx.createLinearGradient(
             curActive.screenX, curActive.screenY,
             target.screenX, target.screenY
           );
-          arcGradient.addColorStop(0, "rgba(236, 72, 153, 0.9)");
-          arcGradient.addColorStop(0.5, "rgba(56, 189, 248, 0.8)");
-          arcGradient.addColorStop(1, "rgba(168, 85, 247, 0.3)");
+          arcGradient.addColorStop(0, "rgba(236, 72, 153, 0.85)");
+          arcGradient.addColorStop(0.5, "rgba(56, 189, 248, 0.75)");
+          arcGradient.addColorStop(1, "rgba(168, 85, 247, 0.25)");
 
           ctx.beginPath();
           ctx.moveTo(curActive.screenX, curActive.screenY);
           ctx.quadraticCurveTo(midX, midY, target.screenX, target.screenY);
           ctx.strokeStyle = arcGradient;
-          ctx.lineWidth = 1.5;
+          ctx.lineWidth = 1.3;
           ctx.setLineDash([4, 3]);
           ctx.stroke();
           ctx.setLineDash([]);
@@ -317,13 +317,13 @@ export default function HomesectionGlobalHero() {
         if (!c.isFront) return;
 
         const isCurrentActive = c.idx === activeCountry;
-        const size = isCurrentActive ? 7 : 4;
+        const size = isCurrentActive ? 6 : 3.5;
 
         ctx.fillStyle = isCurrentActive
-          ? "rgba(244, 63, 94, 0.45)"
-          : "rgba(56, 189, 248, 0.35)";
+          ? "rgba(244, 63, 94, 0.4)"
+          : "rgba(56, 189, 248, 0.3)";
         ctx.beginPath();
-        ctx.arc(c.screenX, c.screenY, size * 2.5, 0, Math.PI * 2);
+        ctx.arc(c.screenX, c.screenY, size * 2.4, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.fillStyle = isCurrentActive ? "#f43f5e" : "#38bdf8";
@@ -336,9 +336,9 @@ export default function HomesectionGlobalHero() {
         ctx.arc(c.screenX, c.screenY, size * 0.4, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.font = "bold 10px Inter, sans-serif";
-        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.85)";
-        ctx.fillText(c.code, c.screenX + 8, c.screenY + 3);
+        ctx.font = "bold 9px Inter, sans-serif";
+        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.8)";
+        ctx.fillText(c.code, c.screenX + 7, c.screenY + 3);
       });
 
       // 6. Outer Atmosphere Rim
@@ -347,11 +347,11 @@ export default function HomesectionGlobalHero() {
         centerX, centerY, radius * 1.04
       );
       rimGrad.addColorStop(0, "rgba(168, 85, 247, 0)");
-      rimGrad.addColorStop(0.5, "rgba(192, 132, 252, 0.6)");
-      rimGrad.addColorStop(1, "rgba(56, 189, 248, 0.8)");
+      rimGrad.addColorStop(0.5, "rgba(192, 132, 252, 0.5)");
+      rimGrad.addColorStop(1, "rgba(56, 189, 248, 0.7)");
 
       ctx.strokeStyle = rimGrad;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.8;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.stroke();
@@ -405,15 +405,15 @@ export default function HomesectionGlobalHero() {
   const letterVariants = {
     hidden: {
       opacity: 0,
-      y: 20,
-      filter: "blur(6px)",
+      y: 16,
+      filter: "blur(4px)",
     },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
       transition: {
-        duration: 0.4,
+        duration: 0.35,
         ease: [0.21, 0.47, 0.32, 0.98],
       },
     },
@@ -422,30 +422,30 @@ export default function HomesectionGlobalHero() {
   const activeCountryData = COUNTRY_MARKERS[activeCountry];
 
   return (
-    <section className="relative w-full min-h-[92vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-24 pb-16 border-b border-purple-900/30">
+    <section className="relative w-full min-h-[75vh] lg:min-h-[82vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-14 pb-10 sm:pt-16 sm:pb-12 border-b border-purple-900/30">
       
       {/* ── BACKGROUND 1: Ambient Lighting Glows ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-b from-purple-600/20 via-indigo-600/15 to-cyan-500/10 rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-b from-purple-600/18 via-indigo-600/12 to-cyan-500/8 rounded-full blur-[130px]" />
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(168, 85, 247, 0.4) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(168, 85, 247, 0.4) 1px, transparent 1px)
+              linear-gradient(to right, rgba(168, 85, 247, 0.35) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(168, 85, 247, 0.35) 1px, transparent 1px)
             `,
-            backgroundSize: "64px 64px",
+            backgroundSize: "56px 56px",
           }}
         />
       </div>
 
-      {/* ── BACKGROUND 2: Slow Moving 3D Vector Globe Canvas ── */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] sm:w-[850px] sm:h-[850px] lg:w-[1000px] lg:h-[1000px] pointer-events-auto z-0 opacity-45 sm:opacity-55 flex items-center justify-center">
+      {/* ── BACKGROUND 2: Medium Professional 3D Vector Globe Canvas ── */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] sm:w-[620px] sm:h-[620px] lg:w-[720px] lg:h-[720px] pointer-events-auto z-0 opacity-40 sm:opacity-50 flex items-center justify-center">
         <div className="relative w-full h-full flex items-center justify-center">
           
           {/* Decorative Orbit Rings */}
-          <div className="absolute inset-4 border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
-          <div className="absolute inset-16 border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
+          <div className="absolute inset-3 border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
+          <div className="absolute inset-12 border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
 
           {/* 3D Canvas element */}
           <div
@@ -460,28 +460,28 @@ export default function HomesectionGlobalHero() {
         </div>
       </div>
 
-      {/* ── FOREGROUND CONTENT: Sits Cleanly On Top Of The Background Globe ── */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center max-w-5xl">
+      {/* ── FOREGROUND CONTENT: Clean, Medium Proportional Typography & Elements ── */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center max-w-4xl">
         
         {/* Top Pill Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -12 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-purple-950/70 border border-purple-500/40 backdrop-blur-md mb-6 shadow-xl"
+          transition={{ duration: 0.4 }}
+          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-950/70 border border-purple-500/40 backdrop-blur-md mb-4 shadow-lg"
         >
-          <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-          <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-purple-200">
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-purple-200">
             Global Performance Marketing Agency
           </span>
         </motion.div>
 
-        {/* ── Agency Title: Clean & Non-Breaking ── */}
+        {/* ── Agency Title: Medium Sleek Proportional Size ── */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="mb-5 flex flex-wrap justify-center items-center gap-x-3 sm:gap-x-4 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none drop-shadow-2xl"
+          className="mb-3 flex flex-wrap justify-center items-center gap-x-2.5 sm:gap-x-3.5 text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-extrabold tracking-tight leading-none drop-shadow-xl"
         >
           {/* Word 1: DigitalAdda */}
           <span className="inline-block whitespace-nowrap text-white">
@@ -504,41 +504,41 @@ export default function HomesectionGlobalHero() {
 
         {/* Sub-Title */}
         <motion.h2
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-xl sm:text-3xl font-bold text-slate-100 mb-5 leading-snug max-w-3xl drop-shadow-lg"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-base sm:text-xl lg:text-2xl font-bold text-slate-100 mb-3 leading-snug max-w-2xl drop-shadow"
         >
           Scaling Brands Across <span className="text-cyan-400 font-extrabold">25+ Countries</span> Worldwide
         </motion.h2>
 
         {/* Description Body */}
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
-          className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed mb-8 font-medium drop-shadow"
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl leading-relaxed mb-6 font-medium"
         >
           Whether expanding internationally or dominating regional markets — we craft data-driven PPC campaigns, high-converting global SEO, and performance marketing built for compounding scale.
         </motion.p>
 
         {/* CTAs Row */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-wrap justify-center items-center gap-4 mb-10 w-full sm:w-auto"
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="flex flex-wrap justify-center items-center gap-3.5 mb-6 w-full sm:w-auto"
         >
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-xl shadow-purple-900/50 hover:scale-[1.03] transition-all duration-200 w-full sm:w-auto text-center"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-900/40 hover:scale-[1.02] transition-all duration-200 w-full sm:w-auto text-center"
           >
             Get Free Global Audit
           </Link>
 
           <a
             href="#strategy-videos"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-slate-950/80 hover:bg-slate-900 text-slate-100 border border-purple-500/40 hover:border-purple-300 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 w-full sm:w-auto text-center backdrop-blur-xl shadow-lg"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-slate-950/80 hover:bg-slate-900 text-slate-100 border border-purple-500/40 hover:border-purple-300 font-bold text-xs uppercase tracking-wider transition-all duration-200 w-full sm:w-auto text-center backdrop-blur-xl"
           >
             Watch Strategy Videos
           </a>
@@ -546,10 +546,10 @@ export default function HomesectionGlobalHero() {
 
         {/* Performance Stats Bar */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.95 }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 pt-6 border-t border-purple-500/30 w-full max-w-3xl bg-slate-950/40 backdrop-blur-md px-6 py-4 rounded-2xl border"
+          transition={{ duration: 0.5, delay: 0.85 }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 border border-purple-500/30 w-full max-w-2xl bg-slate-950/50 backdrop-blur-md px-5 py-3 rounded-xl shadow-lg"
         >
           {[
             { label: "Global Clients", value: "200+" },
@@ -558,10 +558,10 @@ export default function HomesectionGlobalHero() {
             { label: "Satisfaction", value: "98.5%" },
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <span className="text-2xl sm:text-3xl font-black text-white">
+              <span className="text-xl sm:text-2xl font-extrabold text-white">
                 {item.value}
               </span>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-purple-300 mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-purple-300 mt-0.5">
                 {item.label}
               </span>
             </div>
@@ -569,26 +569,26 @@ export default function HomesectionGlobalHero() {
         </motion.div>
 
         {/* Active Country Spotlight Floating Pill */}
-        <div className="mt-8">
+        <div className="mt-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCountryData.name}
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              initial={{ opacity: 0, y: 8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{ duration: 0.35 }}
-              className="notranslate inline-flex items-center gap-3 bg-slate-950/90 backdrop-blur-xl border border-purple-500/50 px-5 py-2.5 rounded-full shadow-2xl pointer-events-none whitespace-nowrap"
+              exit={{ opacity: 0, y: -8, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="notranslate inline-flex items-center gap-2.5 bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 px-4 py-1.5 rounded-full shadow-xl pointer-events-none whitespace-nowrap"
             >
-              <span className="text-xs font-black text-purple-400 px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">
+              <span className="text-[10px] font-black text-purple-400 px-1.5 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">
                 {activeCountryData.code}
               </span>
-              <div className="flex items-center gap-2">
-                <span className="text-base">{activeCountryData.flag}</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm">{activeCountryData.flag}</span>
                 <span className="text-xs font-bold text-white">
                   {activeCountryData.name}
                 </span>
                 <span className="text-gray-500">&middot;</span>
-                <span className="text-[11px] font-semibold text-cyan-300">
+                <span className="text-[10px] font-semibold text-cyan-300">
                   {activeCountryData.stat}
                 </span>
               </div>
