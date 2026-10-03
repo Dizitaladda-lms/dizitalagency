@@ -8,6 +8,7 @@ import CountrySelector from "./CountrySelector";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [imageError, setImageError] = useState(false);
 
   const navItems = [
     { name: "Services", hasDropdown: true, href: "/" },
@@ -57,16 +58,18 @@ export default function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4 sm:pt-5 pb-2 transition-all duration-300">
         <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
           
-          {/* ── LOGO (100% Transparent Vector Typography - Zero White Box Background) ── */}
-          <Link href="/" className="flex items-center gap-2 group select-none">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl sm:text-3xl font-black tracking-tight text-white drop-shadow-md">
-                Digital<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">Adda</span>
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded-full bg-cyan-950/60 backdrop-blur-md shadow-sm">
-                Agency
-              </span>
-            </div>
+          {/* ── ORIGINAL AGENCY LOGO (Processed Transparent PNG - 100% Zero White Background) ── */}
+          <Link href="/" className="flex items-center gap-2 group">
+            {!imageError ? (
+              <img
+                src="/logo_transparent.png"
+                alt="Digital Adda Agency"
+                className="h-10 sm:h-12 w-auto object-contain drop-shadow-lg"
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <span className="text-2xl font-black text-white tracking-tight">Digital Adda</span>
+            )}
           </Link>
 
           {/* ── DESKTOP NAVIGATION (Bold Capsule Bar like Image 2) ── */}
