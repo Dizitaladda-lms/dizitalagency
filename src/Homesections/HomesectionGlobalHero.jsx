@@ -91,8 +91,7 @@ export default function HomesectionGlobalHero() {
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
 
-  // Diagonal 3D view initial rotation angle
-  const rotationRef = useRef({ x: 0.42, y: 0.75 });
+  const rotationRef = useRef({ x: 0.25, y: 0.6 });
   // Slow ambient rotation speed
   const velocityRef = useRef({ x: 0, y: 0.0012 });
 
@@ -122,10 +121,10 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Edge-to-edge diagonal background radius calculation
+    // Round 3D sphere radius calculation
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      return Math.max(rect.width, rect.height) * 0.52;
+      return Math.min(rect.width, rect.height) * 0.44;
     };
 
     // Helper: Convert lat/long to 3D point on sphere radius R
@@ -145,9 +144,8 @@ export default function HomesectionGlobalHero() {
       const width = rect.width;
       const height = rect.height;
 
-      // Diagonal center offset for immersive background flow
-      const centerX = width * 0.54;
-      const centerY = height * 0.48;
+      const centerX = width / 2;
+      const centerY = height * 0.46;
       const radius = getRadius();
 
       ctx.clearRect(0, 0, width, height);
@@ -155,7 +153,7 @@ export default function HomesectionGlobalHero() {
       // Auto rotation physics (slow & smooth)
       if (!isDraggingRef.current) {
         rotationRef.current.y += velocityRef.current.y;
-        rotationRef.current.x += (0.42 - rotationRef.current.x) * 0.01;
+        rotationRef.current.x += (0.25 - rotationRef.current.x) * 0.01;
       }
 
       const rotX = rotationRef.current.x;
@@ -229,7 +227,7 @@ export default function HomesectionGlobalHero() {
       }
 
       // 3. Render Graticule Lines
-      ctx.strokeStyle = "rgba(168, 85, 247, 0.12)";
+      ctx.strokeStyle = "rgba(168, 85, 247, 0.14)";
       ctx.lineWidth = 1;
       graticuleLines.forEach((ring) => {
         ctx.beginPath();
@@ -264,12 +262,12 @@ export default function HomesectionGlobalHero() {
           });
           ctx.closePath();
 
-          const landAlpha = Math.min(0.45, Math.max(0.1, (avgZ + radius) / (2 * radius)));
+          const landAlpha = Math.min(0.48, Math.max(0.12, (avgZ + radius) / (2 * radius)));
           ctx.fillStyle = `rgba(147, 51, 234, ${landAlpha})`;
           ctx.fill();
 
-          ctx.strokeStyle = `rgba(192, 132, 252, ${landAlpha * 1.6})`;
-          ctx.lineWidth = 1.1;
+          ctx.strokeStyle = `rgba(192, 132, 252, ${landAlpha * 1.8})`;
+          ctx.lineWidth = 1.2;
           ctx.stroke();
         }
       });
@@ -321,11 +319,11 @@ export default function HomesectionGlobalHero() {
         if (!c.isFront) return;
 
         const isCurrentActive = c.idx === activeCountry;
-        const size = isCurrentActive ? 6 : 3.5;
+        const size = isCurrentActive ? 6.5 : 4;
 
         ctx.fillStyle = isCurrentActive
-          ? "rgba(244, 63, 94, 0.4)"
-          : "rgba(56, 189, 248, 0.3)";
+          ? "rgba(244, 63, 94, 0.45)"
+          : "rgba(56, 189, 248, 0.35)";
         ctx.beginPath();
         ctx.arc(c.screenX, c.screenY, size * 2.4, 0, Math.PI * 2);
         ctx.fill();
@@ -340,8 +338,8 @@ export default function HomesectionGlobalHero() {
         ctx.arc(c.screenX, c.screenY, size * 0.4, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.font = "bold 9px Inter, sans-serif";
-        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.8)";
+        ctx.font = "bold 9.5px Inter, sans-serif";
+        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.85)";
         ctx.fillText(c.code, c.screenX + 7, c.screenY + 3);
       });
 
@@ -355,7 +353,7 @@ export default function HomesectionGlobalHero() {
       rimGrad.addColorStop(1, "rgba(56, 189, 248, 0.7)");
 
       ctx.strokeStyle = rimGrad;
-      ctx.lineWidth = 1.8;
+      ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.stroke();
@@ -426,11 +424,11 @@ export default function HomesectionGlobalHero() {
   const activeCountryData = COUNTRY_MARKERS[activeCountry];
 
   return (
-    <section className="relative w-full min-h-[78vh] lg:min-h-[85vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-14 pb-10 sm:pt-16 sm:pb-12 border-b border-purple-900/30">
+    <section className="relative w-full min-h-[82vh] lg:min-h-[88vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 border-b border-purple-900/30">
       
       {/* ── BACKGROUND 1: Ambient Lighting Glows ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-gradient-to-b from-purple-600/20 via-indigo-600/14 to-cyan-500/10 rounded-full blur-[140px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] bg-gradient-to-b from-purple-600/22 via-indigo-600/15 to-cyan-500/10 rounded-full blur-[140px]" />
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -443,15 +441,15 @@ export default function HomesectionGlobalHero() {
         />
       </div>
 
-      {/* ── BACKGROUND 2: Diagonal Edge-to-Edge 3D Vector Globe Canvas ── */}
-      <div className="absolute -inset-[15%] w-[130%] h-[130%] pointer-events-auto z-0 opacity-45 sm:opacity-55 flex items-center justify-center overflow-hidden rotate-[-14deg]">
+      {/* ── BACKGROUND 2: Full Screen Height & Width 3D Vector Globe Canvas (Reaches top navbar) ── */}
+      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-55 sm:opacity-65 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full flex items-center justify-center">
           
-          {/* Decorative Diagonal Orbit Rings */}
-          <div className="absolute w-[100vw] h-[100vw] max-w-[1200px] max-h-[1200px] border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
-          <div className="absolute w-[80vw] h-[80vw] max-w-[950px] max-h-[950px] border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
+          {/* Decorative Orbit Rings */}
+          <div className="absolute w-[75vw] h-[75vw] max-w-[850px] max-h-[850px] border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
+          <div className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
 
-          {/* 3D Canvas element spanning edge-to-edge diagonally */}
+          {/* 3D Canvas element spanning top navbar down to hero bottom */}
           <div
             className="w-full h-full relative cursor-grab active:cursor-grabbing select-none"
             onMouseDown={handleMouseDown}
