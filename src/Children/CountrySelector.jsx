@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, Globe, Check, Search } from "lucide-react";
+import { ChevronDown, Check, Search } from "lucide-react";
 
 // Dom removal patch for Google Translate / React DOM reconciliation compatibility
 if (typeof window !== "undefined") {
@@ -32,23 +32,23 @@ if (typeof window !== "undefined") {
 }
 
 export const COUNTRIES = [
-  { id: "IN", name: "India", flag: "🇮🇳", lang: "English", code: "en" },
-  { id: "IN_HI", name: "India", flag: "🇮🇳", lang: "Hindi (हिंदी)", code: "hi" },
-  { id: "US", name: "United States", flag: "🇺🇸", lang: "English", code: "en" },
-  { id: "GB", name: "United Kingdom", flag: "🇬🇧", lang: "English", code: "en" },
-  { id: "AE", name: "United Arab Emirates", flag: "🇦🇪", lang: "Arabic (العربية)", code: "ar" },
-  { id: "ES", name: "Spain", flag: "🇪🇸", lang: "Spanish (Español)", code: "es" },
-  { id: "FR", name: "France", flag: "🇫🇷", lang: "French (Français)", code: "fr" },
-  { id: "DE", name: "Germany", flag: "🇩🇪", lang: "German (Deutsch)", code: "de" },
-  { id: "JP", name: "Japan", flag: "🇯🇵", lang: "Japanese (日本語)", code: "ja" },
-  { id: "CN", name: "China", flag: "🇨🇳", lang: "Chinese (中文)", code: "zh-CN" },
-  { id: "SG", name: "Singapore", flag: "🇸🇬", lang: "English", code: "en" },
-  { id: "CA", name: "Canada", flag: "🇨🇦", lang: "English", code: "en" },
-  { id: "AU", name: "Australia", flag: "🇦🇺", lang: "English", code: "en" },
-  { id: "SA", name: "Saudi Arabia", flag: "🇸🇦", lang: "Arabic (العربية)", code: "ar" },
-  { id: "IT", name: "Italy", flag: "🇮🇹", lang: "Italian (Italiano)", code: "it" },
-  { id: "BR", name: "Brazil", flag: "🇧🇷", lang: "Portuguese (Português)", code: "pt" },
-  { id: "RU", name: "Russia", flag: "🇷🇺", lang: "Russian (Русский)", code: "ru" },
+  { id: "IN", name: "India", flagCode: "in", flag: "🇮🇳", lang: "English", code: "en" },
+  { id: "IN_HI", name: "India", flagCode: "in", flag: "🇮🇳", lang: "Hindi (हिंदी)", code: "hi" },
+  { id: "US", name: "United States", flagCode: "us", flag: "🇺🇸", lang: "English", code: "en" },
+  { id: "GB", name: "United Kingdom", flagCode: "gb", flag: "🇬🇧", lang: "English", code: "en" },
+  { id: "AE", name: "United Arab Emirates", flagCode: "ae", flag: "🇦🇪", lang: "Arabic (العربية)", code: "ar" },
+  { id: "ES", name: "Spain", flagCode: "es", flag: "🇪🇸", lang: "Spanish (Español)", code: "es" },
+  { id: "FR", name: "France", flagCode: "fr", flag: "🇫🇷", lang: "French (Français)", code: "fr" },
+  { id: "DE", name: "Germany", flagCode: "de", flag: "🇩🇪", lang: "German (Deutsch)", code: "de" },
+  { id: "JP", name: "Japan", flagCode: "jp", flag: "🇯🇵", lang: "Japanese (日本語)", code: "ja" },
+  { id: "CN", name: "China", flagCode: "cn", flag: "🇨🇳", lang: "Chinese (中文)", code: "zh-CN" },
+  { id: "SG", name: "Singapore", flagCode: "sg", flag: "🇸🇬", lang: "English", code: "en" },
+  { id: "CA", name: "Canada", flagCode: "ca", flag: "🇨🇦", lang: "English", code: "en" },
+  { id: "AU", name: "Australia", flagCode: "au", flag: "🇦🇺", lang: "English", code: "en" },
+  { id: "SA", name: "Saudi Arabia", flagCode: "sa", flag: "🇸🇦", lang: "Arabic (العربية)", code: "ar" },
+  { id: "IT", name: "Italy", flagCode: "it", flag: "🇮🇹", lang: "Italian (Italiano)", code: "it" },
+  { id: "BR", name: "Brazil", flagCode: "br", flag: "🇧🇷", lang: "Portuguese (Português)", code: "pt" },
+  { id: "RU", name: "Russia", flagCode: "ru", flag: "🇷🇺", lang: "Russian (Русский)", code: "ru" },
 ];
 
 export default function CountrySelector({ isMobile = false }) {
@@ -57,7 +57,26 @@ export default function CountrySelector({ isMobile = false }) {
   const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef(null);
 
-  // Load saved country from localStorage or initialize default
+  // Initialize Google Translate Script
+  useEffect(() => {
+    if (typeof window !== "undefined" && !document.getElementById("google-translate-script")) {
+      window.googleTranslateElementInit = () => {
+        if (window.google && window.google.translate) {
+          new window.google.translate.TranslateElement(
+            { pageLanguage: "en", autoDisplay: false },
+            "google_translate_element"
+          );
+        }
+      };
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  // Load saved country from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem("digitaladda_selected_country");
@@ -66,9 +85,6 @@ export default function CountrySelector({ isMobile = false }) {
         const match = COUNTRIES.find((c) => c.id === parsed.id);
         if (match) {
           setSelectedCountry(match);
-          if (match.code !== "en") {
-            setGoogleTranslateCookie(match.code);
-          }
         }
       }
     } catch (e) {
@@ -87,9 +103,17 @@ export default function CountrySelector({ isMobile = false }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Set Google Translate Cookie & Trigger Translation Script
-  const setGoogleTranslateCookie = (langCode) => {
+  // Apply Language Translation & Update Cookies
+  const applyLanguageTranslation = (langCode) => {
     if (typeof document === "undefined") return;
+
+    if (langCode === "en") {
+      // Clear translation cookie to restore English
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+      window.location.reload();
+      return;
+    }
 
     const cookieVal = `/auto/${langCode}`;
     const domain = window.location.hostname;
@@ -97,21 +121,12 @@ export default function CountrySelector({ isMobile = false }) {
     document.cookie = `googtrans=${cookieVal}; path=/; domain=${domain}`;
     document.cookie = `googtrans=${cookieVal}; path=/;`;
 
-    // Initialize Google Translate Script if not present
-    if (!window.google || !window.google.translate) {
-      const script = document.createElement("script");
-      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-      document.body.appendChild(script);
-
-      window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
-          { pageLanguage: "en", autoDisplay: false },
-          "google_translate_element"
-        );
-      };
+    // Attempt to trigger Google Translate select dynamically
+    const selectElem = document.querySelector(".goog-te-combo");
+    if (selectElem) {
+      selectElem.value = langCode;
+      selectElem.dispatchEvent(new Event("change"));
     } else {
-      // Reload page gently to apply language translation cookie
       window.location.reload();
     }
   };
@@ -127,14 +142,7 @@ export default function CountrySelector({ isMobile = false }) {
       console.error(e);
     }
 
-    if (country.code === "en" && selectedCountry.code !== "en") {
-      // Restore original English
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
-      window.location.reload();
-    } else if (country.code !== "en") {
-      setGoogleTranslateCookie(country.code);
-    }
+    applyLanguageTranslation(country.code);
   };
 
   const filteredCountries = COUNTRIES.filter(
@@ -159,7 +167,15 @@ export default function CountrySelector({ isMobile = false }) {
         aria-label="Select Country and Language"
       >
         <span className="flex items-center gap-2">
-          <span className="text-xl sm:text-2xl leading-none shrink-0 filter drop-shadow">{selectedCountry.flag}</span>
+          {/* High-Res Country Flag Logo */}
+          <img
+            src={`https://flagcdn.com/w40/${selectedCountry.flagCode}.png`}
+            srcSet={`https://flagcdn.com/w80/${selectedCountry.flagCode}.png 2x`}
+            width="22"
+            height="15"
+            alt={selectedCountry.name}
+            className="w-5 h-3.5 object-cover rounded-[2px] shadow-sm shrink-0 border border-white/20"
+          />
           <span className="font-bold text-white tracking-wide">{selectedCountry.name}</span>
           <span className="text-[11px] text-purple-300 font-normal hidden sm:inline-block">
             ({selectedCountry.lang})
@@ -208,7 +224,14 @@ export default function CountrySelector({ isMobile = false }) {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      <span className="text-lg sm:text-xl shrink-0">{country.flag}</span>
+                      <img
+                        src={`https://flagcdn.com/w40/${country.flagCode}.png`}
+                        srcSet={`https://flagcdn.com/w80/${country.flagCode}.png 2x`}
+                        width="20"
+                        height="14"
+                        alt={country.name}
+                        className="w-4 h-3 object-cover rounded-[2px] shadow-sm shrink-0 border border-white/20"
+                      />
                       <span className="font-semibold">{country.name}</span>
                       <span className="text-[10px] text-purple-300">({country.lang})</span>
                     </span>

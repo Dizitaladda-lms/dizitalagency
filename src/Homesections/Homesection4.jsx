@@ -5,42 +5,42 @@ import { useRef, useState, useEffect } from "react";
 
 const TRENDS_DATA = [
   {
-    src: "/dapic/9.webp",
+    src: "/dapic/trends/trend_ai.jpg",
     number: "01",
     title: "AI-Driven Marketing Evolution",
     subtitle: "Predictive analytics, automated customer journeys, and AI-led conversion engines built for compounding scale.",
     tag: "ARTIFICIAL INTELLIGENCE"
   },
   {
-    src: "/dapic/7.webp",
+    src: "/dapic/trends/trend_vr.jpg",
     number: "02",
     title: "VR & Immersive Customer Experiences",
     subtitle: "Interactive 3D environments, virtual product showcases & high-trust customer engagement.",
     tag: "SPATIAL & VR"
   },
   {
-    src: "/dapic/group4.jpeg",
+    src: "/dapic/trends/trend_personalization.jpg",
     number: "03",
     title: "Hyper-Personalization at Scale",
     subtitle: "Real-time user behavior tracking and dynamic tailored content across omni-channel sales funnels.",
     tag: "DATA & PERSONALIZATION"
   },
   {
-    src: "/dapic/1.webp",
+    src: "/dapic/trends/trend_consumer.jpg",
     number: "04",
     title: "Digital-First Consumer Behavior",
     subtitle: "Search-to-scroll conversion strategies dominating modern buyer discovery across global markets.",
     tag: "CONSUMER INSIGHTS"
   },
   {
-    src: "/dapic/IMG_4071.jpeg",
+    src: "/dapic/trends/trend_data.jpg",
     number: "05",
     title: "Data-Backed Decision Making",
     subtitle: "Deep analytics, real-time ROI forecasting, and confident capital allocation across ad networks.",
     tag: "GROWTH ANALYTICS"
   },
   {
-    src: "/dapic/group3.webp",
+    src: "/dapic/trends/trend_omnichannel.jpg",
     number: "06",
     title: "Multi-Platform Digital Dominance",
     subtitle: "Omnichannel brand presence across Google, Meta, AI Search & performance ad networks.",
@@ -104,13 +104,13 @@ export default function Homesection4() {
         <div className="relative max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* ── LEFT SIDE: PHOTO STACK SHOWCASE ── */}
+            {/* ── LEFT SIDE: TREND IMAGE DECK SHOWCASE ── */}
             <div className="lg:col-span-7 order-2 lg:order-1 relative flex flex-col items-center justify-center">
               
               {/* Card deck wrapper */}
               <div className="relative w-full max-w-lg aspect-[4/3] sm:aspect-[16/11]">
                 
-                {/* Visual back cards stack (multi-photo stacked effect) */}
+                {/* Visual back cards stack (multi-card stacked depth) */}
                 <div className="absolute inset-0 translate-x-5 translate-y-6 rotate-[6deg] rounded-2xl bg-purple-950/40 border border-purple-500/20 backdrop-blur-sm pointer-events-none shadow-2xl transition-all duration-500" />
                 <div className="absolute inset-0 -translate-x-4 translate-y-3 rotate-[-4deg] rounded-2xl bg-indigo-950/40 border border-indigo-500/20 backdrop-blur-sm pointer-events-none shadow-xl transition-all duration-500" />
                 <div className="absolute inset-0 translate-x-2 -translate-y-2 rotate-[2deg] rounded-2xl bg-slate-900/60 border border-white/10 backdrop-blur-sm pointer-events-none shadow-lg transition-all duration-500" />

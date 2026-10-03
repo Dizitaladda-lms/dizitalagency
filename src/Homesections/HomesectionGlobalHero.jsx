@@ -120,10 +120,10 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Controlled medium radius for professional proportions
+    // Full screen background radius calculation
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      return Math.min(rect.width, rect.height) * 0.40;
+      return Math.min(rect.width, rect.height) * 0.48;
     };
 
     // Helper: Convert lat/long to 3D point on sphere radius R
@@ -426,7 +426,7 @@ export default function HomesectionGlobalHero() {
       
       {/* ── BACKGROUND 1: Ambient Lighting Glows ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-b from-purple-600/18 via-indigo-600/12 to-cyan-500/8 rounded-full blur-[130px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-gradient-to-b from-purple-600/18 via-indigo-600/12 to-cyan-500/8 rounded-full blur-[130px]" />
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -439,15 +439,15 @@ export default function HomesectionGlobalHero() {
         />
       </div>
 
-      {/* ── BACKGROUND 2: Medium Professional 3D Vector Globe Canvas ── */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] sm:w-[620px] sm:h-[620px] lg:w-[720px] lg:h-[720px] pointer-events-auto z-0 opacity-40 sm:opacity-50 flex items-center justify-center">
+      {/* ── BACKGROUND 2: Full Screen Background 3D Vector Globe Canvas ── */}
+      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-40 sm:opacity-50 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full flex items-center justify-center">
           
-          {/* Decorative Orbit Rings */}
-          <div className="absolute inset-3 border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
-          <div className="absolute inset-12 border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
+          {/* Decorative Full Orbit Rings */}
+          <div className="absolute w-[80vw] h-[80vw] max-w-[900px] max-h-[900px] border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
+          <div className="absolute w-[65vw] h-[65vw] max-w-[750px] max-h-[750px] border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
 
-          {/* 3D Canvas element */}
+          {/* 3D Canvas element spanning full section */}
           <div
             className="w-full h-full relative cursor-grab active:cursor-grabbing select-none"
             onMouseDown={handleMouseDown}
