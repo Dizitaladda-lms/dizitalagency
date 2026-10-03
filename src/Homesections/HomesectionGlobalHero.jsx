@@ -1,65 +1,70 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-// Realistic Continent Polygon Data (lat, lng arrays) for authentic 3D world landmasses
+// Realistic Continent Polygon Coordinates (lat, lng arrays) for authentic 3D world landmasses
 const CONTINENT_POLYGONS = [
-  // North America
+  // North America (USA, Canada, Alaska, Mexico, Central America)
   [
-    [70, -165], [72, -130], [70, -80], [60, -64], [47, -53], [44, -64], 
-    [32, -80], [25, -80], [18, -95], [15, -92], [8, -78], [15, -104], 
-    [30, -115], [48, -125], [60, -140], [65, -168], [70, -165]
+    [70, -165], [72, -140], [70, -120], [60, -110], [50, -125], [40, -124], 
+    [32, -117], [23, -110], [15, -92], [8, -78], [10, -73], [18, -88], 
+    [25, -80], [30, -81], [35, -75], [44, -64], [47, -53], [60, -64], 
+    [70, -80], [72, -130], [70, -165]
   ],
   // Greenland
   [
-    [78, -70], [82, -30], [70, -20], [60, -43], [65, -52], [78, -70]
+    [78, -70], [82, -40], [80, -20], [70, -20], [60, -43], [65, -52], [78, -70]
   ],
   // South America
   [
-    [12, -73], [10, -62], [5, -50], [-5, -35], [-18, -38], [-23, -42], 
+    [12, -73], [10, -62], [5, -50], [-5, -35], [-12, -37], [-18, -38], [-23, -42], 
     [-35, -55], [-54, -68], [-52, -75], [-45, -74], [-18, -71], [0, -80], [12, -73]
   ],
-  // Europe
+  // Europe (Western & Central Europe, Scandinavia, Mediterranean)
   [
-    [71, 28], [68, 45], [60, 30], [55, 38], [45, 36], [40, 26], [37, 22],
-    [36, -5], [43, -9], [48, -4], [52, 2], [58, 6], [62, 5], [65, 14], [70, 20], [71, 28]
+    [71, 28], [70, 20], [65, 14], [62, 5], [58, 6], [54, 8], [52, 2], [48, -4], 
+    [43, -9], [36, -5], [37, 3], [37, 22], [40, 26], [45, 36], [55, 38], [60, 30], 
+    [68, 45], [71, 28]
   ],
   // United Kingdom & Ireland
   [
     [58, -6], [58, 2], [50, 1], [50, -5], [58, -6]
   ],
-  // Africa
+  // Africa (North Africa, Sahara, Central & South Africa)
   [
-    [37, 10], [32, 32], [28, 34], [12, 43], [11, 51], [4, 42], [-11, 40], 
-    [-26, 33], [-34, 20], [-34, 18], [-18, 12], [5, 9], [10, -14], [15, -17], [35, -6], [37, 10]
+    [37, 10], [35, -6], [28, -13], [15, -17], [10, -14], [5, 9], [-18, 12], 
+    [-34, 18], [-34, 26], [-26, 33], [-11, 40], [4, 42], [11, 51], [12, 43], 
+    [28, 34], [32, 32], [37, 10]
   ],
   // Madagascar
   [
     [-12, 49], [-15, 50], [-25, 47], [-25, 44], [-12, 49]
   ],
-  // Asia - Main Landmass
+  // Middle East & Arabia
+  [
+    [30, 35], [40, 35], [45, 50], [30, 48], [25, 57], [15, 53], [12, 44], 
+    [20, 38], [30, 35]
+  ],
+  // Asia - Main Landmass (China, Russia/Siberia, Central Asia)
   [
     [75, 75], [76, 110], [72, 130], [66, 170], [60, 162], [55, 135], [43, 131], 
-    [38, 118], [22, 114], [15, 108], [10, 99], [22, 91], [8, 77], [22, 69], 
-    [12, 44], [15, 53], [25, 57], [30, 48], [30, 35], [40, 35], [45, 50], [55, 60], [75, 75]
+    [38, 118], [22, 114], [15, 108], [10, 99], [22, 91], [30, 78], [35, 60], 
+    [45, 50], [55, 60], [75, 75]
   ],
-  // India Peninsula
+  // India Peninsula & Sri Lanka
   [
-    [32, 75], [24, 69], [15, 73], [8, 77], [13, 80], [20, 85], [27, 88], [30, 78], [32, 75]
+    [32, 75], [28, 88], [20, 85], [13, 80], [8, 77], [10, 76], [15, 73], [24, 69], [32, 75]
   ],
-  // Arabia Peninsula
-  [
-    [30, 35], [30, 48], [25, 57], [15, 53], [12, 44], [20, 38], [30, 35]
-  ],
-  // Japan
+  // Japan Islands
   [
     [45, 142], [41, 140], [35, 136], [31, 130], [35, 133], [40, 138], [45, 142]
   ],
-  // Southeast Asia Islands (Indonesia & Philippines)
+  // Southeast Asia & Indonesia / Philippines
   [
-    [18, 121], [10, 126], [5, 115], [-5, 105], [-8, 115], [-8, 127], [2, 128], [18, 121]
+    [18, 121], [14, 100], [7, 100], [1, 104], [-5, 105], [-8, 115], [-8, 127], 
+    [2, 128], [10, 126], [18, 121]
   ],
   // Australia
   [
@@ -72,17 +77,51 @@ const CONTINENT_POLYGONS = [
   ]
 ];
 
-// Key Target Business Hub Countries
+// Helper: Point in polygon test
+function pointInPolygon(pt, polygon) {
+  const x = pt[0], y = pt[1];
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const xi = polygon[i][0], yi = polygon[i][1];
+    const xj = polygon[j][0], yj = polygon[j][1];
+    const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+
+// 30+ Key Target Business Hub Countries across all Continents
 const COUNTRY_MARKERS = [
+  { name: "India", flag: "🇮🇳", code: "IN", lat: 20.5937, lng: 78.9629, stat: "10M+ Organic Impressions" },
   { name: "United States", flag: "🇺🇸", code: "US", lat: 37.0902, lng: -95.7129, stat: "340% ROAS Growth" },
   { name: "United Kingdom", flag: "🇬🇧", code: "UK", lat: 55.3781, lng: -3.436, stat: "2.8x Lead Velocity" },
-  { name: "United Arab Emirates", flag: "🇦🇪", code: "UAE", lat: 24.2, lng: 54.3, stat: "15k+ Qualified Leads" },
-  { name: "India", flag: "🇮🇳", code: "IN", lat: 21.0, lng: 78.0, stat: "10M+ Organic Impressions" },
-  { name: "Australia", flag: "🇦🇺", code: "AU", lat: -25.2, lng: 133.7, stat: "420% Sales Conversion" },
-  { name: "Canada", flag: "🇨🇦", code: "CA", lat: 56.1, lng: -106.3, stat: "High-Authority Branding" },
-  { name: "Germany", flag: "🇩🇪", code: "DE", lat: 51.1, lng: 10.4, stat: "Multi-Language SEO Scale" },
-  { name: "Singapore", flag: "🇸🇬", code: "SG", lat: 1.35, lng: 103.8, stat: "FinTech Campaign Success" },
-  { name: "Japan", flag: "🇯🇵", code: "JP", lat: 36.2, lng: 138.2, stat: "APAC Market Expansion" },
+  { name: "United Arab Emirates", flag: "🇦🇪", code: "UAE", lat: 23.4241, lng: 53.8478, stat: "15k+ Qualified Leads" },
+  { name: "Germany", flag: "🇩🇪", code: "DE", lat: 51.1657, lng: 10.4515, stat: "Multi-Language SEO Scale" },
+  { name: "France", flag: "🇫🇷", code: "FR", lat: 46.2276, lng: 2.2137, stat: "High-Authority Branding" },
+  { name: "Canada", flag: "🇨🇦", code: "CA", lat: 56.1304, lng: -106.3468, stat: "B2B Market Dominance" },
+  { name: "Australia", flag: "🇦🇺", code: "AU", lat: -25.2744, lng: 133.7751, stat: "420% Sales Conversion" },
+  { name: "Japan", flag: "🇯🇵", code: "JP", lat: 36.2048, lng: 138.2529, stat: "APAC Market Scale" },
+  { name: "Singapore", flag: "🇸🇬", code: "SG", lat: 1.3521, lng: 103.8198, stat: "FinTech Campaign Scale" },
+  { name: "Brazil", flag: "🇧🇷", code: "BR", lat: -14.235, lng: -51.9253, stat: "LATAM Growth Spike" },
+  { name: "Saudi Arabia", flag: "🇸🇦", code: "SA", lat: 23.8859, lng: 45.0792, stat: "Middle East Scale" },
+  { name: "South Korea", flag: "🇰🇷", code: "KR", lat: 35.9078, lng: 127.7669, stat: "Tech User Acquisition" },
+  { name: "Spain", flag: "🇪🇸", code: "ES", lat: 40.4637, lng: -3.7492, stat: "E-commerce Revenue Boost" },
+  { name: "Italy", flag: "🇮🇹", code: "IT", lat: 41.8719, lng: 12.5674, stat: "Luxury Brand Scale" },
+  { name: "Netherlands", flag: "🇳🇱", code: "NL", lat: 52.1326, lng: 5.2913, stat: "Euro Hub ROI" },
+  { name: "Switzerland", flag: "🇨🇭", code: "CH", lat: 46.8182, lng: 8.2275, stat: "Wealth Tech Lead Gen" },
+  { name: "Mexico", flag: "🇲🇽", code: "MX", lat: 23.6345, lng: -102.5528, stat: "Cross-Border Campaign" },
+  { name: "Argentina", flag: "🇦🇷", code: "AR", lat: -38.4161, lng: -63.6167, stat: "Performance PPC" },
+  { name: "South Africa", flag: "🇿🇦", code: "ZA", lat: -30.5595, lng: 22.9375, stat: "African Market Scale" },
+  { name: "Egypt", flag: "🇪🇬", code: "EG", lat: 26.8206, lng: 30.8025, stat: "MENA Lead Pipeline" },
+  { name: "Turkey", flag: "🇹🇷", code: "TR", lat: 38.9637, lng: 35.2433, stat: "Regional Commerce" },
+  { name: "China", flag: "🇨🇳", code: "CN", lat: 35.8617, lng: 104.1954, stat: "Global Supply Marketing" },
+  { name: "Indonesia", flag: "🇮🇩", code: "ID", lat: -0.7893, lng: 113.9213, stat: "SEA App Growth" },
+  { name: "Thailand", flag: "🇹🇭", code: "TH", lat: 15.87, lng: 100.9925, stat: "Tourism & Travel SEO" },
+  { name: "Vietnam", flag: "🇻🇳", code: "VN", lat: 14.0583, lng: 108.2772, stat: "Digital Ad Efficiency" },
+  { name: "Qatar", flag: "🇶🇦", code: "QA", lat: 25.3548, lng: 51.1839, stat: "Enterprise Deals" },
+  { name: "Nigeria", flag: "🇳🇬", code: "NG", lat: 9.082, lng: 8.6753, stat: "West Africa Scaling" },
+  { name: "Sweden", flag: "🇸🇪", code: "SE", lat: 60.1282, lng: 18.6435, stat: "Nordic Tech Campaign" },
+  { name: "New Zealand", flag: "🇳🇿", code: "NZ", lat: -40.9006, lng: 174.886, stat: "Oceania Performance" },
 ];
 
 export default function HomesectionGlobalHero() {
@@ -92,18 +131,40 @@ export default function HomesectionGlobalHero() {
   const lastMousePosRef = useRef({ x: 0, y: 0 });
 
   const rotationRef = useRef({ x: 0.28, y: 0.65 });
-  // Slow ambient rotation speed
-  const velocityRef = useRef({ x: 0, y: 0.0012 });
+  // Slow, smooth ambient rotation speed
+  const velocityRef = useRef({ x: 0, y: 0.0014 });
 
-  // Rotate spotlight country marker
+  // Precompute 1500+ Land Matrix Dots for realistic 3D Globe Tech Texture
+  const landDots = useMemo(() => {
+    const dots = [];
+    const step = 2.4; // Grid density step in degrees
+    for (let lat = -60; lat <= 75; lat += step) {
+      for (let lng = -180; lng <= 180; lng += step) {
+        // Check if lat/lng is on land
+        let isLand = false;
+        for (let poly of CONTINENT_POLYGONS) {
+          if (pointInPolygon([lat, lng], poly)) {
+            isLand = true;
+            break;
+          }
+        }
+        if (isLand) {
+          dots.push({ lat, lng });
+        }
+      }
+    }
+    return dots;
+  }, []);
+
+  // Rotate spotlight country marker automatically
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCountry((prev) => (prev + 1) % COUNTRY_MARKERS.length);
-    }, 3800);
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
-  // 3D Engine for Vector Continent Globe Background
+  // 3D Vector Globe Renderer Engine
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -121,13 +182,13 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Large spherical radius for diagonal screen span
+    // Spherical radius matching hero section layout
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
       return Math.max(rect.width, rect.height) * 0.44;
     };
 
-    // Helper: Convert lat/long to 3D point on sphere radius R
+    // Convert lat/long to 3D point on sphere radius R
     const latLngTo3D = (lat, lng, r) => {
       const phi = (90 - lat) * (Math.PI / 180);
       const theta = (lng + 180) * (Math.PI / 180);
@@ -150,7 +211,7 @@ export default function HomesectionGlobalHero() {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Auto rotation physics (slow & smooth)
+      // Smooth auto rotation physics
       if (!isDraggingRef.current) {
         rotationRef.current.y += velocityRef.current.y;
         rotationRef.current.x += (0.28 - rotationRef.current.x) * 0.01;
@@ -184,15 +245,15 @@ export default function HomesectionGlobalHero() {
       // 0. DIAGONAL DATA BEAM (Bottom-Left to Top-Right exact axis)
       const diagonalGrad = ctx.createLinearGradient(0, height, width, 0);
       diagonalGrad.addColorStop(0, "rgba(168, 85, 247, 0.0)");
-      diagonalGrad.addColorStop(0.3, "rgba(236, 72, 153, 0.18)");
-      diagonalGrad.addColorStop(0.7, "rgba(56, 189, 248, 0.18)");
+      diagonalGrad.addColorStop(0.3, "rgba(236, 72, 153, 0.22)");
+      diagonalGrad.addColorStop(0.7, "rgba(56, 189, 248, 0.22)");
       diagonalGrad.addColorStop(1, "rgba(168, 85, 247, 0.0)");
 
       ctx.beginPath();
       ctx.moveTo(0, height);
       ctx.lineTo(width, 0);
       ctx.strokeStyle = diagonalGrad;
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 3.5;
       ctx.stroke();
 
       // 1. Atmosphere Radial Glow Behind Globe
@@ -200,8 +261,8 @@ export default function HomesectionGlobalHero() {
         centerX, centerY, radius * 0.5,
         centerX, centerY, radius * 1.35
       );
-      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.22)");
-      glowGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.12)");
+      glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.25)");
+      glowGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.15)");
       glowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
       ctx.fillStyle = glowGrad;
@@ -209,21 +270,21 @@ export default function HomesectionGlobalHero() {
       ctx.arc(centerX, centerY, radius * 1.35, 0, Math.PI * 2);
       ctx.fill();
 
-      // 2. Base Ocean Sphere (Deep Dark Blue Fill)
+      // 2. Base Ocean Sphere (Deep Vibrant Tech Blue Fill)
       const oceanGrad = ctx.createRadialGradient(
         centerX - radius * 0.3, centerY - radius * 0.3, radius * 0.2,
         centerX, centerY, radius
       );
-      oceanGrad.addColorStop(0, "#1a0f3d");
-      oceanGrad.addColorStop(0.7, "#0b0524");
-      oceanGrad.addColorStop(1, "#070316");
+      oceanGrad.addColorStop(0, "#1c0d45");
+      oceanGrad.addColorStop(0.7, "#0d062e");
+      oceanGrad.addColorStop(1, "#070318");
 
       ctx.fillStyle = oceanGrad;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.fill();
 
-      // Graticule Lines
+      // 3. Render Graticule Latitude & Longitude Lines
       const graticuleLines = [];
       for (let lat = -60; lat <= 60; lat += 30) {
         const ring = [];
@@ -240,8 +301,7 @@ export default function HomesectionGlobalHero() {
         graticuleLines.push(line);
       }
 
-      // 3. Render Graticule Lines
-      ctx.strokeStyle = "rgba(168, 85, 247, 0.14)";
+      ctx.strokeStyle = "rgba(168, 85, 247, 0.18)";
       ctx.lineWidth = 1;
       graticuleLines.forEach((ring) => {
         ctx.beginPath();
@@ -262,13 +322,13 @@ export default function HomesectionGlobalHero() {
         ctx.stroke();
       });
 
-      // 4. Render Vector Continent Polygons
+      // 4. Render Vector Continent Polygons (Rich Neon purple fill + cyan border)
       CONTINENT_POLYGONS.forEach((poly) => {
         const poly3D = poly.map(([lat, lng]) => latLngTo3D(lat, lng, radius));
         const projectedPoly = poly3D.map(project);
         const avgZ = projectedPoly.reduce((sum, p) => sum + p.z2, 0) / projectedPoly.length;
 
-        if (avgZ > -20) {
+        if (avgZ > -30) {
           ctx.beginPath();
           projectedPoly.forEach((p, idx) => {
             if (idx === 0) ctx.moveTo(p.screenX, p.screenY);
@@ -276,19 +336,32 @@ export default function HomesectionGlobalHero() {
           });
           ctx.closePath();
 
-          const landAlpha = Math.min(0.48, Math.max(0.12, (avgZ + radius) / (2 * radius)));
+          const landAlpha = Math.min(0.55, Math.max(0.18, (avgZ + radius) / (2 * radius)));
           ctx.fillStyle = `rgba(147, 51, 234, ${landAlpha})`;
           ctx.fill();
 
-          ctx.strokeStyle = `rgba(192, 132, 252, ${landAlpha * 1.8})`;
-          ctx.lineWidth = 1.2;
+          ctx.strokeStyle = `rgba(56, 189, 248, ${landAlpha * 1.5})`;
+          ctx.lineWidth = 1.4;
           ctx.stroke();
         }
       });
 
-      // 5. Country Markers & Arcs
+      // 5. Render Glowing Land Dot Matrix (Dense 3D Grid Texture)
+      landDots.forEach((dot) => {
+        const pt3D = latLngTo3D(dot.lat, dot.lng, radius + 0.8);
+        const proj = project(pt3D);
+        if (proj.z2 > 0) {
+          const dotAlpha = Math.min(0.9, Math.max(0.2, proj.z2 / radius));
+          ctx.fillStyle = `rgba(56, 189, 248, ${dotAlpha})`;
+          ctx.beginPath();
+          ctx.arc(proj.screenX, proj.screenY, 1.4 * proj.perspective, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      // 6. Country Markers & Arcs across all 30+ Countries
       const projectedCountries = COUNTRY_MARKERS.map((c, idx) => {
-        const pos3D = latLngTo3D(c.lat, c.lng, radius);
+        const pos3D = latLngTo3D(c.lat, c.lng, radius + 2);
         const proj = project(pos3D);
         return {
           ...c,
@@ -300,74 +373,88 @@ export default function HomesectionGlobalHero() {
         };
       });
 
-      // Draw Arcs
+      // Draw Connection Arcs from Active Country
       const curActive = projectedCountries[activeCountry];
       if (curActive && curActive.isFront) {
         projectedCountries.forEach((target, i) => {
           if (i === activeCountry || !target.isFront) return;
 
           const midX = (curActive.screenX + target.screenX) / 2;
-          const midY = (curActive.screenY + target.screenY) / 2 - 30;
+          const midY = (curActive.screenY + target.screenY) / 2 - 35;
 
           const arcGradient = ctx.createLinearGradient(
             curActive.screenX, curActive.screenY,
             target.screenX, target.screenY
           );
-          arcGradient.addColorStop(0, "rgba(236, 72, 153, 0.85)");
-          arcGradient.addColorStop(0.5, "rgba(56, 189, 248, 0.75)");
-          arcGradient.addColorStop(1, "rgba(168, 85, 247, 0.25)");
+          arcGradient.addColorStop(0, "rgba(244, 63, 94, 0.9)");
+          arcGradient.addColorStop(0.5, "rgba(56, 189, 248, 0.8)");
+          arcGradient.addColorStop(1, "rgba(168, 85, 247, 0.3)");
 
           ctx.beginPath();
           ctx.moveTo(curActive.screenX, curActive.screenY);
           ctx.quadraticCurveTo(midX, midY, target.screenX, target.screenY);
           ctx.strokeStyle = arcGradient;
-          ctx.lineWidth = 1.3;
-          ctx.setLineDash([4, 3]);
+          ctx.lineWidth = 1.4;
+          ctx.setLineDash([5, 3]);
           ctx.stroke();
           ctx.setLineDash([]);
         });
       }
 
-      // Draw Pins
+      // Draw Pins & Country Labels for ALL Visible Front Countries
       projectedCountries.forEach((c) => {
         if (!c.isFront) return;
 
         const isCurrentActive = c.idx === activeCountry;
-        const size = isCurrentActive ? 6.5 : 4;
+        const size = isCurrentActive ? 7 : 4.5;
 
+        // Outer Pulsing Glow Circle
         ctx.fillStyle = isCurrentActive
           ? "rgba(244, 63, 94, 0.45)"
-          : "rgba(56, 189, 248, 0.35)";
+          : "rgba(56, 189, 248, 0.3)";
         ctx.beginPath();
-        ctx.arc(c.screenX, c.screenY, size * 2.4, 0, Math.PI * 2);
+        ctx.arc(c.screenX, c.screenY, size * 2.5, 0, Math.PI * 2);
         ctx.fill();
 
+        // Pin Solid Dot
         ctx.fillStyle = isCurrentActive ? "#f43f5e" : "#38bdf8";
         ctx.beginPath();
         ctx.arc(c.screenX, c.screenY, size, 0, Math.PI * 2);
         ctx.fill();
 
+        // Pin Inner White Center
         ctx.fillStyle = "#ffffff";
         ctx.beginPath();
-        ctx.arc(c.screenX, c.screenY, size * 0.4, 0, Math.PI * 2);
+        ctx.arc(c.screenX, c.screenY, size * 0.45, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.font = "bold 9.5px Inter, sans-serif";
-        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.85)";
-        ctx.fillText(c.code, c.screenX + 7, c.screenY + 3);
+        // Country Code & Flag Label
+        ctx.font = isCurrentActive ? "bold 11px Inter, sans-serif" : "600 9.5px Inter, sans-serif";
+        ctx.fillStyle = isCurrentActive ? "#f43f5e" : "rgba(255, 255, 255, 0.9)";
+        
+        // Show flag + country code
+        const labelText = `${c.flag} ${c.code}`;
+        ctx.fillText(labelText, c.screenX + 8, c.screenY + 3);
+
+        // If active, also draw full country name
+        if (isCurrentActive) {
+          ctx.font = "bold 10px Inter, sans-serif";
+          ctx.fillStyle = "#38bdf8";
+          ctx.fillText(c.name, c.screenX + 8, c.screenY + 15);
+        }
       });
 
-      // 6. Outer Atmosphere Rim
+      // 7. Outer Atmosphere Rim
       const rimGrad = ctx.createRadialGradient(
         centerX, centerY, radius * 0.96,
         centerX, centerY, radius * 1.04
       );
       rimGrad.addColorStop(0, "rgba(168, 85, 247, 0)");
-      rimGrad.addColorStop(0.5, "rgba(192, 132, 252, 0.5)");
-      rimGrad.addColorStop(1, "rgba(56, 189, 248, 0.7)");
+      rimGrad.addColorStop(0.5, "rgba(192, 132, 252, 0.55)");
+      rimGrad.addColorStop(1, "rgba(56, 189, 248, 0.75)");
 
       ctx.strokeStyle = rimGrad;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2.2;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.stroke();
@@ -381,9 +468,9 @@ export default function HomesectionGlobalHero() {
       window.removeEventListener("resize", updateCanvasSize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [activeCountry]);
+  }, [activeCountry, landDots]);
 
-  // Drag handlers
+  // Mouse Drag to Rotate Globe 360 Degrees
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
     lastMousePosRef.current = { x: e.clientX, y: e.clientY };
@@ -459,7 +546,7 @@ export default function HomesectionGlobalHero() {
       <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-90 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full flex items-center justify-center">
           
-          {/* Decorative Diagonal Orbit Rings (Bottom-Left to Top-Right) */}
+          {/* Decorative Diagonal Orbit Rings */}
           <div className="absolute w-[85vw] h-[85vw] max-w-[1000px] max-h-[1000px] border border-purple-500/20 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
           <div className="absolute w-[70vw] h-[70vw] max-w-[800px] max-h-[800px] border border-cyan-500/15 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
 
@@ -476,7 +563,7 @@ export default function HomesectionGlobalHero() {
         </div>
       </div>
 
-      {/* ── FOREGROUND CONTENT: Clean, Medium Proportional Typography & Elements ── */}
+      {/* ── FOREGROUND CONTENT ── */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center max-w-4xl">
         
         {/* Top Pill Badge */}
@@ -492,7 +579,7 @@ export default function HomesectionGlobalHero() {
           </span>
         </motion.div>
 
-        {/* ── Agency Title: Guaranteed Full Word Visibility (No Character Clipping) ── */}
+        {/* Agency Title */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -508,7 +595,7 @@ export default function HomesectionGlobalHero() {
             ))}
           </span>
 
-          {/* Word 2: Agency (With pr-3 padding to guarantee 'y' is never clipped) */}
+          {/* Word 2: Agency */}
           <span className="inline-block pr-3 sm:pr-4 pb-1 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
             {word2.split("").map((char, index) => (
               <motion.span key={index} variants={letterVariants} className="inline-block">
@@ -525,7 +612,7 @@ export default function HomesectionGlobalHero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-base sm:text-xl lg:text-2xl font-bold text-slate-100 mb-3 leading-snug max-w-2xl drop-shadow"
         >
-          Scaling Brands Across <span className="text-cyan-400 font-extrabold">25+ Countries</span> Worldwide
+          Scaling Brands Across <span className="text-cyan-400 font-extrabold">30+ Countries</span> Worldwide
         </motion.h2>
 
         {/* Description Body */}
@@ -569,7 +656,7 @@ export default function HomesectionGlobalHero() {
         >
           {[
             { label: "Global Clients", value: "200+" },
-            { label: "Countries Targeted", value: "25+" },
+            { label: "Countries Targeted", value: "30+" },
             { label: "Campaign ROI", value: "3.8x" },
             { label: "Satisfaction", value: "98.5%" },
           ].map((item, idx) => (
