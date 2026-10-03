@@ -91,7 +91,7 @@ export default function HomesectionGlobalHero() {
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
 
-  const rotationRef = useRef({ x: 0.25, y: 0.6 });
+  const rotationRef = useRef({ x: 0.28, y: 0.65 });
   // Slow ambient rotation speed
   const velocityRef = useRef({ x: 0, y: 0.0012 });
 
@@ -121,10 +121,10 @@ export default function HomesectionGlobalHero() {
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
 
-    // Round 3D sphere radius calculation
+    // Large spherical radius for diagonal screen span
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      return Math.min(rect.width, rect.height) * 0.44;
+      return Math.max(rect.width, rect.height) * 0.44;
     };
 
     // Helper: Convert lat/long to 3D point on sphere radius R
@@ -153,7 +153,7 @@ export default function HomesectionGlobalHero() {
       // Auto rotation physics (slow & smooth)
       if (!isDraggingRef.current) {
         rotationRef.current.y += velocityRef.current.y;
-        rotationRef.current.x += (0.25 - rotationRef.current.x) * 0.01;
+        rotationRef.current.x += (0.28 - rotationRef.current.x) * 0.01;
       }
 
       const rotX = rotationRef.current.x;
@@ -180,6 +180,20 @@ export default function HomesectionGlobalHero() {
           isFront: z2 > -10,
         };
       };
+
+      // 0. DIAGONAL DATA BEAM (Bottom-Left to Top-Right exact axis)
+      const diagonalGrad = ctx.createLinearGradient(0, height, width, 0);
+      diagonalGrad.addColorStop(0, "rgba(168, 85, 247, 0.0)");
+      diagonalGrad.addColorStop(0.3, "rgba(236, 72, 153, 0.18)");
+      diagonalGrad.addColorStop(0.7, "rgba(56, 189, 248, 0.18)");
+      diagonalGrad.addColorStop(1, "rgba(168, 85, 247, 0.0)");
+
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      ctx.lineTo(width, 0);
+      ctx.strokeStyle = diagonalGrad;
+      ctx.lineWidth = 3;
+      ctx.stroke();
 
       // 1. Atmosphere Radial Glow Behind Globe
       const glowGrad = ctx.createRadialGradient(
@@ -424,7 +438,7 @@ export default function HomesectionGlobalHero() {
   const activeCountryData = COUNTRY_MARKERS[activeCountry];
 
   return (
-    <section className="relative w-full min-h-[82vh] lg:min-h-[88vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 border-b border-purple-900/30">
+    <section className="relative w-full min-h-[84vh] lg:min-h-[90vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 border-b border-purple-900/30">
       
       {/* ── BACKGROUND 1: Ambient Lighting Glows ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -441,15 +455,15 @@ export default function HomesectionGlobalHero() {
         />
       </div>
 
-      {/* ── BACKGROUND 2: Full Screen Height & Width 3D Vector Globe Canvas (Reaches top navbar) ── */}
-      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-55 sm:opacity-65 flex items-center justify-center overflow-hidden">
+      {/* ── BACKGROUND 2: Full Screen Diagonal 3D Vector Globe Canvas (Spans Bottom-Left to Top-Right) ── */}
+      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-60 sm:opacity-70 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full flex items-center justify-center">
           
-          {/* Decorative Orbit Rings */}
-          <div className="absolute w-[75vw] h-[75vw] max-w-[850px] max-h-[850px] border border-purple-500/15 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
-          <div className="absolute w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] border border-cyan-500/10 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
+          {/* Decorative Diagonal Orbit Rings (Bottom-Left to Top-Right) */}
+          <div className="absolute w-[85vw] h-[85vw] max-w-[1000px] max-h-[1000px] border border-purple-500/20 rounded-full animate-[spin_60s_linear_infinite] pointer-events-none" />
+          <div className="absolute w-[70vw] h-[70vw] max-w-[800px] max-h-[800px] border border-cyan-500/15 rounded-full animate-[spin_45s_linear_infinite_reverse] pointer-events-none" />
 
-          {/* 3D Canvas element spanning top navbar down to hero bottom */}
+          {/* 3D Canvas element */}
           <div
             className="w-full h-full relative cursor-grab active:cursor-grabbing select-none"
             onMouseDown={handleMouseDown}

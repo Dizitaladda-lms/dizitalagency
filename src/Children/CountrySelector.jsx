@@ -57,19 +57,6 @@ export default function CountrySelector({ isMobile = false }) {
   const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef(null);
 
-  // Set Google Translate cookies
-  const setTranslationCookies = (langCode) => {
-    if (typeof document === "undefined") return;
-    const hostname = window.location.hostname;
-    const valEn = `/en/${langCode}`;
-    const valAuto = `/auto/${langCode}`;
-
-    document.cookie = `googtrans=${valEn}; path=/;`;
-    document.cookie = `googtrans=${valEn}; path=/; domain=${hostname}`;
-    document.cookie = `googtrans=${valAuto}; path=/;`;
-    document.cookie = `googtrans=${valAuto}; path=/; domain=${hostname}`;
-  };
-
   // Initialize Google Translate Script
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -96,7 +83,7 @@ export default function CountrySelector({ isMobile = false }) {
     }
   }, []);
 
-  // Load saved country from localStorage & initialize translation
+  // Load saved country from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem("digitaladda_selected_country");
@@ -105,9 +92,6 @@ export default function CountrySelector({ isMobile = false }) {
         const match = COUNTRIES.find((c) => c.id === parsed.id);
         if (match) {
           setSelectedCountry(match);
-          if (match.code !== "en") {
-            setTranslationCookies(match.code);
-          }
         }
       }
     } catch (e) {
@@ -126,35 +110,7 @@ export default function CountrySelector({ isMobile = false }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Apply Language Translation dynamically
-  const applyLanguageTranslation = (langCode) => {
-    if (typeof document === "undefined") return;
-
-    if (langCode === "en") {
-      // Clear translation cookie to restore English
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
-
-      const selectElem = document.querySelector(".goog-te-combo");
-      if (selectElem) {
-        selectElem.value = "en";
-        selectElem.dispatchEvent(new Event("change", { bubbles: true }));
-      }
-      window.location.reload();
-      return;
-    }
-
-    setTranslationCookies(langCode);
-
-    const selectElem = document.querySelector(".goog-te-combo");
-    if (selectElem) {
-      selectElem.value = langCode;
-      selectElem.dispatchEvent(new Event("change", { bubbles: true }));
-    } else {
-      window.location.reload();
-    }
-  };
-
+  // Guaranteed Language Translation with Cookie & Reload
   const handleSelectCountry = (country) => {
     setSelectedCountry(country);
     setIsOpen(false);
@@ -166,7 +122,36 @@ export default function CountrySelector({ isMobile = false }) {
       console.error(e);
     }
 
-    applyLanguageTranslation(country.code);
+    if (typeof document === "undefined") return;
+
+    const hostname = window.location.hostname;
+
+    if (country.code === "en") {
+      // Clear translation cookies to restore English
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${hostname}`;
+    } else {
+      // Set googtrans cookie for target language (e.g. /en/hi, /en/ar, /en/de, /en/es)
+      const valEn = `/en/${country.code}`;
+      const valAuto = `/auto/${country.code}`;
+
+      document.cookie = `googtrans=${valEn}; path=/;`;
+      document.cookie = `googtrans=${valEn}; path=/; domain=${hostname}`;
+      document.cookie = `googtrans=${valAuto}; path=/;`;
+      document.cookie = `googtrans=${valAuto}; path=/; domain=${hostname}`;
+    }
+
+    // Trigger Google Translate combo if element is loaded
+    const selectElem = document.querySelector(".goog-te-combo");
+    if (selectElem) {
+      selectElem.value = country.code === "en" ? "" : country.code;
+      selectElem.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    // Refresh page to apply complete DOM translation across all components
+    setTimeout(() => {
+      window.location.reload();
+    }, 150);
   };
 
   const filteredCountries = COUNTRIES.filter(
