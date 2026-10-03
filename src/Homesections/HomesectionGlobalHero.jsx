@@ -456,7 +456,7 @@ export default function HomesectionGlobalHero() {
       </div>
 
       {/* ── BACKGROUND 2: Full Screen Diagonal 3D Vector Globe Canvas (Spans Bottom-Left to Top-Right) ── */}
-      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-60 sm:opacity-70 flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-90 flex items-center justify-center overflow-hidden">
         <div className="relative w-full h-full flex items-center justify-center">
           
           {/* Decorative Diagonal Orbit Rings (Bottom-Left to Top-Right) */}
@@ -593,18 +593,18 @@ export default function HomesectionGlobalHero() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className="notranslate inline-flex items-center gap-2.5 bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 px-4 py-1.5 rounded-full shadow-xl pointer-events-none whitespace-nowrap"
+              className="notranslate inline-flex max-w-full flex-wrap items-center justify-center gap-2.5 bg-slate-950/90 backdrop-blur-xl border border-purple-500/40 px-4 py-1.5 rounded-full shadow-xl pointer-events-none"
             >
               <span className="text-[10px] font-black text-purple-400 px-1.5 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">
                 {activeCountryData.code}
               </span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center justify-center gap-1.5">
                 <span className="text-sm">{activeCountryData.flag}</span>
-                <span className="text-xs font-bold text-white">
+                <span className="text-xs font-bold text-white text-center">
                   {activeCountryData.name}
                 </span>
                 <span className="text-gray-500">&middot;</span>
-                <span className="text-[10px] font-semibold text-cyan-300">
+                <span className="text-[10px] font-semibold text-cyan-300 text-center">
                   {activeCountryData.stat}
                 </span>
               </div>
