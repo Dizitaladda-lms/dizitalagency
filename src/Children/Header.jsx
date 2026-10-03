@@ -64,7 +64,7 @@ export default function Header() {
               <img
                 src="/logo_transparent.png"
                 alt="Digital Adda Agency"
-                className="h-10 sm:h-12 w-auto object-contain drop-shadow-lg"
+                className="h-10 w-[140px] shrink-0 object-cover object-center drop-shadow-lg sm:h-12 sm:w-[180px] lg:h-14 lg:w-[200px]"
                 onError={() => setImageError(true)}
               />
             ) : (
