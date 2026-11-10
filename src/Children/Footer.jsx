@@ -1,6 +1,7 @@
 'use client';
 
-import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram, Youtube } from 'lucide-react';
+import Image from 'next/image';
+import { MapPin, Phone, Mail, Facebook, Linkedin, Instagram } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -14,9 +15,11 @@ export default function Footer() {
           {/* Company Info (NO MAP HERE NOW) */}
           <div className="lg:col-span-5 space-y-8">
             <div className="relative items-start">
-              <img 
+              <Image 
                 src="/final-logo.png" 
                 alt="Digital Adda Logo"
+                width={600}
+                height={240}
                 className="h-auto md:h-[10vw] w-full object-cover md:object-contain scale-100 md:scale-200" 
               />
               <div className="absolute -inset-1 bg-cyan-500/20 blur-2xl -z-10 animate-pulse" />
@@ -31,11 +34,15 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-cyan-400" />
-                <span>+91 9355121681</span>
+                <a href="tel:+919355121681" className="hover:text-white transition">
+                  +91 93551 21681
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-cyan-400" />
-                <span>Info@digitaladdagagency.com</span>
+                <a href="mailto:Info@digitaladdagagency.com" className="hover:text-white transition">
+                  Info@digitaladdagagency.com
+                </a>
               </div>
             </div>
           </div>
@@ -44,10 +51,17 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h3 className="text-lg font-bold text-white mb-6">Services</h3>
             <ul className="space-y-3 text-gray-400 text-sm">
-              {['SEO & AI SEO', 'Social Media Marketing', 'PPC Advertising', 'Content Strategy', 'Web Development', 'Brand Identity'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-cyan-400 transition block">
-                    {item}
+              {[
+                { name: 'Search Engine Optimization', href: '/services/seo' },
+                { name: 'Social Media Marketing', href: '/services/social-media-marketing' },
+                { name: 'PPC Advertising', href: '/services/ppc' },
+                { name: 'Content Writing', href: '/services/content-writing' },
+                { name: 'Web Development', href: '/services/website-designing' },
+                { name: 'Brand Identity', href: '/services/graphic-design' },
+              ].map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="hover:text-cyan-400 transition block">
+                    {item.name}
                   </a>
                 </li>
               ))}
@@ -63,6 +77,8 @@ export default function Footer() {
                 { name: 'Portfolio', href: '/Portfolio' },
                 { name: 'Blog', href: '/blogs' },
                 { name: 'Contact', href: '/contact' },
+                { name: 'Privacy Policy', href: '/privacy-policy' },
+                { name: 'Terms of Use', href: '/terms-and-conditions' },
               ].map((item) => (
                 <li key={item.name}>
                   <a href={item.href} className="hover:text-cyan-400 transition block">
@@ -120,10 +136,17 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-5">
-            {[Facebook, Twitter, Linkedin, Instagram, Youtube].map((Icon, i) => (
+            {[
+              { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61571980529782' },
+              { Icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/digitaladda-agency-283322372/' },
+              { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/digitaladdaagency/' },
+            ].map(({ Icon, label, href }) => (
               <a
-                key={i}
-                href="#"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="w-11 h-11 rounded-full bg-gray-800/40 border border-gray-700 flex items-center justify-center hover:border-cyan-500 hover:bg-cyan-500/10 transition-all group"
               >
                 <Icon className="w-5 h-5 text-gray-500 group-hover:text-cyan-400 transition" />

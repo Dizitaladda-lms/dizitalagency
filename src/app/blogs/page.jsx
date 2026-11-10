@@ -2,9 +2,8 @@ import BlogCard from "@/components/BlogCard";
 import prisma from "@/lib/prisma";
 import styles from "./page.module.css";
 
-// Keep the public listing responsive while allowing new posts to appear shortly
-// after publication instead of querying the database on every navigation.
-export const revalidate = 60;
+// This page reads published posts from the database at request time.
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Blog — DigitalAdda Agency",

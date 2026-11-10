@@ -13,16 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "DigitalAdda - Leading Digital Marketing & Growth Agency",
+  title: "Performance Marketing for Education & Growth Brands | DigitalAdda",
   description:
-    "DigitalAdda Agency delivers high-impact digital marketing, SEO, PPC ads, web development, and social media growth strategies.",
+    "DigitalAdda is a Delhi-based digital growth agency for education and growth brands, delivering SEO, paid media, content, social, and web development.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.digitaladdaagency.com"
   ),
   openGraph: {
-    title: "DigitalAdda - Leading Digital Marketing & Growth Agency",
+    title: "Performance Marketing for Education & Growth Brands | DigitalAdda",
     description:
-      "DigitalAdda Agency delivers high-impact digital marketing, SEO, PPC ads, web development, and social media growth strategies.",
+      "A Delhi-based digital growth agency for education and growth brands, delivering SEO, paid media, content, social, and web development.",
     type: "website",
     locale: "en_US",
     siteName: "DigitalAdda Agency",
