@@ -133,7 +133,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070714] text-gray-100 selection:bg-purple-600 selection:text-white pt-24 pb-20 overflow-hidden relative">
+    <div className="min-h-screen text-gray-100 selection:bg-purple-600 selection:text-white pt-24 pb-20 overflow-hidden relative">
       {/* Background Glow Effects */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-purple-700/15 blur-[130px] rounded-full pointer-events-none" />
       <div className="absolute top-96 -left-32 w-[400px] h-[400px] bg-indigo-700/10 blur-[120px] rounded-full pointer-events-none" />

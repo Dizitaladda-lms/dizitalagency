@@ -34,7 +34,7 @@ const sections = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-[#08001a] px-5 pb-24 pt-16 text-white sm:px-8">
+    <main className="min-h-screen px-5 pb-24 pt-16 text-white sm:px-8">
       <article className="mx-auto max-w-3xl">
         <p className="text-xs font-bold uppercase tracking-[0.25em] text-fuchsia-300">
           DigitalAdda

@@ -135,9 +135,7 @@ export default function AboutPage() {
       <style dangerouslySetInnerHTML={{ __html: orbStyles }} />
 
       {/* Full-page dark background */}
-      <div className="fixed inset-0 -z-10 bg-[#08001a]" />
-
-      <main className="min-h-screen text-white overflow-hidden">
+      <main className="globe-page min-h-screen text-white overflow-hidden">
 
         {/* ══════════════════════════════════════════════════════════════
             SECTION 1 — HERO / PAGE BANNER

@@ -163,7 +163,7 @@ export default function ServicePage({ params }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#08001a] text-white overflow-hidden font-sans">
+    <div className="globe-page min-h-screen text-white overflow-hidden font-sans">
 
       {/* ══════════════════════════════════════════════════════════════
           SECTION 1 — HERO

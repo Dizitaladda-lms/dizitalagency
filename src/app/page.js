@@ -172,7 +172,7 @@ export default async function Home() {
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.digitaladdaagency.com";
 
   return (
-    <div className="overflow-hidden bg-[#08001a] text-white">
+    <div className="globe-page overflow-hidden text-white">
       <Script
         id="digitaladda-schema"
         type="application/ld+json"
@@ -201,10 +201,10 @@ export default async function Home() {
         }}
       />
 
-      <section className="relative min-h-[680px] overflow-hidden px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_35%,rgba(106,45,190,0.28),transparent_38%),linear-gradient(135deg,#08001a_35%,#110b2b_100%)]" />
+      <section className="globe-home-hero relative min-h-[680px] overflow-hidden px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
+        <div className="absolute inset-0 globe-home-hero-backdrop" />
         <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:70px_70px]" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
           <div>
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-fuchsia-300">
               Digital growth, built around your business

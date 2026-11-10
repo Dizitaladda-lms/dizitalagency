@@ -124,7 +124,7 @@ const COUNTRY_MARKERS = [
   { name: "New Zealand", flag: "🇳🇿", code: "NZ", lat: -40.9006, lng: 174.886, stat: "Oceania Performance" },
 ];
 
-export default function HomesectionGlobalHero() {
+export default function HomesectionGlobalHero({ backgroundOnly = false }) {
   const canvasRef = useRef(null);
   const [activeCountry, setActiveCountry] = useState(0);
   const isDraggingRef = useRef(false);
@@ -176,7 +176,7 @@ export default function HomesectionGlobalHero() {
       const dpr = window.devicePixelRatio || 1;
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     updateCanvasSize();
@@ -185,7 +185,7 @@ export default function HomesectionGlobalHero() {
     // Spherical radius matching hero section layout
     const getRadius = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
-      return Math.max(rect.width, rect.height) * 0.44;
+      return Math.min(rect.width, rect.height) * 0.62;
     };
 
     // Convert lat/long to 3D point on sphere radius R
@@ -525,7 +525,9 @@ export default function HomesectionGlobalHero() {
   const activeCountryData = COUNTRY_MARKERS[activeCountry];
 
   return (
-    <section className="relative w-full min-h-[84vh] lg:min-h-[90vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 border-b border-purple-900/30">
+    <section className={backgroundOnly
+      ? "fixed inset-0 z-0 h-screen w-screen overflow-hidden pointer-events-none opacity-70"
+      : "relative w-full min-h-[84vh] lg:min-h-[90vh] bg-[#070714] text-white overflow-hidden flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 border-b border-purple-900/30"}>
       
       {/* ── BACKGROUND 1: Ambient Lighting Glows ── */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -543,7 +545,7 @@ export default function HomesectionGlobalHero() {
       </div>
 
       {/* ── BACKGROUND 2: Full Screen Diagonal 3D Vector Globe Canvas (Spans Bottom-Left to Top-Right) ── */}
-      <div className="absolute inset-0 w-full h-full pointer-events-auto z-0 opacity-90 flex items-center justify-center overflow-hidden">
+      <div className={`absolute inset-0 w-full h-full ${backgroundOnly ? "pointer-events-none" : "pointer-events-auto"} z-0 opacity-90 flex items-center justify-center overflow-hidden`}>
         <div className="relative w-full h-full flex items-center justify-center">
           
           {/* Decorative Diagonal Orbit Rings */}
@@ -563,8 +565,7 @@ export default function HomesectionGlobalHero() {
         </div>
       </div>
 
-      {/* ── FOREGROUND CONTENT ── */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center max-w-4xl">
+      {!backgroundOnly && <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center max-w-4xl">
         
         {/* Top Pill Badge */}
         <motion.div
@@ -699,7 +700,7 @@ export default function HomesectionGlobalHero() {
           </AnimatePresence>
         </div>
 
-      </div>
+      </div>}
 
     </section>
   );

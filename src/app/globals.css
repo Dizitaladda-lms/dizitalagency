@@ -118,7 +118,22 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-color: #08001a;
   }
+}
+
+.globe-page > section {
+  background-color: rgb(8 0 26 / 62%) !important;
+}
+
+.globe-home-hero {
+  background-color: transparent !important;
+}
+
+.globe-home-hero-backdrop {
+  background:
+    radial-gradient(ellipse at 75% 35%, rgba(106, 45, 190, 0.24), transparent 38%),
+    linear-gradient(135deg, rgba(8, 0, 26, 0.5) 35%, rgba(17, 11, 43, 0.35) 100%);
 }
 
 /* Marquee animation utilities (global) */

@@ -64,7 +64,7 @@ export default function IndustryPage({ params }) {
   });
 
   return (
-    <div className="min-h-screen bg-[#08001a] text-white overflow-hidden font-sans">
+    <div className="globe-page min-h-screen text-white overflow-hidden font-sans">
 
       {/* ══════════════════════════════════════════════════════════════
           HERO
@@ -393,4 +393,3 @@ export default function IndustryPage({ params }) {
     </div>
   );
 }
-
